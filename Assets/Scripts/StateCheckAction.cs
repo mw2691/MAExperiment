@@ -1,0 +1,37 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class StateCheckAction : MonoBehaviour
+{
+    public bool finished { get; set; }
+    public IState nextState { get; set; }
+    public GameObject CheckObjectPosition;
+
+
+
+    public void Enter()
+    {
+        finished = false;
+        nextState = CheckObjectPosition.GetComponent<IState>();
+        Debug.Log("Enter StateCheckAction");
+
+    }
+
+    public void Execute()
+    {
+        Debug.Log("Execute StateCheckAction");
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            finished = true;
+        }
+        if (finished)
+            Exit();
+    }
+
+    public void Exit()
+    {
+        Debug.Log("Exit StateCheckAction");
+        //nextState.Enter();
+    }
+}

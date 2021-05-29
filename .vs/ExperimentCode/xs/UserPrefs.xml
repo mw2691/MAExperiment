@@ -1,0 +1,32 @@
+﻿<Properties StartupConfiguration="{073406A1-9689-53C5-9F35-01C034CA4195}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/StateWelcome.cs">
+    <Files>
+      <File FileName="Assets/Scripts/IState.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/StateInit.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/StateMachine.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/StateStartExperiment.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/StateTraining.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/StateWelcome.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="ExperimentCode" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="StateWelcome.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="d9b9e71e-2115-4906-9308-6bdc0f18606d" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
