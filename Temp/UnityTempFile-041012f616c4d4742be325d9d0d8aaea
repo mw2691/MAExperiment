@@ -312,6 +312,7 @@
 /define:UNITY_STANDALONE_OSX
 /define:UNITY_TEAM_LICENSE
 /define:USE_SEARCH_ENGINE_API
+"Assets/Scripts/FileStream.cs"
 "Assets/Scripts/IState.cs"
 "Assets/Scripts/StateCheckAction.cs"
 "Assets/Scripts/StateCheckHandPosition.cs"
@@ -321,3 +322,4 @@
 "Assets/Scripts/StateStartExperiment.cs"
 "Assets/Scripts/StateTraining.cs"
 "Assets/Scripts/StateWelcome.cs"
+"Assets/Scripts/Trial.cs"

@@ -1,12 +1,14 @@
 ﻿<Properties StartupConfiguration="{073406A1-9689-53C5-9F35-01C034CA4195}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/StateWelcome.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/FileWriteManagement.cs">
     <Files>
       <File FileName="Assets/Scripts/IState.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/StateInit.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/StateMachine.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/StateStartExperiment.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/StateTraining.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/StateWelcome.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/StateInit.cs" Line="19" Column="1" />
+      <File FileName="Assets/Scripts/StateMachine.cs" Line="21" Column="32" />
+      <File FileName="Assets/Scripts/StateStartExperiment.cs" Line="13" Column="24" />
+      <File FileName="Assets/Scripts/StateTraining.cs" />
+      <File FileName="Assets/Scripts/StateWelcome.cs" Line="4" Column="1" />
+      <File FileName="Assets/Scripts/Trial.cs" Line="23" Column="6" />
+      <File FileName="Assets/Scripts/FileWriteManagement.cs" Line="29" Column="6" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -14,7 +16,7 @@
           <Node name="ExperimentCode" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="StateWelcome.cs" selected="True" />
+                <Node name="FileWriteManagement.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -24,7 +26,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="d9b9e71e-2115-4906-9308-6bdc0f18606d" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="708410e9-cf5d-491c-857d-9399cc3cae3d" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
