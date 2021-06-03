@@ -17,6 +17,17 @@ public class StateInit : MonoBehaviour, IState
 
     }
 
+    //Balance factors
+
+
+
+
+
+
+    //instantiate Trial in StateInit
+
+
+
     public void Execute()
     {
         Debug.Log("Execute StateInit");
