@@ -4,18 +4,20 @@ using UnityEngine;
 using System.Text;
 using System;
 
-public class Trial : MonoBehaviour
+public class Trial
 {
     public string SOAFactors;
     public string Interaction;
     public string InteractionPlacement;
+    public string ParticipantID;
 
 
-    //should be strings, for test purpose only
-    public Transform thumbData;
-    public Transform indexData;
-    public Transform palmData;
-    public Transform objectData;
+    //Dependent measures
+    public Vector3 thumbData;
+    public Vector3 indexData;
+    public Vector3 palmData;
+    public Vector3 objectData;
+    public Vector3 eyeData;
 
     public string resultFileAnnotations;
 
@@ -27,28 +29,25 @@ public class Trial : MonoBehaviour
         this.InteractionPlacement = InteractionPlacement;
     }
 
-    //for test purpose
-    void Update()
-    {
-        if (!FileWriteManagement.CheckExistingFile())
-        {
-            FileWriteManagement.CreateFile();
-            FileWriteManagement.WriteFile(GenerateHeader());
-        }
 
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            FileWriteManagement.WriteFile(GenerateResultLine(), true);
-        }
-    }
-
-    //change param to vector3 
-    public string TransformToString(Transform vectorData)
+    public string Vector3ToString(Vector3 vectorData)
     {
         StringBuilder sb = new StringBuilder();
-        sb.Append(vectorData.position.x + ",");
-        sb.Append(vectorData.position.y + ",");
-        sb.Append(vectorData.position.z + ",");
+        sb.Append(vectorData.x + ",");
+        sb.Append(vectorData.y + ",");
+        sb.Append(vectorData.z + ",");
+
+        return sb.ToString();
+    }
+
+
+    public string GenerateFileName()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append(ParticipantID + "_");
+        sb.Append(SOAFactors + "_");
+        sb.Append(Interaction + "_");
+        sb.Append(InteractionPlacement + ".log");
 
         return sb.ToString();
     }
@@ -57,11 +56,11 @@ public class Trial : MonoBehaviour
     public string GenerateHeader()
     {
         StringBuilder sb = new StringBuilder();
-        sb.Append("TrialInfo" + "\t");
         sb.Append("ThumbPosition" + "\t");
         sb.Append("IndexPosition" + "\t");
         sb.Append("PalmPosition" + "\t");
         sb.Append("ObjectPosition" + "\t");
+        sb.Append("RightEyePosition" + "\t");
         sb.Append("Annotations" + "\t" + Environment.NewLine);
 
         return sb.ToString();
@@ -71,11 +70,11 @@ public class Trial : MonoBehaviour
     public string GenerateResultLine()
     {
         StringBuilder sb = new StringBuilder();
-        sb.Append(SOAFactors + "," + Interaction + "," + InteractionPlacement + "\t");
-        sb.Append(TransformToString(thumbData)  + "\t");
-        sb.Append(TransformToString(indexData) + "\t");
-        sb.Append(TransformToString(palmData) + "\t");
-        sb.Append(TransformToString(objectData) + "\t");
+        sb.Append(Vector3ToString(thumbData)  + "\t");
+        sb.Append(Vector3ToString(indexData) + "\t");
+        sb.Append(Vector3ToString(palmData) + "\t");
+        sb.Append(Vector3ToString(objectData) + "\t");
+        sb.Append(Vector3ToString(eyeData) + "\t");
         sb.Append(resultFileAnnotations + "\t" + Environment.NewLine);
 
         return sb.ToString();

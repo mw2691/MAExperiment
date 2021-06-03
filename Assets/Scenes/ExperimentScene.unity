@@ -346,57 +346,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 259972634}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &284640993
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 284640995}
-  - component: {fileID: 284640994}
-  m_Layer: 0
-  m_Name: Trial
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &284640994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 284640993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fbabca34ab9941d7beeb5c581909558, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SOAFactors: SOAFactor1/2/3/4
-  Interaction: Einschenken/Abstellen
-  InteractionPlacement: Left/Right
-  thumbData: {fileID: 448223194}
-  indexData: {fileID: 1047184054}
-  palmData: {fileID: 1068577738}
-  objectData: {fileID: 259972635}
-  resultFileAnnotations: Annotation1
---- !u!4 &284640995
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 284640993}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.7848597, y: 0.079619125, z: 0.7361618}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &319405778
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,7 +990,7 @@ Transform:
   - {fileID: 1047184054}
   - {fileID: 259972635}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1899695768
 GameObject:

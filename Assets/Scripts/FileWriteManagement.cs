@@ -5,41 +5,41 @@ using System.IO;
 
 public class FileWriteManagement
 {
-    public static int participantID = 4;
-    public static string fileName = "ID" + participantID.ToString() + ".log";
-    public static string currentPath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
-
-    public static bool CheckExistingFile()
+    public static bool CheckExistingFile(string fileName)
     {
-        if (File.Exists(currentPath))
+        string pathWithfileName = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+        if (File.Exists(pathWithfileName))
         {
             Debug.Log("file is already created");
             return true;
         }
         else
         {
+            Debug.Log("filenotthere");
             return false;
         }
     }
 
-    public static void CreateFile()
+    public static void CreateFile(string fileName)
     {
         using(FileStream fs = File.Create(fileName)) ;
     }
 
-    public static void WriteFile(string data)
+    public static void WriteFile(string data, string fileName)
     {
+        string currentPath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
         using(StreamWriter writeText = new StreamWriter(currentPath))
         {
-            writeText.WriteLine(data);
+            writeText.Write(data);
         }
     }
 
-    public static void WriteFile(string data, bool appendFile)
+    public static void WriteFile(string data, string fileName, bool appendFile)
     {
+        string currentPath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
         using (StreamWriter writeText = new StreamWriter(currentPath, appendFile))
         {
-            writeText.WriteLine(data);
+            writeText.Write(data);
         }
     }
 }

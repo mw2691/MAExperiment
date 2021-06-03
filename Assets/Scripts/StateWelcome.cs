@@ -8,6 +8,7 @@ public class StateWelcome : MonoBehaviour, IState
     public bool finished { get; set; }
     public IState nextState { get; set; }
     public GameObject StateTraining;
+    Trial trial= new Trial("Halfway", "Einschenken", "Links");
 
 
     public void Enter()
@@ -20,9 +21,23 @@ public class StateWelcome : MonoBehaviour, IState
 
     public void Execute()
     {
+        trial.ParticipantID = "01";
+        trial.thumbData = new Vector3();
+        trial.indexData = new Vector3();
+        trial.palmData = new Vector3();
+        trial.objectData = new Vector3();
+        trial.eyeData = new Vector3();
+        var resultFileName = trial.GenerateFileName();
+        FileWriteManagement.CheckExistingFile(resultFileName);
+        FileWriteManagement.CreateFile(resultFileName);
+        FileWriteManagement.WriteFile(trial.GenerateHeader(), resultFileName);
+        FileWriteManagement.WriteFile(trial.GenerateResultLine(), resultFileName, true);
+
+
         Debug.Log("Execute StateWelcome");
         if (Input.GetKeyDown(KeyCode.A))
         {
+
             finished = true;
         }
 
