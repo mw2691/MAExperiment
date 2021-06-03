@@ -28,10 +28,19 @@ public class StateWelcome : MonoBehaviour, IState
         trial.objectData = new Vector3();
         trial.eyeData = new Vector3();
         var resultFileName = trial.GenerateFileName();
-        FileWriteManagement.CheckExistingFile(resultFileName);
-        FileWriteManagement.CreateFile(resultFileName);
-        FileWriteManagement.WriteFile(trial.GenerateHeader(), resultFileName);
-        FileWriteManagement.WriteFile(trial.GenerateResultLine(), resultFileName, true);
+
+        //Remove comments to create resultfile
+        //if (!FileWriteManagement.CheckExistingFile(resultFileName))
+        //{
+        //    FileWriteManagement.CreateFile(resultFileName);
+        //    FileWriteManagement.WriteFile(trial.GenerateHeader(), resultFileName);
+        //}
+        //else if (resultFileName.StartsWith(trial.ParticipantID))
+        //{
+        //    FileWriteManagement.WriteFile(trial.GenerateResultLine(), resultFileName, true);
+        //}
+
+
 
 
         Debug.Log("Execute StateWelcome");

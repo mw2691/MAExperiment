@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateCheckHandPosition : MonoBehaviour
+public class StateCheckHandPosition : MonoBehaviour, IState
 {
     public bool finished { get; set; }
     public IState nextState { get; set; }

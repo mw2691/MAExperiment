@@ -18,7 +18,6 @@ public class Trial
     public Vector3 palmData;
     public Vector3 objectData;
     public Vector3 eyeData;
-
     public string resultFileAnnotations;
 
 

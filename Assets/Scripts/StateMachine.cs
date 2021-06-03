@@ -20,9 +20,12 @@ public class StateMachine : MonoBehaviour
     {
         currentState.Execute();
         if (currentState.finished)
+        {
             //currentState.Exit();
             currentState = currentState.nextState;
             currentState.Enter();
+        }
+
 
         Debug.Log("CurrentState:::::: " + currentState);
     }

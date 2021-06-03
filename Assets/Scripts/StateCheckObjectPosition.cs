@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateCheckObjectPosition : MonoBehaviour
+public class StateCheckObjectPosition : MonoBehaviour, IState
 {
     public bool finished { get; set; }
     public IState nextState { get; set; }
