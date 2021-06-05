@@ -11,13 +11,20 @@ for i = 1:numberOfParticipants
     [SOAOrdered,InteractionsOrdered, PlacementsOrdered] = BalanceFactors(trialsPerCondition, randomTrials, SOALevels, Interactions, Placements);
     
     resultName = 'BalancedFactors';
-    iDToString = int2str(i);
+    if i < 10
+        tostr = int2str(i);
+        iDToString = strcat('0',tostr); 
+    else
+        iDToString = int2str(i);
+    end
+    
     resultFileName=[iDToString '_' resultName '.txt'];
-    resultFileHeader = 'SOA\t Interactions\t Placements\n';
-    resultFileFormatSpecifier = '%s\t %s\t %s\n';
+    resultFileHeader = 'SOA\t Interactions\t Placements\t Progress\n';
+    resultFileFormatSpecifier = '%s\t %s\t %s\t %s\n';
     resultFile = fopen(resultFileName, 'w');
     fprintf(resultFile, resultFileHeader);
-    balancedFactors = [SOAOrdered InteractionsOrdered PlacementsOrdered];
+    progress = zeros(160,1);
+    balancedFactors = [SOAOrdered InteractionsOrdered PlacementsOrdered progress];
     fprintf(resultFile, resultFileFormatSpecifier, balancedFactors');
     fclose(resultFile);
 end

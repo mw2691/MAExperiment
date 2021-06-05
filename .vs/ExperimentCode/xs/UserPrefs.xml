@@ -1,15 +1,9 @@
 ﻿<Properties StartupConfiguration="{073406A1-9689-53C5-9F35-01C034CA4195}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/FileWriteManagement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Trial.cs">
     <Files>
-      <File FileName="Assets/Scripts/StateWelcome.cs" />
-      <File FileName="Assets/Scripts/StateTraining.cs" />
-      <File FileName="Assets/Scripts/StateInit.cs" />
-      <File FileName="Assets/Scripts/StateCheckObjectPosition.cs" />
-      <File FileName="Assets/Scripts/StateCheckHandPosition.cs" />
-      <File FileName="Assets/Scripts/StateStartExperiment.cs" />
-      <File FileName="Assets/Scripts/StateCheckAction.cs" />
-      <File FileName="Assets/Scripts/StateMachine.cs" Line="6" Column="2" />
-      <File FileName="Assets/Scripts/FileWriteManagement.cs" Line="5" Column="1" />
+      <File FileName="Assets/Scripts/StateWelcome.cs" Line="21" Column="1" />
+      <File FileName="Assets/Scripts/FileWriteManagement.cs" Line="52" Column="9" />
+      <File FileName="Assets/Scripts/Trial.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -17,7 +11,7 @@
           <Node name="ExperimentCode" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="FileWriteManagement.cs" selected="True" />
+                <Node name="Trial.cs" selected="True" />
               </Node>
             </Node>
           </Node>

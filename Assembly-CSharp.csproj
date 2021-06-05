@@ -72,36 +72,6 @@
     <Compile Include="Assets/Scripts/FixationCheck/FixationCrossColorSwitch.cs" />
   </ItemGroup>
   <ItemGroup>
-     <None Include="Assets/TrialOrderFiles/29_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/25_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/13_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/10_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/11_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/30_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/26_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/14_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/2_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/15_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/8_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/5_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/12_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/7_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/9_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/19_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/18_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/20_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/4_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/28_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/6_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/24_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/17_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/21_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/16_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/22_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/23_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/1_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/3_BalancedFactors.txt" />
-     <None Include="Assets/TrialOrderFiles/27_BalancedFactors.txt" />
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Hub/Editor/2020.2.1f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

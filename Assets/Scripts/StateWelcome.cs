@@ -17,6 +17,13 @@ public class StateWelcome : MonoBehaviour, IState
         nextState = StateTraining.GetComponent<IState>();
         Debug.Log("Enter StateWelcome");
 
+
+        //for testing:
+        FileWriteManagement.WriteProgressInTrialOrderFile("12", 60);
+        //var aa = FileWriteManagement.GetTrialOrderLine("01");
+        //Debug.Log("aaaaaaaaaa: " + aa);
+
+
     }
 
     public void Execute()
@@ -40,6 +47,10 @@ public class StateWelcome : MonoBehaviour, IState
         //    FileWriteManagement.WriteFile(trial.GenerateResultLine(), resultFileName, true);
         //}
 
+
+        var bb = FileWriteManagement.GetRowNumberOfProgressInTrialOrderFile("14");
+        if (FileWriteManagement.CheckForPreviousTrials("14") == true)
+            Debug.Log("hier ist noch keine 1 drin");
 
 
 
