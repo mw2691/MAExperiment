@@ -60,13 +60,16 @@
     <Compile Include="Assets/Scripts/StateCheckObjectPosition.cs" />
     <Compile Include="Assets/Scripts/StateWelcome.cs" />
     <Compile Include="Assets/Scripts/StateCheckAction.cs" />
+    <Compile Include="Assets/Scripts/Trial.cs" />
     <Compile Include="Assets/Scripts/StateInit.cs" />
     <Compile Include="Assets/Scripts/StateCheckHandPosition.cs" />
     <Compile Include="Assets/Scripts/StateTraining.cs" />
+    <Compile Include="Assets/Scripts/FileWriteManagement.cs" />
     <Compile Include="Assets/Scripts/StateStartExperiment.cs" />
     <Compile Include="Assets/Scripts/StateMachine.cs" />
-    <Compile Include="Assets/Scripts/Trial.cs" />
-    <Compile Include="Assets/Scripts/FileWriteManagement.cs" />
+    <Compile Include="Assets/Scripts/PositionCheck/PositionCheck.cs" />
+    <Compile Include="Assets/Scripts/FixationCheck/CrosshairController.cs" />
+    <Compile Include="Assets/Scripts/FixationCheck/FixationCrossColorSwitch.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
