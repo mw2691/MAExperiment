@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
 
 public class StateWelcome : MonoBehaviour, IState
 {
@@ -18,11 +19,12 @@ public class StateWelcome : MonoBehaviour, IState
         Debug.Log("Enter StateWelcome");
 
 
-        //for testing:
-        FileWriteManagement.WriteProgressInTrialOrderFile("12", 60);
-        //var aa = FileWriteManagement.GetTrialOrderLine("01");
-        //Debug.Log("aaaaaaaaaa: " + aa);
-
+        //Remove comments to check and get the row Number of progress
+        //Tuple<int, bool> rowNumberOfProgressInTrialOrderFile = FileWriteManagement.GetRowNumberOfProgressInTrialOrderFile("12");
+        //if (rowNumberOfProgressInTrialOrderFile.Item2)
+        //    Debug.Log("Where did we stopped?: " + rowNumberOfProgressInTrialOrderFile.Item1);
+        //else
+        //    Debug.Log("We have not started any trials with this participant");
 
     }
 
@@ -46,11 +48,8 @@ public class StateWelcome : MonoBehaviour, IState
         //{
         //    FileWriteManagement.WriteFile(trial.GenerateResultLine(), resultFileName, true);
         //}
-
-
-        var bb = FileWriteManagement.GetRowNumberOfProgressInTrialOrderFile("14");
-        if (FileWriteManagement.CheckForPreviousTrials("14") == true)
-            Debug.Log("hier ist noch keine 1 drin");
+        
+ 
 
 
 

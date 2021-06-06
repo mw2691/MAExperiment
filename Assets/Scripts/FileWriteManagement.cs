@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Linq;
+using System;
 
 public class FileWriteManagement
 {
@@ -89,7 +90,7 @@ public class FileWriteManagement
     }
 
 
-    public static int GetRowNumberOfProgressInTrialOrderFile(string participantID)
+    public static Tuple<int, bool> GetRowNumberOfProgressInTrialOrderFile(string participantID)
     {
         List<int> rowNumber = new List<int>();
         string fullPath = trialOrderFilePath + "/" + GetTrialOrderFileName(participantID);
@@ -102,25 +103,13 @@ public class FileWriteManagement
                 rowNumber.Add(i);
             }
         }
-        return rowNumber[rowNumber.Count-1];
-    }
-
-
-    public static bool CheckForPreviousTrials(string participantID)
-    {
-        try
+        if (!(rowNumber.Count == 0))
+            return Tuple.Create(rowNumber[rowNumber.Count - 1], true);
+        else
         {
-            if (!(GetRowNumberOfProgressInTrialOrderFile(participantID) == 0))
-                return true;
+            rowNumber.Add(0);
+            return Tuple.Create(rowNumber[0], false);
         }
-        catch (System.Exception ex)
-        {
-            return false;
-        }
-        return false;
     }
-
-
-
 }
 
