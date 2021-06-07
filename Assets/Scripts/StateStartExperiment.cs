@@ -7,6 +7,8 @@ public class StateStartExperiment : MonoBehaviour, IState
     public bool finished { get; set; }
     public IState nextState { get; set; }
     public GameObject CheckAction;
+    public StateInit StateInitScript;
+    public ExperimentController ExperimentControllerScript;
 
 
 
@@ -15,7 +17,6 @@ public class StateStartExperiment : MonoBehaviour, IState
         finished = false;
         nextState = CheckAction.GetComponent<IState>();
         Debug.Log("Enter StateStartExperiment");
-
     }
 
     public void Execute()
@@ -26,6 +27,7 @@ public class StateStartExperiment : MonoBehaviour, IState
             finished = true;
         }
         if (finished)
+            ExperimentControllerScript.trialOrderLineCounter++;
             Exit();
     }
 

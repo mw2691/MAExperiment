@@ -49,7 +49,6 @@ public class FileWriteManagement
         }
     }
 
-
     public static string GetTrialOrderFileName(string participantID)
     {
         string[] txtFiles = Directory.GetFiles(trialOrderFilePath, "*.txt").Select(Path.GetFileName).ToArray();
@@ -65,21 +64,18 @@ public class FileWriteManagement
         return "Participant ID is not valid";
     }
 
-    public static string GetTrialOrderLine(string participantID)
+    public static string GetTrialOrderLine(string participantID, int lineNumber)
     {
         string fullPath = trialOrderFilePath + "/" + GetTrialOrderFileName(participantID);
-        using (StreamReader sr = new StreamReader(fullPath))
-        {
-            //skip header
-            sr.ReadLine();
-            return sr.ReadLine();
-        }
+        string[] arrLine = File.ReadAllLines(fullPath);
+        return arrLine[lineNumber];
+
     }
 
     public static void WriteProgressInTrialOrderFile(string participantID, int lineToEdit)
     {
         string fullPath = trialOrderFilePath + "/" + GetTrialOrderFileName(participantID);
-        var currentLine = GetTrialOrderLine(participantID);
+        var currentLine = GetTrialOrderLine(participantID, lineToEdit);
         string[] subs = currentLine.Split(' ');
         subs[subs.Length - 1] = "1";
         var newLine = string.Join(" ", subs);

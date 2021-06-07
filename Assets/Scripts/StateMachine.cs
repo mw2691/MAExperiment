@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    private IState currentState;
+    public IState currentState;
     public GameObject StateWelcome;
 
     // Start is called before the first frame update

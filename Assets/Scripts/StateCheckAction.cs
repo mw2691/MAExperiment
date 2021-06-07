@@ -6,16 +6,15 @@ public class StateCheckAction : MonoBehaviour, IState
 {
     public bool finished { get; set; }
     public IState nextState { get; set; }
-    public GameObject CheckObjectPosition;
+    public GameObject StateInit;
 
 
 
     public void Enter()
     {
         finished = false;
-        nextState = CheckObjectPosition.GetComponent<IState>();
+        nextState = StateInit.GetComponent<IState>();
         Debug.Log("Enter StateCheckAction");
-
     }
 
     public void Execute()

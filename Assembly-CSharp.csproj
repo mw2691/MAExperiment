@@ -70,6 +70,7 @@
     <Compile Include="Assets/Scripts/PositionCheck/PositionCheck.cs" />
     <Compile Include="Assets/Scripts/FixationCheck/CrosshairController.cs" />
     <Compile Include="Assets/Scripts/FixationCheck/FixationCrossColorSwitch.cs" />
+    <Compile Include="Assets/Scripts/ExperimentController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

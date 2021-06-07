@@ -9,7 +9,7 @@ public class StateWelcome : MonoBehaviour, IState
     public bool finished { get; set; }
     public IState nextState { get; set; }
     public GameObject StateTraining;
-    Trial trial= new Trial("Halfway", "Einschenken", "Links");
+    //Trial trial= new Trial("Halfway", "Einschenken", "Links");
 
 
     public void Enter()
@@ -18,27 +18,17 @@ public class StateWelcome : MonoBehaviour, IState
         nextState = StateTraining.GetComponent<IState>();
         Debug.Log("Enter StateWelcome");
 
-
+        #region Check and get row number of progress in TrialOrderFile
         //Remove comments to check and get the row Number of progress
         //Tuple<int, bool> rowNumberOfProgressInTrialOrderFile = FileWriteManagement.GetRowNumberOfProgressInTrialOrderFile("12");
         //if (rowNumberOfProgressInTrialOrderFile.Item2)
         //    Debug.Log("Where did we stopped?: " + rowNumberOfProgressInTrialOrderFile.Item1);
         //else
         //    Debug.Log("We have not started any trials with this participant");
+        #endregion
 
-    }
-
-    public void Execute()
-    {
-        trial.ParticipantID = "01";
-        trial.thumbData = new Vector3();
-        trial.indexData = new Vector3();
-        trial.palmData = new Vector3();
-        trial.objectData = new Vector3();
-        trial.eyeData = new Vector3();
-        var resultFileName = trial.GenerateFileName();
-
-        //Remove comments to create resultfile
+        #region Check and create ResultFile
+        ////Remove comments to create resultfile
         //if (!FileWriteManagement.CheckExistingFile(resultFileName))
         //{
         //    FileWriteManagement.CreateFile(resultFileName);
@@ -48,8 +38,26 @@ public class StateWelcome : MonoBehaviour, IState
         //{
         //    FileWriteManagement.WriteFile(trial.GenerateResultLine(), resultFileName, true);
         //}
-        
- 
+        #endregion
+
+
+        FileWriteManagement.WriteProgressInTrialOrderFile("05", 5);
+
+    }
+
+    public void Execute()
+    {
+        //trial.ParticipantID = "01";
+        //trial.thumbData = new Vector3();
+        //trial.indexData = new Vector3();
+        //trial.palmData = new Vector3();
+        //trial.objectData = new Vector3();
+        //trial.eyeData = new Vector3();
+        //var resultFileName = trial.GenerateFileName();
+
+
+
+
 
 
 
