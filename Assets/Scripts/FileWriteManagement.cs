@@ -10,11 +10,20 @@ public class FileWriteManagement
     static string trialOrderFolderName = "TrialOrderFiles";
     static string trialOrderFilePath = Path.Combine(Directory.GetCurrentDirectory(), trialOrderFolderName);
 
+    public static string GetResultFileDirectory(string participantID)
+    {
+        string currentPath = Path.Combine(Directory.GetCurrentDirectory(), "ResultFiles");
+        return currentPath + "/" + participantID;
+    }
+
 
     public static bool CheckExistingFile(string fileName)
     {
-        string pathWithfileName = Path.Combine(Directory.GetCurrentDirectory(), fileName);
-        if (File.Exists(pathWithfileName))
+        string currentPath = Path.Combine(Directory.GetCurrentDirectory(), "ResultFiles");
+        string[] subs = fileName.Split('_');
+        currentPath += "/" + subs[0] + "/" + fileName;
+
+        if (File.Exists(currentPath))
         {
             Debug.Log("file is already created");
             return true;
@@ -26,7 +35,17 @@ public class FileWriteManagement
         }
     }
 
+    public static void CreateDirectory(string participantID)
+    {
+        string currentPath = Path.Combine(Directory.GetCurrentDirectory());
+        currentPath = currentPath + "/" +  "ResultFiles" + "/" + participantID;
+        if (!Directory.Exists(currentPath))
+            Directory.CreateDirectory(currentPath);
+    }
+
+
     public static void CreateFile(string fileName)
+
     {
         using (FileStream fs = File.Create(fileName)) ;
     }

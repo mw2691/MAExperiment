@@ -21,11 +21,17 @@ public class Trial
     public string resultFileAnnotations;
 
 
-    public Trial(string SOAFactors, string Interaction, string InteractionPlacement)
+    public Trial(string ParticipantID, string SOAFactors, string Interaction, string InteractionPlacement)
     {
-        this.SOAFactors = SOAFactors;
-        this.Interaction = Interaction; 
-        this.InteractionPlacement = InteractionPlacement;
+        char tab = '\u0009';
+        string soaRemovedTab = SOAFactors.Replace(tab.ToString(), "");
+        string interactionRemovedTab = Interaction.Replace(tab.ToString(), "");
+        string placementRemovedTab = InteractionPlacement.Replace(tab.ToString(), "");
+
+        this.ParticipantID = ParticipantID;
+        this.SOAFactors = soaRemovedTab;
+        this.Interaction = interactionRemovedTab; 
+        this.InteractionPlacement = placementRemovedTab;
     }
 
 

@@ -9,7 +9,7 @@ public class StateWelcome : MonoBehaviour, IState
     public bool finished { get; set; }
     public IState nextState { get; set; }
     public GameObject StateTraining;
-    //Trial trial= new Trial("Halfway", "Einschenken", "Links");
+
 
 
     public void Enter()
@@ -41,7 +41,7 @@ public class StateWelcome : MonoBehaviour, IState
         #endregion
 
 
-        FileWriteManagement.WriteProgressInTrialOrderFile("05", 5);
+
 
     }
 

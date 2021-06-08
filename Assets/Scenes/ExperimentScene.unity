@@ -611,7 +611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CheckAction: {fileID: 234035409}
   StateInitScript: {fileID: 474315543}
-  ExperimentControllerScript: {fileID: 0}
+  ExperimentControllerScript: {fileID: 1883989539}
 --- !u!4 &943555698
 Transform:
   m_ObjectHideFlags: 0
