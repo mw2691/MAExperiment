@@ -13,13 +13,13 @@ public class StateTraining : MonoBehaviour, IState
     {
         finished = false;
         nextState = StateInit.GetComponent<IState>();
-        Debug.Log("Enter StateTraining");
+        //Debug.Log("Enter StateTraining");
 
     }
 
     public void Execute()
     {
-        Debug.Log("Execute StateTraining");
+        //Debug.Log("Execute StateTraining");
         if (Input.GetKeyDown(KeyCode.B))
         {
             finished = true;
@@ -31,7 +31,7 @@ public class StateTraining : MonoBehaviour, IState
 
     public void Exit()
     {
-        Debug.Log("Exit StateWelcome");
+        //Debug.Log("Exit StateWelcome");
         //nextState.Enter();
     }
 

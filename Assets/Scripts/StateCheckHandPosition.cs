@@ -54,7 +54,7 @@ public class StateCheckHandPosition : MonoBehaviour, IState
             this.timeStamp += 0.0f;
         }
 
-        Debug.Log("Execute StateCheckHandPosition");
+        //Debug.Log("Execute StateCheckHandPosition");
         if (Input.GetKeyDown(KeyCode.E))
         {
             finished = true;
@@ -65,7 +65,7 @@ public class StateCheckHandPosition : MonoBehaviour, IState
 
     public void Exit()
     {
-        Debug.Log("Exit StateCheckHandPosition");
+        //Debug.Log("Exit StateCheckHandPosition");
         //nextState.Enter();
         this.FixationCross.SetActive(false);
         this.Crosshair.active = false;

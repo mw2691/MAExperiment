@@ -100,7 +100,20 @@ public class FileWriteManagement
         var newLine = string.Join(" ", subs);
 
         string[] arrLine = File.ReadAllLines(fullPath);
-        arrLine[lineToEdit - 1] = newLine;
+        arrLine[lineToEdit] = newLine;
+        File.WriteAllLines(fullPath, arrLine);
+    }
+
+    public static void WriteProgressInTrialOrderFile(string participantID, int lineToEdit, string errorCode)
+    {
+        string fullPath = trialOrderFilePath + "/" + GetTrialOrderFileName(participantID);
+        var currentLine = GetTrialOrderLine(participantID, lineToEdit);
+        string[] subs = currentLine.Split(' ');
+        subs[subs.Length - 1] = errorCode;
+        var newLine = string.Join(" ", subs);
+
+        string[] arrLine = File.ReadAllLines(fullPath);
+        arrLine[lineToEdit] = newLine;
         File.WriteAllLines(fullPath, arrLine);
     }
 
@@ -126,5 +139,33 @@ public class FileWriteManagement
             return Tuple.Create(rowNumber[0], false);
         }
     }
+
+    public static List<string> GetAllErrorTrials(string participantID)
+    {
+        List<string> allErrorTrials = new List<string>();
+        string fullPath = trialOrderFilePath + "/" + GetTrialOrderFileName(participantID);
+        string[] arrLine = File.ReadAllLines(fullPath);
+        for (int i = 0; i < arrLine.Length; i++)
+        {
+            string[] subs = arrLine[i].Split(' ');
+            if (subs[subs.Length - 1] == "2")
+            {
+                allErrorTrials.Add(arrLine[i]);
+            }
+        }
+        return allErrorTrials;
+    }
+
+    public static void AppendErrorTrialsToTrialOrderFile(string participantID)
+    {
+        var allErrorTrialsString = GetAllErrorTrials(participantID);
+        string fullPath = trialOrderFilePath + "/" + GetTrialOrderFileName(participantID);
+        
+        for (int i = 0; i < allErrorTrialsString.Count; i++)
+        {
+            File.AppendAllText(fullPath, allErrorTrialsString[i] + Environment.NewLine);
+        }
+    }
+
 }
 

@@ -612,6 +612,8 @@ MonoBehaviour:
   CheckAction: {fileID: 234035409}
   StateInitScript: {fileID: 474315543}
   ExperimentControllerScript: {fileID: 1883989539}
+  ExperimentalTrialSuccesful: 0
+  ExperimentalTrialNOTSuccesful: 0
 --- !u!4 &943555698
 Transform:
   m_ObjectHideFlags: 0
@@ -719,7 +721,37 @@ Transform:
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1438051387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1438051388}
+  m_Layer: 0
+  m_Name: StateEndExperiment
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1438051388
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438051387}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.7848597, y: 0.079619125, z: 0.7361618}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1553469695 stripped
 GameObject:
@@ -735,7 +767,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5723867871965529644, guid: e4c325d1e2252d04cb42cb573405070f, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5723867871965529644, guid: e4c325d1e2252d04cb42cb573405070f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -879,6 +911,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RelevantCamera: {fileID: 247921584}
   active: 0
+  fixCrossRef: {fileID: 1928339485}
+  colorSwitch: {fileID: 1928339487}
 --- !u!1 &1883989537
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,7 +942,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1883989539
 MonoBehaviour:
@@ -923,8 +957,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateMachineScript: {fileID: 1899695769}
-  stateInitScript: {fileID: 474315543}
+  stateStartExperimentScript: {fileID: 943555697}
   trialOrderLineCounter: 1
+  stateInitFinished: 0
+  stateStartExperimentFinished: 0
+  isExperimentalTrialSuccesful: 0
+  ParticipantID: 
 --- !u!1 &1899695768
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,8 +1005,24 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1928339485 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5723867872659298186, guid: e4c325d1e2252d04cb42cb573405070f, type: 3}
+  m_PrefabInstance: {fileID: 1706471648}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1928339487 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5723867872659298184, guid: e4c325d1e2252d04cb42cb573405070f, type: 3}
+  m_PrefabInstance: {fileID: 1706471648}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928339485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0c4f982c6dbc544b9533e1a5a74b33b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7922205256466282142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -982,7 +1036,7 @@ PrefabInstance:
       objectReference: {fileID: 1262432899}
     - target: {fileID: 7922205256693921745, guid: cb8ce560eddd1954ab16b43c219542d1, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7922205256693921745, guid: cb8ce560eddd1954ab16b43c219542d1, type: 3}
       propertyPath: m_LocalPosition.x

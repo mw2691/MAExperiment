@@ -14,12 +14,12 @@ public class StateCheckAction : MonoBehaviour, IState
     {
         finished = false;
         nextState = StateInit.GetComponent<IState>();
-        Debug.Log("Enter StateCheckAction");
+        //Debug.Log("Enter StateCheckAction");
     }
 
     public void Execute()
     {
-        Debug.Log("Execute StateCheckAction");
+        //Debug.Log("Execute StateCheckAction");
         if (Input.GetKeyDown(KeyCode.G))
         {
             finished = true;
@@ -30,7 +30,7 @@ public class StateCheckAction : MonoBehaviour, IState
 
     public void Exit()
     {
-        Debug.Log("Exit StateCheckAction");
+        //Debug.Log("Exit StateCheckAction");
         //nextState.Enter();
     }
 }

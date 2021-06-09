@@ -15,8 +15,8 @@ public class CrosshairController : MonoBehaviour
     public bool Fixated { get; private set; }
     private bool fixationDone;
     private float timeStamp;
-    private GameObject fixCrossRef;
-    private FixationCrossColorSwitch colorSwitch;
+    public GameObject fixCrossRef;
+    public FixationCrossColorSwitch colorSwitch;
 
     void Start()
     {
@@ -24,8 +24,8 @@ public class CrosshairController : MonoBehaviour
         this.Fixated = false;
         this.fixationDone = false;
         this.timeStamp = 0f;
-        this.fixCrossRef = GameObject.FindWithTag("FixationCrossCenter");
-        this.colorSwitch = this.fixCrossRef.GetComponent<FixationCrossColorSwitch>();
+        //this.fixCrossRef = GameObject.FindWithTag("FixationCrossCenter");
+        //this.colorSwitch = this.fixCrossRef.GetComponent<FixationCrossColorSwitch>();
         this.active = false;
     }
 

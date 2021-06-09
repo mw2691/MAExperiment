@@ -11,6 +11,7 @@ public class Trial
     public string InteractionPlacement;
     public string ParticipantID;
 
+    public int TrialNumber;
 
     //Dependent measures
     public Vector3 thumbData;
@@ -21,7 +22,7 @@ public class Trial
     public string resultFileAnnotations;
 
 
-    public Trial(string ParticipantID, string SOAFactors, string Interaction, string InteractionPlacement)
+    public Trial(string ParticipantID, int TrialNumber, string SOAFactors, string Interaction, string InteractionPlacement)
     {
         char tab = '\u0009';
         string soaRemovedTab = SOAFactors.Replace(tab.ToString(), "");
@@ -29,6 +30,7 @@ public class Trial
         string placementRemovedTab = InteractionPlacement.Replace(tab.ToString(), "");
 
         this.ParticipantID = ParticipantID;
+        this.TrialNumber = TrialNumber;
         this.SOAFactors = soaRemovedTab;
         this.Interaction = interactionRemovedTab; 
         this.InteractionPlacement = placementRemovedTab;
@@ -49,6 +51,7 @@ public class Trial
     public string GenerateFileName()
     {
         StringBuilder sb = new StringBuilder();
+        sb.Append(TrialNumber + "_");
         sb.Append(ParticipantID + "_");
         sb.Append(SOAFactors + "_");
         sb.Append(Interaction + "_");

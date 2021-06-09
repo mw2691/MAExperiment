@@ -14,13 +14,13 @@ public class StateCheckObjectPosition : MonoBehaviour, IState
     {
         finished = false;
         nextState = CheckHandPosition.GetComponent<IState>();
-        Debug.Log("Enter StateCheckObjectPosition");
+        //Debug.Log("Enter StateCheckObjectPosition");
 
     }
 
     public void Execute()
     {
-        Debug.Log("Execute StateCheckObjectPosition");
+        //Debug.Log("Execute StateCheckObjectPosition");
         if (Input.GetKeyDown(KeyCode.D))
         {
             finished = true;
@@ -31,7 +31,7 @@ public class StateCheckObjectPosition : MonoBehaviour, IState
 
     public void Exit()
     {
-        Debug.Log("Exit StateCheckObjectPosition");
+        //Debug.Log("Exit StateCheckObjectPosition");
         //nextState.Enter();
     }
 }

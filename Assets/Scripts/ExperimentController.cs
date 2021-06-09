@@ -7,33 +7,51 @@ using System;
 public class ExperimentController : MonoBehaviour
 {
     public StateMachine stateMachineScript;
-    public StateInit stateInitScript;
+    public StateStartExperiment stateStartExperimentScript;
+   
 
     public IState getState { get; set; }
     public int trialOrderLineCounter = 1;
 
-    private bool waitForInstantiateTrial = false;
+    public bool stateInitFinished;
+    public bool stateStartExperimentFinished;
+    public bool isExperimentalTrialSuccesful;
+
 
     private Trial currentTrial;
+
+    public string ParticipantID;
     
 
 
     // Start is called before the first frame update
     void Start()
     {
+        //FileWriteManagement.WriteProgressInTrialOrderFile("29", 1);
 
-        ///Read out command line arguments (demographic data) from java program)
-        /*string[] args = System.Environment.GetCommandLineArgs();
-        string input = "";
-        for (int i = 0; i < args.Length; i++)
+        
+        ///Read out command line arguments (demographic data)
+        string[] args = Environment.GetCommandLineArgs();
+        if (args.Length < 10)
         {
-            Debug.Log("ARG " + i + ": " + args[i]);
-        }*/
+            args = new string[] { "24", "dummyValue1", "dummyArg2", "dummyValue2" };
+        }
 
+        ParticipantID = args[0];
 
+        //FileWriteManagement.AppendErrorTrialsToTrialOrderFile(ParticipantID);
 
-        //Create folderstructure for data recording
-        FileWriteManagement.CreateDirectory("01");
+        //Create folderstructure for data recording (check for existing directory is implemented in method CreateDirectory())
+        FileWriteManagement.CreateDirectory(ParticipantID);
+
+        //Check for progress in TrialOrder
+        var tupleRowNumber = FileWriteManagement.GetRowNumberOfProgressInTrialOrderFile(ParticipantID);
+        var isProgressInTrialOrder = tupleRowNumber.Item2;
+        var rowNumberOfProgressTrialOrder = tupleRowNumber.Item1;
+        if (isProgressInTrialOrder)
+        {
+            trialOrderLineCounter = rowNumberOfProgressTrialOrder + 1;
+        }
     }
 
 
@@ -42,48 +60,49 @@ public class ExperimentController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (waitForInstantiateTrial == false)
+        if (!stateInitFinished)
         {
             if (stateMachineScript.currentState.ToString() == "StateInit (StateInit)")
             {
                 //Instantiate Trial
-                currentTrial = InstantiateTrial("01", trialOrderLineCounter);
-                //Debug.Log("From EXPERIMENTCONTROLLER: " + currentTrial.SOAFactors + currentTrial.Interaction + currentTrial.InteractionPlacement);
+                currentTrial = InstantiateTrial(ParticipantID, trialOrderLineCounter);
 
-
+                //ResultFile Management (check, create, write header)
                 var resultFileName = currentTrial.GenerateFileName();
+                Debug.Log("FromExperimentController: " + resultFileName);
                 var resultHeader = currentTrial.GenerateHeader();
 
+                if (!FileWriteManagement.CheckExistingFile(resultFileName))
+                {
+                    var resultFileDirectory = FileWriteManagement.GetResultFileDirectory(ParticipantID);
+                    resultFileDirectory = resultFileDirectory + "/" + resultFileName;
+                    FileWriteManagement.CreateFile(resultFileDirectory);
+                    FileWriteManagement.WriteFile(resultHeader, resultFileDirectory, true);
+                }
 
-
-                if (FileWriteManagement.CheckExistingFile(resultFileName))
-                    Debug.Log("ok");
-                ////Check for ResultFile
-                //if (!FileWriteManagement.CheckExistingFile(resultFileName))
-                //{
-                //    FileWriteManagement.CreateFile(resultFileName);
-                //    FileWriteManagement.WriteFile(trial.GenerateHeader(), resultFileName);
-                //}
-                //else if (resultFileName.StartsWith(trial.ParticipantID))
-                //{
-                //    FileWriteManagement.WriteFile(trial.GenerateResultLine(), resultFileName, true);
-                //}
-
-                var resultFileDirectory = FileWriteManagement.GetResultFileDirectory("01");
-                resultFileDirectory = resultFileDirectory + "/" + resultFileName;
-                FileWriteManagement.CreateFile(resultFileDirectory);
-                //Write Header into file
-                FileWriteManagement.WriteFile(resultHeader, resultFileDirectory, true);
-
-
-                waitForInstantiateTrial = true;
+                stateInitFinished = true;
             }
         }
 
-
-
-
-
+        if (!stateStartExperimentFinished)
+        {
+            if (stateMachineScript.currentState.ToString() == "StateStartExperiment (StateStartExperiment)")
+            {
+                //write results in resultfile
+                //generate resultline
+                //
+                if (stateStartExperimentScript.ExperimentalTrialSuccesful)
+                {
+                    FileWriteManagement.WriteProgressInTrialOrderFile(ParticipantID, trialOrderLineCounter);
+                    stateStartExperimentFinished = true;
+                }
+                if (stateStartExperimentScript.ExperimentalTrialNOTSuccesful)
+                {
+                    FileWriteManagement.WriteProgressInTrialOrderFile(ParticipantID, trialOrderLineCounter, "2");
+                    stateStartExperimentFinished = true;
+                }                
+            }
+        }
     }
 
 
@@ -91,8 +110,7 @@ public class ExperimentController : MonoBehaviour
     {
         var currentTrialOrder = FileWriteManagement.GetTrialOrderLine(participantID, lineNumber);
         string[] subs = currentTrialOrder.Split(' ');
-        Trial _currentTrial = new Trial(participantID, subs[0], subs[1], subs[2]);
-        //Debug.Log("CURRENTTRIAAAAL: " + currentTrial.SOAFactors + currentTrial.Interaction + currentTrial.InteractionPlacement);
+        Trial _currentTrial = new Trial(participantID, lineNumber, subs[0], subs[1], subs[2]);
         return _currentTrial;
     }
 
@@ -102,6 +120,7 @@ public class ExperimentController : MonoBehaviour
 
     public void ResetBools()
     {
-        this.waitForInstantiateTrial = false;
+        this.stateInitFinished = false;
+        this.stateStartExperimentFinished = false;
     }
 }

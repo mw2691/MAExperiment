@@ -1,4 +1,4 @@
-SOA	 Interactions	 Placements	 Progress
+SOA4	 Pour	 Right	 2
 SOA4	 Pour	 Right	 0
 SOA2	 Pour	 Right	 0
 SOA3	 Place	 Right	 0

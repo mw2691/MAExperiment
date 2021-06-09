@@ -1,5 +1,5 @@
-SOA	 Interactions	 Placements	 Progress
-SOA3	 Pour	 Right	 0
+SOA3	 Pour	 Right	 1
+SOA4	 Pour	 Left	 2
 SOA4	 Pour	 Left	 0
 SOA2	 Place	 Left	 0
 SOA3	 Pour	 Right	 0

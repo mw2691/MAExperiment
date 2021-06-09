@@ -16,7 +16,7 @@ public class StateWelcome : MonoBehaviour, IState
     {
         finished = false;
         nextState = StateTraining.GetComponent<IState>();
-        Debug.Log("Enter StateWelcome");
+        //Debug.Log("Enter StateWelcome");
 
         #region Check and get row number of progress in TrialOrderFile
         //Remove comments to check and get the row Number of progress
@@ -61,7 +61,7 @@ public class StateWelcome : MonoBehaviour, IState
 
 
 
-        Debug.Log("Execute StateWelcome");
+        //Debug.Log("Execute StateWelcome");
         if (Input.GetKeyDown(KeyCode.A))
         {
 
@@ -74,7 +74,7 @@ public class StateWelcome : MonoBehaviour, IState
 
     public void Exit()
     {
-        Debug.Log("Exit StateWelcome");
+        //Debug.Log("Exit StateWelcome");
         //nextState.Enter();
     }
 }
