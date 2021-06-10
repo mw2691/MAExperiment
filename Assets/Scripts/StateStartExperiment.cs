@@ -26,13 +26,11 @@ public class StateStartExperiment : MonoBehaviour, IState
         //for test: Experiment was good
         if (Input.GetKey(KeyCode.O))
         {
-            //Debug.Log("StartExperiment: TrialSuccessful: " + ExperimentalTrialSuccesful);
             ExperimentalTrialSuccesful = true;
 
         }
         if(Input.GetKey(KeyCode.P))
         {
-            //Debug.Log("StartExperiment: TrialNOTSuccessful: " + ExperimentalTrialNOTSuccesful);
             ExperimentalTrialNOTSuccesful = true;
         }
 

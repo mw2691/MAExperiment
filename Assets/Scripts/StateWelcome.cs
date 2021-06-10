@@ -12,6 +12,7 @@ public class StateWelcome : MonoBehaviour, IState
 
 
 
+
     public void Enter()
     {
         finished = false;

@@ -6,13 +6,13 @@ public class StateInit : MonoBehaviour, IState
 {
     public bool finished { get; set; }
     public IState nextState { get; set; }
-    public GameObject CheckObjectPosition;
+    public GameObject CheckHandPosition;
 
 
     public void Enter()
     {
         finished = false;
-        nextState = CheckObjectPosition.GetComponent<IState>();
+        nextState = CheckHandPosition.GetComponent<IState>();
         //Debug.Log("Enter StateInit");
     }
 

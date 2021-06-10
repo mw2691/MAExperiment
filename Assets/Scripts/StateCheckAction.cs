@@ -9,7 +9,6 @@ public class StateCheckAction : MonoBehaviour, IState
     public GameObject StateInit;
 
 
-
     public void Enter()
     {
         finished = false;

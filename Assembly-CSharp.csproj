@@ -57,7 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Scripts/IState.cs" />
-    <Compile Include="Assets/Scripts/StateCheckObjectPosition.cs" />
     <Compile Include="Assets/Scripts/StateWelcome.cs" />
     <Compile Include="Assets/Scripts/StateCheckAction.cs" />
     <Compile Include="Assets/Scripts/Trial.cs" />

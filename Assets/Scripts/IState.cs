@@ -7,6 +7,7 @@ public interface IState
     bool finished { get; set; }
     IState nextState { get; set; }
 
+
     void Enter();
 
     void Execute();

@@ -8,18 +8,14 @@ public class ExperimentController : MonoBehaviour
 {
     public StateMachine stateMachineScript;
     public StateStartExperiment stateStartExperimentScript;
-   
-
     public IState getState { get; set; }
-    public int trialOrderLineCounter = 1;
 
     public bool stateInitFinished;
     public bool stateStartExperimentFinished;
-    public bool isExperimentalTrialSuccesful;
-
+    public bool stateCheckHandPosition;
 
     private Trial currentTrial;
-
+    public int trialOrderLineCounter = 1;
     public string ParticipantID;
     
 
@@ -84,13 +80,18 @@ public class ExperimentController : MonoBehaviour
             }
         }
 
+
+
         if (!stateStartExperimentFinished)
         {
             if (stateMachineScript.currentState.ToString() == "StateStartExperiment (StateStartExperiment)")
             {
                 //write results in resultfile
                 //generate resultline
-                //
+
+
+
+                //Check if experimental trial was successful
                 if (stateStartExperimentScript.ExperimentalTrialSuccesful)
                 {
                     FileWriteManagement.WriteProgressInTrialOrderFile(ParticipantID, trialOrderLineCounter);
@@ -122,5 +123,6 @@ public class ExperimentController : MonoBehaviour
     {
         this.stateInitFinished = false;
         this.stateStartExperimentFinished = false;
+        this.stateCheckHandPosition = false;
     }
 }
