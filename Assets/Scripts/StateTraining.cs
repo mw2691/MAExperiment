@@ -7,6 +7,9 @@ public class StateTraining : MonoBehaviour, IState
     public bool finished { get; set; }
     public IState nextState { get; set; }
     public GameObject StateInit;
+    public StateCheckAction stateCheckActionScript;
+
+    public bool isStateTraining;
 
 
     public void Enter()
@@ -25,12 +28,20 @@ public class StateTraining : MonoBehaviour, IState
             finished = true;
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            Debug.Log("Bool State Training set");
+            isStateTraining = true;
+        }
+
         if (finished)
             Exit();
+
     }
 
     public void Exit()
     {
+        //finished = true;
         //Debug.Log("Exit StateWelcome");
         //nextState.Enter();
     }

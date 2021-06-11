@@ -9,6 +9,7 @@ public class ExperimentController : MonoBehaviour
     public StateMachine stateMachineScript;
     public StateStartExperiment stateStartExperimentScript;
     public IState getState { get; set; }
+    public StateTraining stateTrainingScript;
 
     public bool stateInitFinished;
     public bool stateStartExperimentFinished;
@@ -65,8 +66,18 @@ public class ExperimentController : MonoBehaviour
 
                 //ResultFile Management (check, create, write header)
                 var resultFileName = currentTrial.GenerateFileName();
-                Debug.Log("FromExperimentController: " + resultFileName);
                 var resultHeader = currentTrial.GenerateHeader();
+
+
+                //Check for training state and append train to result file name
+                if (stateTrainingScript.isStateTraining)
+                {
+                    string[] subString = resultFileName.Split('_');
+                    subString[0] += "_train";
+                    resultFileName = string.Join("_", subString);
+                }
+
+
 
                 if (!FileWriteManagement.CheckExistingFile(resultFileName))
                 {
@@ -92,12 +103,12 @@ public class ExperimentController : MonoBehaviour
 
 
                 //Check if experimental trial was successful
-                if (stateStartExperimentScript.ExperimentalTrialSuccesful)
+                if (stateStartExperimentScript.ExperimentalTrialSuccesful && !stateTrainingScript.isStateTraining)
                 {
                     FileWriteManagement.WriteProgressInTrialOrderFile(ParticipantID, trialOrderLineCounter);
                     stateStartExperimentFinished = true;
                 }
-                if (stateStartExperimentScript.ExperimentalTrialNOTSuccesful)
+                if (stateStartExperimentScript.ExperimentalTrialNOTSuccesful && !stateTrainingScript.isStateTraining)
                 {
                     FileWriteManagement.WriteProgressInTrialOrderFile(ParticipantID, trialOrderLineCounter, "2");
                     stateStartExperimentFinished = true;

@@ -8,6 +8,9 @@ public class StateCheckAction : MonoBehaviour, IState
     public IState nextState { get; set; }
     public GameObject StateInit;
 
+    public StateTraining stateTrainingScript;
+    public ExperimentController experimentControllerScript;
+
 
     public void Enter()
     {
@@ -18,6 +21,14 @@ public class StateCheckAction : MonoBehaviour, IState
 
     public void Execute()
     {
+        //Ask for to exit training
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            experimentControllerScript.trialOrderLineCounter = 1;
+            stateTrainingScript.isStateTraining = false;
+        }
+
+
         //Debug.Log("Execute StateCheckAction");
         if (Input.GetKeyDown(KeyCode.G))
         {

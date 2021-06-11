@@ -48,6 +48,8 @@ public class StateStartExperiment : MonoBehaviour, IState
 
     public void Exit()
     {
+        ExperimentalTrialSuccesful = false;
+        ExperimentalTrialNOTSuccesful = false;
         ExperimentControllerScript.ResetBools();
         //Debug.Log("Exit StateStartExperiment");
         //nextState.Enter();

@@ -153,6 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StateInit: {fileID: 474315542}
+  stateTrainingScript: {fileID: 477940421}
+  experimentControllerScript: {fileID: 1883989539}
 --- !u!4 &234035411
 Transform:
   m_ObjectHideFlags: 0
@@ -336,6 +338,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StateInit: {fileID: 474315542}
+  stateCheckActionScript: {fileID: 234035410}
+  isStateTraining: 0
 --- !u!4 &477940422
 Transform:
   m_ObjectHideFlags: 0
@@ -995,6 +999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateMachineScript: {fileID: 1899695769}
   stateStartExperimentScript: {fileID: 943555697}
+  stateTrainingScript: {fileID: 477940421}
   stateInitFinished: 0
   stateStartExperimentFinished: 0
   stateCheckHandPosition: 0
