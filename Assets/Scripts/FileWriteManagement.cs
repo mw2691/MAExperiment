@@ -167,5 +167,89 @@ public class FileWriteManagement
         }
     }
 
+
+    public static bool CheckAllTrialsAreEqualToTrialOrderCounter(string participantID, int lineNumber)
+    {
+        string fullPath = trialOrderFilePath + "/" + GetTrialOrderFileName(participantID);
+        string[] arrLine = File.ReadAllLines(fullPath);
+
+        if (arrLine.Length == lineNumber)
+        {
+            return true;
+        }
+        else
+            return false;
+
+    }
+
+
+    public static int CountRowsinTrialOrderFile(string participantID)
+    {
+        string fullPath = trialOrderFilePath + "/" + GetTrialOrderFileName(participantID);
+        string[] arrLine = File.ReadAllLines(fullPath);
+
+        return arrLine.Length;
+    }
+
+
+    public static bool CheckForRemainingErrorTrials(string participantID, int lineNumber)
+    {
+        bool areThereErrorTrials = false;
+        string fullPath = trialOrderFilePath + "/" + GetTrialOrderFileName(participantID);
+        string[] arrLine = File.ReadAllLines(fullPath);
+
+        for (int i = lineNumber; i < arrLine.Length; i++)
+        {
+            string[] subs = arrLine[i].Split(' ');
+            if (subs[subs.Length - 1] == "2")
+            {
+                areThereErrorTrials = true;
+            }
+        }
+        if (areThereErrorTrials)
+            return true;
+        else
+            return false;
+    }
+
+
+    public static List<string> GetRemainingErrorTrials(string participantID, int lineNumber)
+    {
+        List<string> allErrorTrials = new List<string>();
+        string fullPath = trialOrderFilePath + "/" + GetTrialOrderFileName(participantID);
+        string[] arrLine = File.ReadAllLines(fullPath);
+
+        for (int i = lineNumber; i < arrLine.Length; i++)
+        {
+            string[] subs = arrLine[i].Split(' ');
+            if (subs[subs.Length -1] == "2")
+            {
+                allErrorTrials.Add(arrLine[i]);
+            }
+        }
+        return allErrorTrials;
+    }
+
+    public static void AppendRemainingErrorTrials(string participantID, int lineNumber)
+    {
+        var remainingErrorTrials = GetRemainingErrorTrials(participantID, lineNumber);
+        string fullPath = trialOrderFilePath + "/" + GetTrialOrderFileName(participantID);
+
+        for (int i = 0; i < remainingErrorTrials.Count; i++)
+        {
+            File.AppendAllText(fullPath, remainingErrorTrials[i] + Environment.NewLine);
+        }
+    }
+
+    public static string GetProgressValueFromTrialOrderLine(string participantID)
+    {
+        string fullPath = trialOrderFilePath + "/" + GetTrialOrderFileName(participantID);
+        string[] arrLine = File.ReadAllLines(fullPath);
+        string lastLine = arrLine[arrLine.Length - 1];
+        string[] subs = lastLine.Split(' ');
+        string progress = subs[subs.Length - 1];
+        return progress;
+    }
+
 }
 
