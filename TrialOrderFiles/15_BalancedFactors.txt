@@ -158,4 +158,15 @@ SOA4	 Pour	 Right	 0
 SOA4	 Place	 Right	 0
 SOA4	 Pour	 Left	 0
 SOA2	 Pour	 Left	 1
-SOA1	 Pour	 Right	 0
+SOA1	 Pour	 Right	 1
+SOA3	 Place	 Right	 2
+SOA2	 Pour	 Right	 1
+SOA2	 Pour	 Right	 1
+SOA3	 Place	 Right	 1
+SOA2	 Pour	 Right	 1
+SOA2	 Pour	 Right	 1
+SOA3	 Place	 Right	 1
+SOA3	 Place	 Right	 2
+SOA2	 Pour	 Right	 2
+SOA2	 Pour	 Right	 2
+SOA3	 Place	 Right	 2

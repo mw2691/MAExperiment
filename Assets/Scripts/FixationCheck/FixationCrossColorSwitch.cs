@@ -9,7 +9,7 @@ public class FixationCrossColorSwitch : MonoBehaviour {
   private Material[] backUpMaterials;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
     MeshRenderer[] obtainedRenderer = this.gameObject.GetComponentsInChildren<MeshRenderer>();
     this.childRenderer = new MeshRenderer[obtainedRenderer.Length - 1];
     int counter = 0;

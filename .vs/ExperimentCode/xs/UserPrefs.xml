@@ -1,16 +1,12 @@
 ﻿<Properties StartupConfiguration="{073406A1-9689-53C5-9F35-01C034CA4195}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/FileWriteManagement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/StateStartExperiment.cs">
     <Files>
-      <File FileName="Assets/Scripts/FileWriteManagement.cs" Line="171" Column="29" />
-      <File FileName="Assets/Scripts/ExperimentController.cs" Line="62" Column="65" />
-      <File FileName="Assets/Scripts/StateInit.cs" Line="19" Column="26" />
-      <File FileName="Assets/Scripts/Trial.cs" Line="58" Column="49" />
-      <File FileName="Assets/Scripts/StateMachine.cs" Line="21" Column="32" />
-      <File FileName="Assets/Scripts/StateStartExperiment.cs" Line="45" Column="20" />
-      <File FileName="Assets/Scripts/StateCheckHandPosition.cs" Line="38" Column="38" />
-      <File FileName="Assets/Scripts/StateWelcome.cs" Line="15" Column="1" />
-      <File FileName="Assets/Scripts/StateTraining.cs" Line="22" Column="1" />
-      <File FileName="Assets/Scripts/StateCheckAction.cs" Line="12" Column="60" />
+      <File FileName="Assets/Scripts/ExperimentController.cs" Line="67" Column="39" />
+      <File FileName="Assets/Scripts/StateStartExperiment.cs" Line="290" Column="64" />
+      <File FileName="Assets/Scripts/StateCheckHandPosition.cs" Line="32" Column="36" />
+      <File FileName="Assets/Scripts/FixationCheck/FixationCrossColorSwitch.cs" Line="29" Column="15" />
+      <File FileName="Assets/Scripts/PositionCheck/PositionCheck.cs" Line="9" Column="42" />
+      <File FileName="Assets/Scripts/FixationCheck/CrosshairController.cs" Line="17" Column="29" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -20,7 +16,7 @@
               <Node name="Scripts" expanded="True">
                 <Node name="FixationCheck" expanded="True" />
                 <Node name="PositionCheck" expanded="True" />
-                <Node name="FileWriteManagement.cs" selected="True" />
+                <Node name="StateStartExperiment.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -30,7 +26,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="02ff5ec9-3968-4699-8f2a-5bb9e446a908" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="52e3df52-63e5-49a0-8d69-c24b02bb668c" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

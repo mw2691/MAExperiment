@@ -19,7 +19,12 @@ public class ExperimentController : MonoBehaviour
     public bool stateInitActionAppendOfErrorTrialsIsFinished;
     public bool stateCheckActionAppendRemainingErrorTrialsIsFinished;
 
-    private Trial currentTrial;
+    private const string StateInit = "StateInit (StateInit)";
+    private const string StateStartExperiment = "StateStartExperiment (StateStartExperiment)";
+    private const string StateCheckAction = "StateCheckAction (StateCheckAction)";
+
+
+    public Trial currentTrial;
     public int trialOrderLineCounter = 1;
     public string ParticipantID;
     public int trialOrderLineCounterBeforeAppendErrorTrials;
@@ -36,7 +41,7 @@ public class ExperimentController : MonoBehaviour
         string[] args = Environment.GetCommandLineArgs();
         if (args.Length < 10)
         {
-            args = new string[] { "15", "dummyValue1", "dummyArg2", "dummyValue2" };
+            args = new string[] { "12", "dummyValue1", "dummyArg2", "dummyValue2" };
         }
 
         ParticipantID = args[0];
@@ -64,11 +69,11 @@ public class ExperimentController : MonoBehaviour
     {
         if (!stateInitFinished)
         {
-            if (stateMachineScript.currentState.ToString() == "StateInit (StateInit)")
+            if (stateMachineScript.currentState.ToString() == StateInit)
             {
-                var aa = FileWriteManagement.CountRowsinTrialOrderFile(ParticipantID);
-                Debug.Log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa TrialOrderLineCounter: " + trialOrderLineCounter);
-                Debug.Log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa Amount of Rows in File: " + aa);
+                //var aa = FileWriteManagement.CountRowsinTrialOrderFile(ParticipantID);
+                //Debug.Log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa TrialOrderLineCounter: " + trialOrderLineCounter);
+                //Debug.Log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa Amount of Rows in File: " + aa);
 
 
                 if (!stateInitActionAppendOfErrorTrialsIsFinished)
@@ -78,13 +83,29 @@ public class ExperimentController : MonoBehaviour
                         Debug.Log("Ich appende die ErrorTrials");
                         FileWriteManagement.AppendErrorTrialsToTrialOrderFile(ParticipantID);
                         trialOrderLineCounterBeforeAppendErrorTrials = trialOrderLineCounter;
+                        stateCheckActionAppendRemainingErrorTrialsIsFinished = true;
                         stateInitActionAppendOfErrorTrialsIsFinished = true;
                     }
                 }
 
+
+                if (stateCheckActionAppendRemainingErrorTrialsIsFinished)
+                {
+                    //Debug.Log("1.   !stateInitAppendRemainingErrorTrialsIsFinished");
+                    if (FileWriteManagement.CheckAllTrialsAreEqualToTrialOrderCounter(ParticipantID, trialOrderLineCounter))
+                    {
+                        //Debug.Log("2.   FileWriteManagement.CheckAllTrialsAreEqualToTrialOrderCounter(ParticipantID, trialOrderLineCounter)");
+                        Debug.Log("3.   AppendRemainingErrors");
+                        FileWriteManagement.AppendRemainingErrorTrials(ParticipantID, trialOrderLineCounter);
+                        stateCheckActionAppendRemainingErrorTrialsIsFinished = false;
+                    }
+                }
+
+
                 var rowsInTrialOrderFile = FileWriteManagement.CountRowsinTrialOrderFile(ParticipantID);
                 var progressValue = FileWriteManagement.GetProgressValueFromTrialOrderLine(ParticipantID);
-                if ((rowsInTrialOrderFile <= trialOrderLineCounter) && progressValue == "1")
+                var testo = FileWriteManagement.CheckForRemainingErrorTrials(ParticipantID, trialOrderLineCounter);
+                if (progressValue == "1" && !testo)
                 {
                     EditorApplication.isPlaying = false;
                     //Application.Quit();
@@ -118,7 +139,6 @@ public class ExperimentController : MonoBehaviour
                 }
 
                 stateInitFinished = true;
-                //stateInitActionAppendOfErrorTrialsIsFinished = false;
             }
         }
 
@@ -126,10 +146,16 @@ public class ExperimentController : MonoBehaviour
 
         if (!stateStartExperimentFinished)
         {
-            if (stateMachineScript.currentState.ToString() == "StateStartExperiment (StateStartExperiment)")
+            if (stateMachineScript.currentState.ToString() == StateStartExperiment)
             {
                 //write results in resultfile
                 //generate resultline
+
+
+                //check for condition in current trial --> in StateScript
+
+                
+
 
                 //Check if experimental trial was successful
                 if (stateStartExperimentScript.ExperimentalTrialSuccesful && !stateTrainingScript.isStateTraining)
@@ -141,29 +167,33 @@ public class ExperimentController : MonoBehaviour
                 {
                     FileWriteManagement.WriteProgressInTrialOrderFile(ParticipantID, trialOrderLineCounter, "2");
                     stateStartExperimentFinished = true;
-                }                
+                }
+
+
             }
         }
 
 
+
+
+
         if (!stateCheckAction)
         {
-            if (stateMachineScript.currentState.ToString() == "StateCheckAction (StateCheckAction)")
+            if (stateMachineScript.currentState.ToString() == StateCheckAction)
             {
-                if (FileWriteManagement.CheckAllTrialsAreEqualToTrialOrderCounter(ParticipantID, trialOrderLineCounter))
-                {
-                    if (!stateCheckActionAppendRemainingErrorTrialsIsFinished)
-                    {
-                        if (FileWriteManagement.CheckForRemainingErrorTrials(ParticipantID, trialOrderLineCounter))
-                        {
-                            Debug.Log("Ich appende Remaining errortrials");
-                            FileWriteManagement.AppendRemainingErrorTrials(ParticipantID, trialOrderLineCounter);
-                            stateCheckActionAppendRemainingErrorTrialsIsFinished = true;
-                        }
-                    }
-                }
-                stateCheckAction = true;
+                //if (stateCheckActionAppendRemainingErrorTrialsIsFinished)
+                //{
+                //    //Debug.Log("1.   !stateInitAppendRemainingErrorTrialsIsFinished");
+                //    if (FileWriteManagement.CheckAllTrialsAreEqualToTrialOrderCounter(ParticipantID, trialOrderLineCounter))
+                //    {
+                //        //Debug.Log("2.   FileWriteManagement.CheckAllTrialsAreEqualToTrialOrderCounter(ParticipantID, trialOrderLineCounter)");
+                //        Debug.Log("3.   AppendRemainingErrors");
+                //        FileWriteManagement.AppendRemainingErrorTrials(ParticipantID, trialOrderLineCounter);
+                //        stateCheckActionAppendRemainingErrorTrialsIsFinished = false;
+                //    }
+                //}
             }
+            stateCheckAction = true;
         }
 
 
