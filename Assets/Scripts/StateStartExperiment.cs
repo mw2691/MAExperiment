@@ -108,8 +108,8 @@ public class StateStartExperiment : MonoBehaviour, IState
         }
         if (finished)
         {
-            ExperimentControllerScript.trialOrderLineCounter++;
-            Exit();
+            //ExperimentControllerScript.trialOrderLineCounter++;
+            //Exit();
         }
     }
 
@@ -117,7 +117,7 @@ public class StateStartExperiment : MonoBehaviour, IState
     {
         ExperimentalTrialSuccesful = false;
         ExperimentalTrialNOTSuccesful = false;
-        ExperimentControllerScript.ResetBools();
+        //ExperimentControllerScript.ResetBools();
 
         //Debug.Log("Exit StateStartExperiment");
         //nextState.Enter();

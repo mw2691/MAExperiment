@@ -17,6 +17,9 @@ public class StateCheckAction : MonoBehaviour, IState
     private Vector3 palmLastPosition;
     private Vector3 objectLastPosition;
 
+    public bool ExperimentalTrialSuccesful;
+    public bool ExperimentalTrialNOTSuccesful;
+
 
     public void Enter()
     {
@@ -26,6 +29,7 @@ public class StateCheckAction : MonoBehaviour, IState
 
         palmLastPosition = PalmReference.transform.position;
         objectLastPosition = ObjectReference.transform.position;
+
     }
 
     public void Execute()
@@ -39,10 +43,23 @@ public class StateCheckAction : MonoBehaviour, IState
 
         Debug.Log("Delta Distance: " + Vector3.Distance(palmLastPosition, objectLastPosition));
 
-        if (Vector3.Distance(palmLastPosition, objectLastPosition) <= 0.07f)
+        if (Vector3.Distance(palmLastPosition, objectLastPosition) <= 0.4f)
         {
-            Debug.Log("Ive got it from my mama");
+            Debug.Log("Vectors are in equal range");
         }
+
+
+        if (Input.GetKey(KeyCode.O))
+        {
+            ExperimentalTrialSuccesful = true;
+
+        }
+        if (Input.GetKey(KeyCode.P))
+        {
+            ExperimentalTrialNOTSuccesful = true;
+        }
+
+
 
 
         //Ask for to exit training
@@ -59,11 +76,17 @@ public class StateCheckAction : MonoBehaviour, IState
             finished = true;
         }
         if (finished)
+        {
+            experimentControllerScript.trialOrderLineCounter++;
             Exit();
+        }
     }
 
     public void Exit()
     {
+        ExperimentalTrialSuccesful = false;
+        ExperimentalTrialNOTSuccesful = false;
+        experimentControllerScript.ResetBools();
         //Debug.Log("Exit StateCheckAction");
         //nextState.Enter();
     }

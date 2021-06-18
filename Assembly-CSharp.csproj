@@ -56,6 +56,10 @@
     <Analyzer Include="/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Analyzers/Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/Scripts/PositionCheck/PositionCheck.cs" />
+    <Compile Include="Assets/Scripts/FixationCheck/CrosshairController.cs" />
+    <Compile Include="Assets/Scripts/FixationCheck/FixationCrossColorSwitch.cs" />
+    <Compile Include="Assets/Scripts/ExperimentController.cs" />
     <Compile Include="Assets/Scripts/IState.cs" />
     <Compile Include="Assets/Scripts/StateWelcome.cs" />
     <Compile Include="Assets/Scripts/StateCheckAction.cs" />
@@ -66,12 +70,24 @@
     <Compile Include="Assets/Scripts/FileWriteManagement.cs" />
     <Compile Include="Assets/Scripts/StateStartExperiment.cs" />
     <Compile Include="Assets/Scripts/StateMachine.cs" />
-    <Compile Include="Assets/Scripts/PositionCheck/PositionCheck.cs" />
-    <Compile Include="Assets/Scripts/FixationCheck/CrosshairController.cs" />
-    <Compile Include="Assets/Scripts/FixationCheck/FixationCrossColorSwitch.cs" />
-    <Compile Include="Assets/Scripts/ExperimentController.cs" />
+    <Compile Include="Assets/Scripts/UDPClient.cs" />
+    <Compile Include="Assets/Scripts/RingFingerScript.cs" />
+    <Compile Include="Assets/Scripts/Sensor0Script.cs" />
+    <Compile Include="Assets/Scripts/MiddleFingerScript.cs" />
+    <Compile Include="Assets/Scripts/Sensor2Script.cs" />
+    <Compile Include="Assets/Scripts/Sensor1Script.cs" />
+    <Compile Include="Assets/Scripts/ObjectScript.cs" />
+    <Compile Include="Assets/Scripts/SensorData.cs" />
+    <Compile Include="Assets/Scripts/PinkyFingerScript.cs" />
+    <Compile Include="Assets/FastIK/Scripts/Sample/SampleProcedualAnimation.cs" />
+    <Compile Include="Assets/FastIK/Scripts/FastIK/FastIKFabric.cs" />
+    <Compile Include="Assets/FastIK/Scripts/Sample/SampleSinMover.cs" />
+    <Compile Include="Assets/FastIK/Scripts/FastIK/FastIKCCD.cs" />
+    <Compile Include="Assets/FastIK/Scripts/Sample/SampleRotator.cs" />
+    <Compile Include="Assets/FastIK/Scripts/FastIK/FastIKLook.cs" />
   </ItemGroup>
   <ItemGroup>
+     <None Include="Assets/FastIK/Documentation.txt" />
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Hub/Editor/2020.2.1f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

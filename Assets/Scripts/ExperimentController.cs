@@ -12,6 +12,7 @@ public class ExperimentController : MonoBehaviour
     public StateStartExperiment stateStartExperimentScript;
     public IState getState { get; set; }
     public StateTraining stateTrainingScript;
+    public StateCheckAction stateCheckActionScript;
 
     public GameObject PalmReference;
     public GameObject ThumbReference;
@@ -53,7 +54,7 @@ public class ExperimentController : MonoBehaviour
         string[] args = Environment.GetCommandLineArgs();
         if (args.Length < 10)
         {
-            args = new string[] { "12", "dummyValue1", "dummyArg2", "dummyValue2" };
+            args = new string[] { "09", "dummyValue1", "dummyArg2", "dummyValue2" };
         }
 
         ParticipantID = args[0];
@@ -184,16 +185,16 @@ public class ExperimentController : MonoBehaviour
                 }
 
                 //Check if experimental trial was successful --> eventuell in den stateCheckAction packen
-                if (stateStartExperimentScript.ExperimentalTrialSuccesful && !stateTrainingScript.isStateTraining)
-                {
-                    FileWriteManagement.WriteProgressInTrialOrderFile(ParticipantID, trialOrderLineCounter);
-                    stateStartExperimentFinished = true;
-                }
-                if (stateStartExperimentScript.ExperimentalTrialNOTSuccesful && !stateTrainingScript.isStateTraining)
-                {
-                    FileWriteManagement.WriteProgressInTrialOrderFile(ParticipantID, trialOrderLineCounter, "2");
-                    stateStartExperimentFinished = true;
-                }
+                //if (stateStartExperimentScript.ExperimentalTrialSuccesful && !stateTrainingScript.isStateTraining)
+                //{
+                //    FileWriteManagement.WriteProgressInTrialOrderFile(ParticipantID, trialOrderLineCounter);
+                //    stateStartExperimentFinished = true;
+                //}
+                //if (stateStartExperimentScript.ExperimentalTrialNOTSuccesful && !stateTrainingScript.isStateTraining)
+                //{
+                //    FileWriteManagement.WriteProgressInTrialOrderFile(ParticipantID, trialOrderLineCounter, "2");
+                //    stateStartExperimentFinished = true;
+                //}
             }
         }
 
@@ -217,8 +218,16 @@ public class ExperimentController : MonoBehaviour
                     FileWriteManagement.WriteFile(currentTrial.GenerateResultLine(), resultFileDirectory, true);
                     counter++;
                 }
-
-
+                if (stateCheckActionScript.ExperimentalTrialSuccesful && !stateTrainingScript.isStateTraining)
+                {
+                    FileWriteManagement.WriteProgressInTrialOrderFile(ParticipantID, trialOrderLineCounter);
+                    stateCheckAction = true;
+                }
+                if (stateCheckActionScript.ExperimentalTrialNOTSuccesful && !stateTrainingScript.isStateTraining)
+                {
+                    FileWriteManagement.WriteProgressInTrialOrderFile(ParticipantID, trialOrderLineCounter, "2");
+                    stateCheckAction = true;
+                }
 
 
                 //Debug.Log("StateCheckAction: " + currentTrial.GenerateResultLine());
@@ -235,7 +244,7 @@ public class ExperimentController : MonoBehaviour
                 //    }
                 //}
             }
-            stateCheckAction = true;
+            //stateCheckAction = true;
         }
 
 
