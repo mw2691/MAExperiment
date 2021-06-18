@@ -77,16 +77,18 @@ public class StateStartExperiment : MonoBehaviour, IState
 
     public void Execute()
     {
+
+        //StartExperiment(currentTrialConditions);
         if (!audioHasPlayed)
         {
             PlayGoSignal();
             audioHasPlayed = true;
         }
-        if (audioHasPlayed)
+        if (audioHasPlayed && !audioSource.isPlaying)
         {
             StartExperiment(currentTrialConditions);
         }
-            
+
 
         //for test: Experiment was good
         if (Input.GetKey(KeyCode.O))
@@ -134,7 +136,7 @@ public class StateStartExperiment : MonoBehaviour, IState
         //checks for SOA conditions
         if (trialInfo.SOAFactors == SOA1)
         {
-            SOA1MovementOnset(trialInfo.Interaction, trialInfo.InteractionPlacement);
+            StartCoroutine(SOA1MovementOnset(trialInfo.Interaction, trialInfo.InteractionPlacement));
         }
 
         if (trialInfo.SOAFactors == SOA2)
@@ -165,8 +167,8 @@ public class StateStartExperiment : MonoBehaviour, IState
         {
             yield return null;
         }
-        yield return new WaitForSeconds(0.5f);
         StartStimulation(currentTrialConditions.Interaction, currentTrialConditions.InteractionPlacement);
+        yield return new WaitForSeconds(0.5f);
         PlaceStimulationLeft.SetActive(false);
         PlaceStimulationRight.SetActive(false);
         PourStimulationLeft.SetActive(false);
@@ -224,11 +226,11 @@ public class StateStartExperiment : MonoBehaviour, IState
 
     private bool AtMovementOnset()
     {
-        if (audioHasPlayed)
+        if (this.audioHasPlayed)
         {
             return true;
-        }
-        return false;
+        }else
+            return false;
     }
 
 

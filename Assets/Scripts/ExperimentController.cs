@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using System;
@@ -11,6 +12,12 @@ public class ExperimentController : MonoBehaviour
     public StateStartExperiment stateStartExperimentScript;
     public IState getState { get; set; }
     public StateTraining stateTrainingScript;
+
+    public GameObject PalmReference;
+    public GameObject ThumbReference;
+    public GameObject IndexReference;
+    public GameObject EyeReference;
+    public GameObject ObjectReference;
 
     public bool stateInitFinished;
     public bool stateStartExperimentFinished;
@@ -28,15 +35,20 @@ public class ExperimentController : MonoBehaviour
     public int trialOrderLineCounter = 1;
     public string ParticipantID;
     public int trialOrderLineCounterBeforeAppendErrorTrials;
-    
+
+    private string resultFileName;
+    private string resultFileDirectory;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
+
+
         //FileWriteManagement.WriteProgressInTrialOrderFile("29", 1);
 
-        
+
         ///Read out command line arguments (demographic data)
         string[] args = Environment.GetCommandLineArgs();
         if (args.Length < 10)
@@ -116,7 +128,7 @@ public class ExperimentController : MonoBehaviour
                 currentTrial = InstantiateTrial(ParticipantID, trialOrderLineCounter);
 
                 //ResultFile Management (check, create, write header)
-                var resultFileName = currentTrial.GenerateFileName();
+                this.resultFileName = currentTrial.GenerateFileName();
                 var resultHeader = currentTrial.GenerateHeader();
 
 
@@ -132,11 +144,18 @@ public class ExperimentController : MonoBehaviour
 
                 if (!FileWriteManagement.CheckExistingFile(resultFileName))
                 {
-                    var resultFileDirectory = FileWriteManagement.GetResultFileDirectory(ParticipantID);
+                    resultFileDirectory = FileWriteManagement.GetResultFileDirectory(ParticipantID);
                     resultFileDirectory = resultFileDirectory + "/" + resultFileName;
                     FileWriteManagement.CreateFile(resultFileDirectory);
                     FileWriteManagement.WriteFile(resultHeader, resultFileDirectory, true);
                 }
+
+                currentTrial.palmData = PalmReference.transform.position;
+                currentTrial.thumbData = ThumbReference.transform.position;
+                currentTrial.indexData = IndexReference.transform.position;
+                currentTrial.eyeData = EyeReference.transform.position;
+                currentTrial.objectData = ObjectReference.transform.position;
+                currentTrial.resultFileAnnotations = "noch leer";
 
                 stateInitFinished = true;
             }
@@ -148,16 +167,23 @@ public class ExperimentController : MonoBehaviour
         {
             if (stateMachineScript.currentState.ToString() == StateStartExperiment)
             {
+                var counter = 0;
                 //write results in resultfile
                 //generate resultline
+                //Debug.Log("stateStartExperiment: " + currentTrial.GenerateResultLine());
+                currentTrial.palmData = PalmReference.transform.position;
+                currentTrial.thumbData = ThumbReference.transform.position;
+                currentTrial.indexData = IndexReference.transform.position;
+                currentTrial.eyeData = EyeReference.transform.position;
+                currentTrial.objectData = ObjectReference.transform.position;
+                currentTrial.resultFileAnnotations = "noch leer";
+                if (counter % 2 == 0)
+                {
+                    FileWriteManagement.WriteFile(currentTrial.GenerateResultLine(), resultFileDirectory, true);
+                    counter++;
+                }
 
-
-                //check for condition in current trial --> in StateScript
-
-                
-
-
-                //Check if experimental trial was successful
+                //Check if experimental trial was successful --> eventuell in den stateCheckAction packen
                 if (stateStartExperimentScript.ExperimentalTrialSuccesful && !stateTrainingScript.isStateTraining)
                 {
                     FileWriteManagement.WriteProgressInTrialOrderFile(ParticipantID, trialOrderLineCounter);
@@ -168,8 +194,6 @@ public class ExperimentController : MonoBehaviour
                     FileWriteManagement.WriteProgressInTrialOrderFile(ParticipantID, trialOrderLineCounter, "2");
                     stateStartExperimentFinished = true;
                 }
-
-
             }
         }
 
@@ -181,6 +205,24 @@ public class ExperimentController : MonoBehaviour
         {
             if (stateMachineScript.currentState.ToString() == StateCheckAction)
             {
+                var counter = 0;
+                currentTrial.palmData = PalmReference.transform.position;
+                currentTrial.thumbData = ThumbReference.transform.position;
+                currentTrial.indexData = IndexReference.transform.position;
+                currentTrial.eyeData = EyeReference.transform.position;
+                currentTrial.objectData = ObjectReference.transform.position;
+                currentTrial.resultFileAnnotations = "noch leer";
+                if (counter % 2 == 0)
+                {
+                    FileWriteManagement.WriteFile(currentTrial.GenerateResultLine(), resultFileDirectory, true);
+                    counter++;
+                }
+
+
+
+
+                //Debug.Log("StateCheckAction: " + currentTrial.GenerateResultLine());
+                //FileWriteManagement.WriteFile(currentTrial.GenerateResultLine(), resultFileName, true);
                 //if (stateCheckActionAppendRemainingErrorTrialsIsFinished)
                 //{
                 //    //Debug.Log("1.   !stateInitAppendRemainingErrorTrialsIsFinished");
