@@ -1,0 +1,38 @@
+﻿<Properties StartupConfiguration="{073406A1-9689-53C5-9F35-01C034CA4195}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/FileWriteManagement.cs">
+    <Files>
+      <File FileName="Assets/Scripts/ExperimentController.cs" Line="175" Column="52" />
+      <File FileName="Assets/Scripts/Trial.cs" Line="17" Column="5" />
+      <File FileName="Assets/Scripts/StateStartExperiment.cs" Line="110" Column="10" />
+      <File FileName="Assets/Scripts/StateCheckAction.cs" Line="89" Column="41" />
+      <File FileName="Assets/Scripts/StateCheckHandPosition.cs" Line="32" Column="36" />
+      <File FileName="Assets/Scripts/FixationCheck/FixationCrossColorSwitch.cs" Line="29" Column="15" />
+      <File FileName="Assets/Scripts/PositionCheck/PositionCheck.cs" Line="9" Column="42" />
+      <File FileName="Assets/Scripts/FixationCheck/CrosshairController.cs" Line="17" Column="29" />
+      <File FileName="Assets/Scripts/StateInit.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/FileWriteManagement.cs" Line="94" Column="24" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="ExperimentCode" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="FixationCheck" expanded="True" />
+                <Node name="PositionCheck" expanded="True" />
+                <Node name="FileWriteManagement.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="52e3df52-63e5-49a0-8d69-c24b02bb668c" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

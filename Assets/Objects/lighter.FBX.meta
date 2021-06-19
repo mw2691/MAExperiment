@@ -1,0 +1,143 @@
+fileFormatVersion: 2
+guid: 578d6c42677f6404497e4fe24125fc81
+timeCreated: 1433935676
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Base
+    100002: Body
+    100004: Clicker
+    100006: GasChamber
+    100008: GasLever
+    100010: Inside1
+    100012: Inside2
+    100014: Light
+    100016: LightButton
+    100018: //RootNode
+    100020: Refueller
+    100022: Screw
+    100024: Spark
+    100026: SparkCapInside
+    100028: SparkCapOutside
+    100030: Spring
+    400000: Base
+    400002: Body
+    400004: Clicker
+    400006: GasChamber
+    400008: GasLever
+    400010: Inside1
+    400012: Inside2
+    400014: Light
+    400016: LightButton
+    400018: //RootNode
+    400020: Refueller
+    400022: Screw
+    400024: Spark
+    400026: SparkCapInside
+    400028: SparkCapOutside
+    400030: Spring
+    2300000: Base
+    2300002: Body
+    2300004: Clicker
+    2300006: GasChamber
+    2300008: GasLever
+    2300010: Inside1
+    2300012: Inside2
+    2300014: Light
+    2300016: LightButton
+    2300018: Refueller
+    2300020: Screw
+    2300022: Spark
+    2300024: SparkCapInside
+    2300026: SparkCapOutside
+    2300028: Spring
+    3300000: Base
+    3300002: Body
+    3300004: Clicker
+    3300006: GasChamber
+    3300008: GasLever
+    3300010: Inside1
+    3300012: Inside2
+    3300014: Light
+    3300016: LightButton
+    3300018: Refueller
+    3300020: Screw
+    3300022: Spark
+    3300024: SparkCapInside
+    3300026: SparkCapOutside
+    3300028: Spring
+    4300000: Body
+    4300002: SparkCapOutside
+    4300004: GasLever
+    4300006: Clicker
+    4300008: GasChamber
+    4300010: Spark
+    4300012: SparkCapInside
+    4300014: LightButton
+    4300016: Screw
+    4300018: Light
+    4300020: Base
+    4300022: Refueller
+    4300024: Spring
+    4300026: Inside1
+    4300028: Inside2
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,32 @@
+﻿<Properties StartupConfiguration="{B80CFFCB-346F-48C7-F691-A16CFD253D05}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/StateCheckHandPosition.cs">
+    <Files>
+      <File FileName="Assets/Scripts/StateCheckAction.cs" Line="48" Column="114" />
+      <File FileName="Assets/Scripts/ExperimentController.cs" Line="91" Column="1" />
+      <File FileName="Assets/Scripts/StateCheckHandPosition.cs" Line="78" Column="42" />
+      <File FileName="Assets/Scripts/StateStartExperiment.cs" Line="272" Column="6" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MAExperiment-master" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="FixationCheck" expanded="True" />
+                <Node name="PositionCheck" expanded="True" />
+                <Node name="StateCheckHandPosition.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="b339bba7-ad7a-41a7-bee4-53a44232c6c6" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
