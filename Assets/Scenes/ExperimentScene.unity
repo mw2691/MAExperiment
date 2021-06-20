@@ -1199,13 +1199,19 @@ MonoBehaviour:
   stateTrainingScript: {fileID: 477940421}
   experimentControllerScript: {fileID: 1883989539}
   stateStartExperimentScript: {fileID: 943555697}
+  PlaceStimulationLeft: {fileID: 329043372}
+  PlaceStimulationRight: {fileID: 617533135}
   PalmReference: {fileID: 547816212}
   ObjectReference: {fileID: 2142296597}
   IndexFingerReference: {fileID: 2029192611}
   ThumbFingerReference: {fileID: 849432912}
+  CupRight: {fileID: 1435693373}
+  CupLeft: {fileID: 1660525026}
   ExperimentalTrialSuccesful: 0
   ExperimentalTrialNOTSuccesful: 0
-  CheckDuration: 2.5
+  CheckDuration: 10
+  BottleRotationRangeMin: 60
+  BottleRotationRangeMax: 110
 --- !u!4 &234035411
 Transform:
   m_ObjectHideFlags: 0
@@ -4600,7 +4606,7 @@ MonoBehaviour:
   TrialTimeOut: 0
   CheckDuration: 0.5
   TrialDurationTimeStamp: 0
-  TrialMaxDuration: 0
+  TrialMaxDuration: 20
 --- !u!4 &943555698
 Transform:
   m_ObjectHideFlags: 0
@@ -6799,6 +6805,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1432193089}
   m_Mesh: {fileID: 4300096, guid: 1591f8eda65a14357a4de2c3e3a57b99, type: 3}
+--- !u!1 &1435693373 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: fe1a8c2a025bae246a966f648c010139, type: 3}
+  m_PrefabInstance: {fileID: 876758763}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1438051387
 GameObject:
   m_ObjectHideFlags: 0
@@ -7766,6 +7777,11 @@ MonoBehaviour:
   Iterations: 10
   Delta: 0.001
   SnapBackStrength: 1
+--- !u!1 &1660525026 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: fe1a8c2a025bae246a966f648c010139, type: 3}
+  m_PrefabInstance: {fileID: 162992972}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1661694678
 GameObject:
   m_ObjectHideFlags: 0
@@ -10773,7 +10789,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2142296597}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.9052734, y: 0, z: -11.31592}
+  m_LocalPosition: {x: 4.62, y: 0, z: -11.31592}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

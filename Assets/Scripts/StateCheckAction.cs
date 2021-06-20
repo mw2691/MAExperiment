@@ -12,6 +12,10 @@ public class StateCheckAction : MonoBehaviour, IState
     public ExperimentController experimentControllerScript;
     public StateStartExperiment stateStartExperimentScript;
 
+    private Trial currentTrialConditions;
+
+    public GameObject PlaceStimulationLeft;
+    public GameObject PlaceStimulationRight;
 
     public GameObject PalmReference;
     public GameObject ObjectReference;
@@ -19,6 +23,8 @@ public class StateCheckAction : MonoBehaviour, IState
     public GameObject ThumbFingerReference;
     private Vector3 palmLastPosition;
     private Vector3 objectLastPosition;
+    public GameObject CupRight;
+    public GameObject CupLeft;
 
     public bool ExperimentalTrialSuccesful;
     public bool ExperimentalTrialNOTSuccesful;
@@ -26,43 +32,40 @@ public class StateCheckAction : MonoBehaviour, IState
     private float timeStamp = 0.0f;
     public float CheckDuration = 10f;
 
+    private const string InteractionPour = "Pour";
+    private const string InteractionPlace = "Place";
+    private const string PlacementLeft = "Left";
+    private const string PlacementRight = "Right";
+
+    public float BottleRotationRangeMin = 60.0f;
+    public float BottleRotationRangeMax = 110.0f;
+
 
     public void Enter()
     {
         finished = false;
         nextState = StateInit.GetComponent<IState>();
         //Debug.Log("Enter StateCheckAction");
+        currentTrialConditions = experimentControllerScript.currentTrial;
 
         palmLastPosition = PalmReference.transform.position;
         objectLastPosition = ObjectReference.transform.position;
-        Debug.Log("Uga timestamp");
     }
-
+    
     public void Execute()
     {
+
+        CheckExperiment(currentTrialConditions);
+
+
         #region Check bottle grasp
-        //Check for is bottle grasped?
         this.palmLastPosition = PalmReference.transform.position;
         this.objectLastPosition = ObjectReference.transform.position;
         stateStartExperimentScript.TrialDurationTimeStamp += Time.deltaTime;
 
-        if (stateStartExperimentScript.TrialDurationTimeStamp >= stateStartExperimentScript.TrialMaxDuration &&
-            !IsBottleGrasped(palmLastPosition, objectLastPosition))
-        {
-            Debug.Log("Bitte schneller die Flasche greifen");
-            stateStartExperimentScript.TrialTimeOut = true;
-        }
-
-        if (stateStartExperimentScript.TrialDurationTimeStamp >= stateStartExperimentScript.TrialMaxDuration &&
-            IsBottleGrasped(palmLastPosition, objectLastPosition))
-        {
-            Debug.Log("Bitte schneller die Aktion ausführen");
-            stateStartExperimentScript.TrialTimeOut = true;
-        }
-
+        StartCoroutine(TrialTimeOutAndBottleIsNotGrasped());
+        StartCoroutine(TrialTimeOutAndBottleIsGrasped());
         #endregion
-
-
 
 
         if (Input.GetKey(KeyCode.O))
@@ -74,7 +77,6 @@ public class StateCheckAction : MonoBehaviour, IState
         {
             ExperimentalTrialNOTSuccesful = true;
         }
-
 
 
 
@@ -108,6 +110,175 @@ public class StateCheckAction : MonoBehaviour, IState
         //nextState.Enter();
     }
 
+
+
+    public IEnumerator TrialTimeOutAndBottleIsNotGrasped()
+    {
+        while (!(stateStartExperimentScript.TrialDurationTimeStamp >= stateStartExperimentScript.TrialMaxDuration &&
+            !IsBottleGrasped(palmLastPosition, objectLastPosition)))
+        {
+            yield return null;
+        }
+        stateStartExperimentScript.TrialTimeOut = true;
+        Debug.Log("Bitte schneller die Flasche greifen");
+        yield return new WaitForSeconds(0.5f);
+        this.finished = true;
+    }
+
+    public IEnumerator TrialTimeOutAndBottleIsGrasped()
+    {
+        while (!(stateStartExperimentScript.TrialDurationTimeStamp >= stateStartExperimentScript.TrialMaxDuration &&
+            IsBottleGrasped(palmLastPosition, objectLastPosition)))
+        {
+            yield return null;
+        }
+        stateStartExperimentScript.TrialTimeOut = true;
+        Debug.Log("Bitte schneller die Aktion ausführen");
+        yield return new WaitForSeconds(0.5f);
+        this.finished = true;
+    }
+
+
+
+
+    public void CheckExperiment(Trial trialInfo)
+    {
+        if ((trialInfo.Interaction == InteractionPour) && (trialInfo.InteractionPlacement == PlacementRight))
+        {
+            StartCoroutine(PourRight());
+        }
+        if ((trialInfo.Interaction == InteractionPour) && (trialInfo.InteractionPlacement == PlacementLeft))
+        {
+            StartCoroutine(PourLeft());
+        }
+        if ((trialInfo.Interaction == InteractionPlace) && (trialInfo.InteractionPlacement == PlacementRight))
+        {
+            StartCoroutine(PlaceRight());
+        }
+        if ((trialInfo.Interaction == InteractionPlace) && (trialInfo.InteractionPlacement == PlacementLeft))
+        {
+            StartCoroutine(PlaceLeft());
+        }
+
+        //checks for SOA conditions
+        //if (trialInfo.SOAFactors == SOA1)
+        //{
+        //    StartCoroutine(SOA1MovementOnset(trialInfo.Interaction, trialInfo.InteractionPlacement));
+        //}
+
+        //if (trialInfo.SOAFactors == SOA2)
+        //{
+        //    StartCoroutine(SOA2Halfway(trialInfo.Interaction, trialInfo.InteractionPlacement));
+        //}
+
+        //if (trialInfo.SOAFactors == SOA3)
+        //{
+        //    StartCoroutine(SOA3AtBottle(trialInfo.Interaction, trialInfo.InteractionPlacement));
+        //}
+
+        //if (trialInfo.SOAFactors == SOA4)
+        //{
+        //    StartCoroutine(SOA4AfterGrasp(trialInfo.Interaction, trialInfo.InteractionPlacement));
+        //}
+    }
+
+    #region coroutines
+    private IEnumerator PourRight()
+    {
+        while (!CheckPourRight())
+        {
+            yield return null;
+        }
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("Check PourRight good");
+        ExperimentalTrialSuccesful = true;
+        this.finished = true;
+    }
+
+    
+    private IEnumerator PourLeft()
+    {
+        while (!CheckPourLeft())
+        {
+            yield return null;
+        }
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("Check PourLeft good");
+        ExperimentalTrialSuccesful = true;
+        this.finished = true;
+    }
+
+    private IEnumerator PlaceRight()
+    {
+        while (!CheckPlaceRight())
+        {
+            yield return null;
+        }
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("Check PlaceRight good");
+        ExperimentalTrialSuccesful = true;
+        this.finished = true;
+    }
+
+    private IEnumerator PlaceLeft()
+    {
+        while (!CheckPlaceLeft())
+        {
+            yield return null;
+        }
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("Check PlaceLeft good");
+        ExperimentalTrialSuccesful = true;
+        this.finished = true;
+    }
+    #endregion
+
+    #region implement coroutines condition methods
+
+    private bool CheckPourRight()
+    {
+        if ((ObjectReference.transform.eulerAngles.z >= BottleRotationRangeMin && ObjectReference.transform.eulerAngles.z <= BottleRotationRangeMax) &&
+            (Vector3.Distance(ObjectReference.transform.position, CupRight.transform.position) >= 0.0f &&
+            Vector3.Distance(ObjectReference.transform.position, CupRight.transform.position) <= 6.0f))
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
+    private bool CheckPourLeft()
+    {
+        if ((ObjectReference.transform.eulerAngles.z >= BottleRotationRangeMin && ObjectReference.transform.eulerAngles.z <= BottleRotationRangeMax) &&
+            (Vector3.Distance(ObjectReference.transform.position, CupLeft.transform.position) >= 0.0f &&
+            Vector3.Distance(ObjectReference.transform.position, CupLeft.transform.position) <= 6.0f))
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
+    private bool CheckPlaceRight()
+    {
+        if (Vector3.Distance(PlaceStimulationRight.transform.position, ObjectReference.transform.position) <= 0.2)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
+    private bool CheckPlaceLeft()
+    {
+        if (Vector3.Distance(PlaceStimulationLeft.transform.position, ObjectReference.transform.position) <= 0.2)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+    #endregion
 
     private bool IsBottleGrasped(Vector3 lastPositionPalm, Vector3 lastPositionObject)
     {

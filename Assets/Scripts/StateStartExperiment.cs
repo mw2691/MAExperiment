@@ -44,7 +44,7 @@ public class StateStartExperiment : MonoBehaviour, IState
     public float CheckDuration = 0.5f;
     private float timeStamp = 0.0f;
     public float TrialDurationTimeStamp = 0.0f;
-    public float TrialMaxDuration = 20.0f;
+    public float TrialMaxDuration = 25.0f;
 
 
 
@@ -72,7 +72,7 @@ public class StateStartExperiment : MonoBehaviour, IState
 
         this.timeStamp = 0.0f;
         this.TrialDurationTimeStamp = 0.0f;
-        this.TrialMaxDuration = 20f;
+        this.TrialMaxDuration = 25.0f;
 
     }
 
@@ -131,22 +131,22 @@ public class StateStartExperiment : MonoBehaviour, IState
         //checks for SOA conditions
         if (trialInfo.SOAFactors == SOA1)
         {
-            StartCoroutine(SOA1MovementOnset(trialInfo.Interaction, trialInfo.InteractionPlacement));
+            StartCoroutine(SOA1MovementOnset());
         }
 
         if (trialInfo.SOAFactors == SOA2)
         {
-            StartCoroutine(SOA2Halfway(trialInfo.Interaction, trialInfo.InteractionPlacement));
+            StartCoroutine(SOA2Halfway());
         }
 
         if (trialInfo.SOAFactors == SOA3)
         {
-            StartCoroutine(SOA3AtBottle(trialInfo.Interaction, trialInfo.InteractionPlacement));
+            StartCoroutine(SOA3AtBottle());
         }
 
         if (trialInfo.SOAFactors == SOA4)
         {
-            StartCoroutine(SOA4AfterGrasp(trialInfo.Interaction, trialInfo.InteractionPlacement));
+            StartCoroutine(SOA4AfterGrasp());
         }
     } 
 
@@ -156,7 +156,7 @@ public class StateStartExperiment : MonoBehaviour, IState
 
 
 
-    private IEnumerator SOA1MovementOnset(string trialInteraction, string trialPlacement)
+    private IEnumerator SOA1MovementOnset()
     {
         while (!AtMovementOnset())
         {
@@ -171,7 +171,7 @@ public class StateStartExperiment : MonoBehaviour, IState
         this.finished = true;
     }
     
-    private IEnumerator SOA2Halfway(string trialInteraction, string trialPlacement)
+    private IEnumerator SOA2Halfway()
     {
         while (!HalfWayDone())
         {
@@ -186,7 +186,7 @@ public class StateStartExperiment : MonoBehaviour, IState
         this.finished = true;
     }
 
-    private IEnumerator SOA3AtBottle(string trialInteraction, string trialPlacement)
+    private IEnumerator SOA3AtBottle()
     {
         while (!AtBottle())
         {
@@ -201,7 +201,7 @@ public class StateStartExperiment : MonoBehaviour, IState
         this.finished = true;
     }
 
-    private IEnumerator SOA4AfterGrasp(string trialInteraction, string trialPlacement)
+    private IEnumerator SOA4AfterGrasp()
     {
         while (!AfterGrasp())
         {
@@ -216,9 +216,6 @@ public class StateStartExperiment : MonoBehaviour, IState
         this.finished = true;
     }
 
-
-
-
     private bool AtMovementOnset()
     {
         if (!FixationCross.activeSelf)
@@ -227,12 +224,6 @@ public class StateStartExperiment : MonoBehaviour, IState
         }else
             return false;
     }
-
-
-
-
-
-
 
     private bool HalfWayDone()
     {
@@ -247,7 +238,6 @@ public class StateStartExperiment : MonoBehaviour, IState
         else
             return false;
     }
-
 
     private bool AtBottle()
     {
