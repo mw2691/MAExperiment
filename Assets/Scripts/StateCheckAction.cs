@@ -10,6 +10,7 @@ public class StateCheckAction : MonoBehaviour, IState
 
     public StateTraining stateTrainingScript;
     public ExperimentController experimentControllerScript;
+    public StateStartExperiment stateStartExperimentScript;
 
 
     public GameObject PalmReference;
@@ -22,6 +23,9 @@ public class StateCheckAction : MonoBehaviour, IState
     public bool ExperimentalTrialSuccesful;
     public bool ExperimentalTrialNOTSuccesful;
 
+    private float timeStamp = 0.0f;
+    public float CheckDuration = 10f;
+
 
     public void Enter()
     {
@@ -31,27 +35,32 @@ public class StateCheckAction : MonoBehaviour, IState
 
         palmLastPosition = PalmReference.transform.position;
         objectLastPosition = ObjectReference.transform.position;
-
+        Debug.Log("Uga timestamp");
     }
 
     public void Execute()
     {
-
+        #region Check bottle grasp
         //Check for is bottle grasped?
         this.palmLastPosition = PalmReference.transform.position;
         this.objectLastPosition = ObjectReference.transform.position;
-        
+        stateStartExperimentScript.TrialDurationTimeStamp += Time.deltaTime;
 
-        Debug.Log("Delta Distance: " + Vector3.Distance(palmLastPosition, objectLastPosition));
-
-        if ((Vector3.Distance(palmLastPosition, objectLastPosition) <= 0.4f) &&
-            Vector3.Distance(IndexFingerReference.transform.position, ObjectReference.transform.position) <= 0.4f)
+        if (stateStartExperimentScript.TrialDurationTimeStamp >= stateStartExperimentScript.TrialMaxDuration &&
+            !IsBottleGrasped(palmLastPosition, objectLastPosition))
         {
-            Debug.Log("Vectors are in equal range");
+            Debug.Log("Bitte schneller die Flasche greifen");
+            stateStartExperimentScript.TrialTimeOut = true;
         }
 
+        if (stateStartExperimentScript.TrialDurationTimeStamp >= stateStartExperimentScript.TrialMaxDuration &&
+            IsBottleGrasped(palmLastPosition, objectLastPosition))
+        {
+            Debug.Log("Bitte schneller die Aktion ausführen");
+            stateStartExperimentScript.TrialTimeOut = true;
+        }
 
-
+        #endregion
 
 
 
@@ -94,8 +103,23 @@ public class StateCheckAction : MonoBehaviour, IState
         ExperimentalTrialSuccesful = false;
         ExperimentalTrialNOTSuccesful = false;
         experimentControllerScript.ResetBools();
+        this.finished = true;
         //Debug.Log("Exit StateCheckAction");
         //nextState.Enter();
+    }
+
+
+    private bool IsBottleGrasped(Vector3 lastPositionPalm, Vector3 lastPositionObject)
+    {
+        if ((Vector3.Distance(lastPositionPalm, lastPositionObject) <= 0.4f) &&
+    Vector3.Distance(IndexFingerReference.transform.position, ObjectReference.transform.position) <= 0.4f &&
+    Vector3.Distance(ThumbFingerReference.transform.position, ObjectReference.transform.position) <= 0.4f)
+        {
+            Debug.Log("Bottle is grasped");
+            return true;
+        }
+        else
+            return false;
     }
 
 }

@@ -218,12 +218,18 @@ public class ExperimentController : MonoBehaviour
                     FileWriteManagement.WriteFile(currentTrial.GenerateResultLine(), resultFileDirectory, true);
                     counter++;
                 }
-                if (stateCheckActionScript.ExperimentalTrialSuccesful && !stateTrainingScript.isStateTraining)
+
+                if (stateStartExperimentScript.TrialTimeOut)
+                {
+                    FileWriteManagement.WriteProgressInTrialOrderFile(ParticipantID, trialOrderLineCounter, "2");
+                }
+
+                if (stateCheckActionScript.ExperimentalTrialSuccesful && !stateStartExperimentScript.TrialTimeOut)
                 {
                     FileWriteManagement.WriteProgressInTrialOrderFile(ParticipantID, trialOrderLineCounter);
                     stateCheckAction = true;
                 }
-                if (stateCheckActionScript.ExperimentalTrialNOTSuccesful && !stateTrainingScript.isStateTraining)
+                if (stateCheckActionScript.ExperimentalTrialNOTSuccesful && !stateStartExperimentScript.TrialTimeOut)
                 {
                     FileWriteManagement.WriteProgressInTrialOrderFile(ParticipantID, trialOrderLineCounter, "2");
                     stateCheckAction = true;

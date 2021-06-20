@@ -26,7 +26,7 @@ public class StateStartExperiment : MonoBehaviour, IState
 
     public bool ExperimentalTrialSuccesful;
     public bool ExperimentalTrialNOTSuccesful;
-    public bool audioHasPlayed;
+    public bool TrialTimeOut;
 
     private Trial currentTrialConditions;
 
@@ -43,6 +43,8 @@ public class StateStartExperiment : MonoBehaviour, IState
 
     public float CheckDuration = 0.5f;
     private float timeStamp = 0.0f;
+    public float TrialDurationTimeStamp = 0.0f;
+    public float TrialMaxDuration = 20.0f;
 
 
 
@@ -59,6 +61,7 @@ public class StateStartExperiment : MonoBehaviour, IState
     public void Enter()
     {
         finished = false;
+        TrialTimeOut = false;
         nextState = CheckAction.GetComponent<IState>();
         //Debug.Log("Enter StateStartExperiment");
         currentTrialConditions = ExperimentControllerScript.currentTrial;
@@ -66,9 +69,10 @@ public class StateStartExperiment : MonoBehaviour, IState
         var handReferenceZ = new Vector3(0, 0, HandReference.position.z);
         var objectReferenceZ = new Vector3(0, 0, ObjectReference.position.z);
         constDistanceBetweenHandAndObject = Vector3.Distance(handReferenceZ, objectReferenceZ);
-        audioHasPlayed = false;
 
         this.timeStamp = 0.0f;
+        this.TrialDurationTimeStamp = 0.0f;
+        this.TrialMaxDuration = 20f;
 
     }
 
@@ -77,7 +81,14 @@ public class StateStartExperiment : MonoBehaviour, IState
         //Start the trial
         if (!FixationCross.activeSelf && StateCheckHandPositionScript.finished)
         {
+            TrialDurationTimeStamp += Time.deltaTime;
             StartExperiment(currentTrialConditions);
+        }
+
+        if (TrialDurationTimeStamp >= TrialMaxDuration)
+        {
+            TrialTimeOut = true;
+            this.finished = true;
         }
 
 
