@@ -37,7 +37,7 @@ public class StateCheckAction : MonoBehaviour, IState
     private const string PlacementLeft = "Left";
     private const string PlacementRight = "Right";
 
-    public float BottleRotationRangeMin = 60.0f;
+    public float BottleRotationRangeMin = 45.0f;
     public float BottleRotationRangeMax = 110.0f;
 
 
@@ -54,17 +54,14 @@ public class StateCheckAction : MonoBehaviour, IState
     
     public void Execute()
     {
-        CheckExperiment(currentTrialConditions);
-
-
-        #region Check bottle grasp
         this.palmLastPosition = PalmReference.transform.position;
         this.objectLastPosition = ObjectReference.transform.position;
+        CheckExperiment(currentTrialConditions);
+
         stateStartExperimentScript.TrialDurationTimeStamp += Time.deltaTime;
 
         StartCoroutine(TrialTimeOutAndBottleIsNotGrasped());
         StartCoroutine(TrialTimeOutAndBottleIsGrasped());
-        #endregion
 
 
         if (Input.GetKey(KeyCode.O))
@@ -119,6 +116,7 @@ public class StateCheckAction : MonoBehaviour, IState
             yield return null;
         }
         stateStartExperimentScript.TrialTimeOut = true;
+        experimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.TrialNotSuccesful;
         Debug.Log("Bitte schneller die Flasche greifen");
         yield return new WaitForSeconds(0.5f);
         this.finished = true;
@@ -132,6 +130,7 @@ public class StateCheckAction : MonoBehaviour, IState
             yield return null;
         }
         stateStartExperimentScript.TrialTimeOut = true;
+        experimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.TrialNotSuccesful;
         Debug.Log("Bitte schneller die Aktion ausführen");
         yield return new WaitForSeconds(0.5f);
         this.finished = true;
@@ -165,18 +164,24 @@ public class StateCheckAction : MonoBehaviour, IState
     {
         while (!IsBottleRotated())
         {
+            if (IsBottleGrasped(palmLastPosition, objectLastPosition))
+            {
+                experimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.Grasped;
+            }
             yield return null;
         }
 
         if (CheckPourRight())
         {
             ExperimentalTrialSuccesful = true;
+            experimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.TrialActionEnded;
             yield return new WaitForSeconds(0.5f);
             this.finished = true;
         }
         else
         {
             ExperimentalTrialNOTSuccesful = true;
+            experimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.TrialNotSuccesful;
             yield return new WaitForSeconds(0.5f);
             this.finished = true;
         }
@@ -186,18 +191,24 @@ public class StateCheckAction : MonoBehaviour, IState
     {
         while (!IsBottleRotated())
         {
+            if (IsBottleGrasped(palmLastPosition, objectLastPosition))
+            {
+                experimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.Grasped;
+            }
             yield return null;
         }
 
         if (CheckPourLeft())
         {
             ExperimentalTrialSuccesful = true;
+            experimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.TrialActionEnded;
             yield return new WaitForSeconds(0.5f);
             this.finished = true;
         }
         else
         {
             ExperimentalTrialNOTSuccesful = true;
+            experimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.TrialNotSuccesful;
             yield return new WaitForSeconds(0.5f);
             this.finished = true;
         }
@@ -214,12 +225,14 @@ public class StateCheckAction : MonoBehaviour, IState
         if (Vector3.Distance(ObjectReference.transform.position, PlaceStimulationRight.transform.position) <= 0.2)
         {
             ExperimentalTrialSuccesful = true;
+            experimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.TrialActionEnded;
             yield return new WaitForSeconds(0.5f);
             this.finished = true;
         }
         else
         {
             ExperimentalTrialNOTSuccesful = true;
+            experimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.TrialNotSuccesful;
             yield return new WaitForSeconds(0.5f);
             this.finished = true;
         }
@@ -235,12 +248,14 @@ public class StateCheckAction : MonoBehaviour, IState
         if (Vector3.Distance(ObjectReference.transform.position, PlaceStimulationLeft.transform.position) <= 0.2)
         {
             ExperimentalTrialSuccesful = true;
+            experimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.TrialActionEnded;
             yield return new WaitForSeconds(0.5f);
             this.finished = true;
         }
         else
         {
             ExperimentalTrialNOTSuccesful = true;
+            experimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.TrialNotSuccesful;
             yield return new WaitForSeconds(0.5f);
             this.finished = true;
         }
@@ -272,12 +287,13 @@ public class StateCheckAction : MonoBehaviour, IState
     }
 
 
-    private bool IsBottleGrasped(Vector3 lastPositionPalm, Vector3 lastPositionObject)
+    public bool IsBottleGrasped(Vector3 lastPositionPalm, Vector3 lastPositionObject)
     {
         if ((Vector3.Distance(lastPositionPalm, lastPositionObject) <= 0.4f) &&
     Vector3.Distance(IndexFingerReference.transform.position, ObjectReference.transform.position) <= 0.4f &&
     Vector3.Distance(ThumbFingerReference.transform.position, ObjectReference.transform.position) <= 0.4f)
         {
+            experimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.Grasped;
             Debug.Log("Bottle is grasped");
             return true;
         }
@@ -288,7 +304,7 @@ public class StateCheckAction : MonoBehaviour, IState
 
     private bool IsBottleRotated()
     {
-        if (ObjectReference.transform.eulerAngles.z >= 45.0f && ObjectReference.transform.eulerAngles.z <= BottleRotationRangeMax)
+        if (ObjectReference.transform.eulerAngles.z >= BottleRotationRangeMin && ObjectReference.transform.eulerAngles.z <= BottleRotationRangeMax)
         {
             return true;
         }

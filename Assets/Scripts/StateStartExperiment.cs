@@ -14,7 +14,7 @@ public class StateStartExperiment : MonoBehaviour, IState
     public MeshRenderer ObjectMesh;
     public GameObject FixationCross;
     public StateCheckHandPosition StateCheckHandPositionScript;
-
+    public StateCheckAction StateCheckActionScript;
 
 
     //visual cues
@@ -46,6 +46,9 @@ public class StateStartExperiment : MonoBehaviour, IState
     public float TrialDurationTimeStamp = 0.0f;
     public float TrialMaxDuration = 25.0f;
 
+    private Vector3 palmLastPosition;
+    private Vector3 objectLastPosition;
+
 
 
     private void Start()
@@ -74,10 +77,16 @@ public class StateStartExperiment : MonoBehaviour, IState
         this.TrialDurationTimeStamp = 0.0f;
         this.TrialMaxDuration = 25.0f;
 
+        palmLastPosition = HandReference.transform.position;
+        objectLastPosition = ObjectReference.transform.position;
+
     }
 
     public void Execute()
     {
+        this.palmLastPosition = HandReference.transform.position;
+        this.objectLastPosition = ObjectReference.transform.position;
+
         //Start the trial
         if (!FixationCross.activeSelf && StateCheckHandPositionScript.finished)
         {
@@ -162,6 +171,7 @@ public class StateStartExperiment : MonoBehaviour, IState
         {
             yield return null;
         }
+        ExperimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.ReachForBottle;
         StartStimulation(currentTrialConditions.Interaction, currentTrialConditions.InteractionPlacement);
         yield return new WaitForSeconds(0.5f);
         PlaceStimulationLeft.SetActive(false);
@@ -177,6 +187,7 @@ public class StateStartExperiment : MonoBehaviour, IState
         {
             yield return null;
         }
+        ExperimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.ReachForBottle;
         StartStimulation(currentTrialConditions.Interaction, currentTrialConditions.InteractionPlacement);
         yield return new WaitForSeconds(0.5f);
         PlaceStimulationLeft.SetActive(false);
@@ -192,6 +203,7 @@ public class StateStartExperiment : MonoBehaviour, IState
         {
             yield return null;
         }
+        ExperimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.ReachForBottle;
         StartStimulation(currentTrialConditions.Interaction, currentTrialConditions.InteractionPlacement);
         yield return new WaitForSeconds(0.5f);
         PlaceStimulationLeft.SetActive(false);
@@ -203,10 +215,11 @@ public class StateStartExperiment : MonoBehaviour, IState
 
     private IEnumerator SOA4AfterGrasp()
     {
-        while (!AfterGrasp())
+        while (!StateCheckActionScript.IsBottleGrasped(palmLastPosition, objectLastPosition))
         {
             yield return null;
         }
+        ExperimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.ReachForBottle;
         StartStimulation(currentTrialConditions.Interaction, currentTrialConditions.InteractionPlacement);
         yield return new WaitForSeconds(0.5f);
         PlaceStimulationLeft.SetActive(false);
@@ -252,25 +265,6 @@ public class StateStartExperiment : MonoBehaviour, IState
         }
         return false;
     }
-
-    private bool AfterGrasp()
-    {
-        if (ObjectMesh.bounds.Contains(HandReference.position))
-        {
-            this.timeStamp += Time.deltaTime;
-            if (this.timeStamp >= this.CheckDuration)
-            {
-                return true;
-            }
-        }
-        else
-        {
-            this.timeStamp += 0.0f;
-        }
-        return false;
-    }
-
-
 
 
     private void StartStimulation(string trialInteraction, string trialPlacement)

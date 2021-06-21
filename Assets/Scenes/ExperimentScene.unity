@@ -4597,6 +4597,7 @@ MonoBehaviour:
   ObjectMesh: {fileID: 2142296599}
   FixationCross: {fileID: 61540997}
   StateCheckHandPositionScript: {fileID: 744470895}
+  StateCheckActionScript: {fileID: 234035410}
   PlaceStimulationLeft: {fileID: 329043372}
   PlaceStimulationRight: {fileID: 617533135}
   PourStimulationLeft: {fileID: 1570606951}
@@ -9384,6 +9385,7 @@ MonoBehaviour:
   trialOrderLineCounter: 1
   ParticipantID: 
   trialOrderLineCounterBeforeAppendErrorTrials: 0
+  currentAnnotationState: 0
 --- !u!1 &1898141842
 GameObject:
   m_ObjectHideFlags: 0

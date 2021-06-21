@@ -31,6 +31,12 @@ public class ExperimentController : MonoBehaviour
     private const string StateStartExperiment = "StateStartExperiment (StateStartExperiment)";
     private const string StateCheckAction = "StateCheckAction (StateCheckAction)";
 
+    private const string StartAnnotation = "Start";
+    private const string ReachForBottleAnnotation = "ReachForBottle";
+    private const string GraspedAnnotation = "Grasped";
+    private const string TrialActionEndedAnnotation = "TrialActionEnded";
+    private const string TrialNotSuccesful= "TrialNotSuccesful";
+
 
     public Trial currentTrial;
     public int trialOrderLineCounter = 1;
@@ -40,13 +46,23 @@ public class ExperimentController : MonoBehaviour
     private string resultFileName;
     private string resultFileDirectory;
 
+    public AnnotationStates currentAnnotationState;
+
+    public enum AnnotationStates
+    {
+        Start,
+        ReachForBottle,
+        Grasped,
+        TrialActionEnded,
+        TrialNotSuccesful
+    }
 
 
     // Start is called before the first frame update
     void Start()
     {
 
-
+        currentAnnotationState = AnnotationStates.Start;
         //FileWriteManagement.WriteProgressInTrialOrderFile("29", 1);
 
 
@@ -156,7 +172,7 @@ public class ExperimentController : MonoBehaviour
                 currentTrial.indexData = IndexReference.transform.position;
                 currentTrial.eyeData = EyeReference.transform.position;
                 currentTrial.objectData = ObjectReference.transform.position;
-                currentTrial.resultFileAnnotations = "noch leer";
+                currentTrial.resultFileAnnotations = AnnotationInResultFile(currentAnnotationState);
 
                 stateInitFinished = true;
             }
@@ -177,7 +193,7 @@ public class ExperimentController : MonoBehaviour
                 currentTrial.indexData = IndexReference.transform.position;
                 currentTrial.eyeData = EyeReference.transform.position;
                 currentTrial.objectData = ObjectReference.transform.position;
-                currentTrial.resultFileAnnotations = "noch leer";
+                currentTrial.resultFileAnnotations = AnnotationInResultFile(currentAnnotationState);
                 if (counter % 2 == 0)
                 {
                     FileWriteManagement.WriteFile(currentTrial.GenerateResultLine(), resultFileDirectory, true);
@@ -212,7 +228,7 @@ public class ExperimentController : MonoBehaviour
                 currentTrial.indexData = IndexReference.transform.position;
                 currentTrial.eyeData = EyeReference.transform.position;
                 currentTrial.objectData = ObjectReference.transform.position;
-                currentTrial.resultFileAnnotations = "noch leer";
+                currentTrial.resultFileAnnotations = AnnotationInResultFile(currentAnnotationState);
                 if (counter % 2 == 0)
                 {
                     FileWriteManagement.WriteFile(currentTrial.GenerateResultLine(), resultFileDirectory, true);
@@ -263,6 +279,27 @@ public class ExperimentController : MonoBehaviour
         return _currentTrial;
     }
 
+
+
+    private string AnnotationInResultFile(AnnotationStates annotationState)
+    {
+        switch (annotationState)
+        {
+            case AnnotationStates.Start:
+                return StartAnnotation;
+            case AnnotationStates.ReachForBottle:
+                return ReachForBottleAnnotation;
+            case AnnotationStates.Grasped:
+                return GraspedAnnotation;
+            case AnnotationStates.TrialActionEnded:
+                return TrialActionEndedAnnotation;
+            case AnnotationStates.TrialNotSuccesful:
+                return TrialNotSuccesful;
+            default:
+                return "Annotation State Not defined";
+
+        }
+    }
 
 
 
