@@ -54,7 +54,6 @@ public class StateCheckAction : MonoBehaviour, IState
     
     public void Execute()
     {
-
         CheckExperiment(currentTrialConditions);
 
 
@@ -161,30 +160,47 @@ public class StateCheckAction : MonoBehaviour, IState
         }
     }
 
-    #region coroutines
+
     private IEnumerator PourRight()
     {
-        while (!CheckPourRight())
+        while (!IsBottleRotated())
         {
             yield return null;
         }
-        yield return new WaitForSeconds(0.5f);
-        Debug.Log("Check PourRight good");
-        ExperimentalTrialSuccesful = true;
-        this.finished = true;
-    }
 
+        if (CheckPourRight())
+        {
+            ExperimentalTrialSuccesful = true;
+            yield return new WaitForSeconds(0.5f);
+            this.finished = true;
+        }
+        else
+        {
+            ExperimentalTrialNOTSuccesful = true;
+            yield return new WaitForSeconds(0.5f);
+            this.finished = true;
+        }
+    }
 
     private IEnumerator PourLeft()
     {
-        while (!CheckPourLeft())
+        while (!IsBottleRotated())
         {
             yield return null;
         }
-        yield return new WaitForSeconds(0.5f);
-        Debug.Log("Check PourLeft good");
-        ExperimentalTrialSuccesful = true;
-        this.finished = true;
+
+        if (CheckPourLeft())
+        {
+            ExperimentalTrialSuccesful = true;
+            yield return new WaitForSeconds(0.5f);
+            this.finished = true;
+        }
+        else
+        {
+            ExperimentalTrialNOTSuccesful = true;
+            yield return new WaitForSeconds(0.5f);
+            this.finished = true;
+        }
     }
 
 
@@ -209,32 +225,27 @@ public class StateCheckAction : MonoBehaviour, IState
         }
     }
 
-    //private IEnumerator PlaceRight()
-    //{
-    //    while (!CheckPlaceRight())
-    //    {
-    //        yield return null;
-    //    }
-    //    yield return new WaitForSeconds(0.5f);
-    //    Debug.Log("Check PlaceRight good");
-    //    ExperimentalTrialSuccesful = true;
-    //    this.finished = true;
-    //}
-
     private IEnumerator PlaceLeft()
     {
-        while (!CheckPlaceLeft())
+        while (!IsBottleGrasped(palmLastPosition, objectLastPosition))
         {
             yield return null;
         }
         yield return new WaitForSeconds(0.5f);
-        Debug.Log("Check PlaceLeft good");
-        ExperimentalTrialSuccesful = true;
-        this.finished = true;
+        if (Vector3.Distance(ObjectReference.transform.position, PlaceStimulationLeft.transform.position) <= 0.2)
+        {
+            ExperimentalTrialSuccesful = true;
+            yield return new WaitForSeconds(0.5f);
+            this.finished = true;
+        }
+        else
+        {
+            ExperimentalTrialNOTSuccesful = true;
+            yield return new WaitForSeconds(0.5f);
+            this.finished = true;
+        }
     }
-    #endregion
 
-    #region coroutines condition methods
 
     private bool CheckPourRight()
     {
@@ -260,26 +271,6 @@ public class StateCheckAction : MonoBehaviour, IState
             return false;
     }
 
-    private bool CheckPlaceRight()
-    {
-        if (Vector3.Distance(PlaceStimulationRight.transform.position, ObjectReference.transform.position) <= 0.2)
-        {
-            return true;
-        }
-        else
-            return false;
-    }
-
-    private bool CheckPlaceLeft()
-    {
-        if (Vector3.Distance(PlaceStimulationLeft.transform.position, ObjectReference.transform.position) <= 0.2)
-        {
-            return true;
-        }
-        else
-            return false;
-    }
-    #endregion
 
     private bool IsBottleGrasped(Vector3 lastPositionPalm, Vector3 lastPositionObject)
     {
@@ -288,6 +279,17 @@ public class StateCheckAction : MonoBehaviour, IState
     Vector3.Distance(ThumbFingerReference.transform.position, ObjectReference.transform.position) <= 0.4f)
         {
             Debug.Log("Bottle is grasped");
+            return true;
+        }
+        else
+            return false;
+    }
+
+
+    private bool IsBottleRotated()
+    {
+        if (ObjectReference.transform.eulerAngles.z >= 45.0f && ObjectReference.transform.eulerAngles.z <= BottleRotationRangeMax)
+        {
             return true;
         }
         else
