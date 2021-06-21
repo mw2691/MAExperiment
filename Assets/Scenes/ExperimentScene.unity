@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &33644603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1201,10 +1201,10 @@ MonoBehaviour:
   stateStartExperimentScript: {fileID: 943555697}
   PlaceStimulationLeft: {fileID: 329043372}
   PlaceStimulationRight: {fileID: 617533135}
-  PalmReference: {fileID: 547816212}
-  ObjectReference: {fileID: 2142296597}
-  IndexFingerReference: {fileID: 2029192611}
-  ThumbFingerReference: {fileID: 849432912}
+  PalmReference: {fileID: 392993303}
+  ObjectReference: {fileID: 33644602}
+  IndexFingerReference: {fileID: 633777954}
+  ThumbFingerReference: {fileID: 1421017421}
   CupRight: {fileID: 1435693373}
   CupLeft: {fileID: 1660525026}
   ExperimentalTrialSuccesful: 0
@@ -1577,7 +1577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &392993304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1963,7 +1963,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &427343164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2906,7 +2906,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &633777955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3113,7 +3113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &693016884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3992,7 +3992,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &855039079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4592,9 +4592,9 @@ MonoBehaviour:
   CheckAction: {fileID: 234035409}
   StateInitScript: {fileID: 474315543}
   ExperimentControllerScript: {fileID: 1883989539}
-  HandReference: {fileID: 547816213}
-  ObjectReference: {fileID: 2142296601}
-  ObjectMesh: {fileID: 2142296599}
+  HandReference: {fileID: 392993305}
+  ObjectReference: {fileID: 33644607}
+  ObjectMesh: {fileID: 698774986}
   FixationCross: {fileID: 61540997}
   StateCheckHandPositionScript: {fileID: 744470895}
   StateCheckActionScript: {fileID: 234035410}
@@ -4824,7 +4824,7 @@ PrefabInstance:
     - target: {fileID: 7922205256693921744, guid: cb8ce560eddd1954ab16b43c219542d1, type: 3}
       propertyPath: HandReference
       value: 
-      objectReference: {fileID: 2142296597}
+      objectReference: {fileID: 33644602}
     - target: {fileID: 7922205256693921744, guid: cb8ce560eddd1954ab16b43c219542d1, type: 3}
       propertyPath: InitialHandVolume
       value: 
@@ -4950,7 +4950,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1062342535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5478,7 +5478,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1165392874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6696,7 +6696,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1421017422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9371,11 +9371,11 @@ MonoBehaviour:
   stateStartExperimentScript: {fileID: 943555697}
   stateTrainingScript: {fileID: 477940421}
   stateCheckActionScript: {fileID: 234035410}
-  PalmReference: {fileID: 547816212}
-  ThumbReference: {fileID: 849432912}
-  IndexReference: {fileID: 2029192611}
+  PalmReference: {fileID: 392993303}
+  ThumbReference: {fileID: 1421017421}
+  IndexReference: {fileID: 633777954}
   EyeReference: {fileID: 807104888}
-  ObjectReference: {fileID: 2142296597}
+  ObjectReference: {fileID: 33644602}
   stateInitFinished: 0
   stateStartExperimentFinished: 0
   stateCheckHandPosition: 0
@@ -10807,7 +10807,7 @@ PrefabInstance:
     - target: {fileID: 7922205256693921744, guid: cb8ce560eddd1954ab16b43c219542d1, type: 3}
       propertyPath: HandReference
       value: 
-      objectReference: {fileID: 1262432899}
+      objectReference: {fileID: 392993303}
     - target: {fileID: 7922205256693921744, guid: cb8ce560eddd1954ab16b43c219542d1, type: 3}
       propertyPath: InitialHandVolume
       value: 

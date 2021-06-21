@@ -172,14 +172,15 @@ public class FileWriteManagement
     {
         string fullPath = trialOrderFilePath + "/" + GetTrialOrderFileName(participantID);
         string[] arrLine = File.ReadAllLines(fullPath);
+        var aa = arrLine.Length - 1;
+        Debug.Log("File Length -1: " + aa);
 
-        if (arrLine.Length == lineNumber)
+        if (arrLine.Length -1 == lineNumber)
         {
             return true;
         }
         else
             return false;
-
     }
 
 

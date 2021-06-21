@@ -120,10 +120,9 @@ public class ExperimentController : MonoBehaviour
 
                 if (stateCheckActionAppendRemainingErrorTrialsIsFinished)
                 {
-                    //Debug.Log("1.   !stateInitAppendRemainingErrorTrialsIsFinished");
+                    Debug.Log("Before appending remaining error trials            TrialOrderLineCounter: " + trialOrderLineCounter + ", " + "CountRowsinTrialOrderFile: " + FileWriteManagement.CountRowsinTrialOrderFile(ParticipantID));
                     if (FileWriteManagement.CheckAllTrialsAreEqualToTrialOrderCounter(ParticipantID, trialOrderLineCounter))
                     {
-                        //Debug.Log("2.   FileWriteManagement.CheckAllTrialsAreEqualToTrialOrderCounter(ParticipantID, trialOrderLineCounter)");
                         Debug.Log("3.   AppendRemainingErrors");
                         FileWriteManagement.AppendRemainingErrorTrials(ParticipantID, trialOrderLineCounter);
                         stateCheckActionAppendRemainingErrorTrialsIsFinished = false;
@@ -310,5 +309,6 @@ public class ExperimentController : MonoBehaviour
         this.stateStartExperimentFinished = false;
         this.stateCheckHandPosition = false;
         this.stateCheckAction = false;
+        stateCheckActionAppendRemainingErrorTrialsIsFinished = true;
     }
 }
