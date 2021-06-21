@@ -159,27 +159,6 @@ public class StateCheckAction : MonoBehaviour, IState
         {
             StartCoroutine(PlaceLeft());
         }
-
-        //checks for SOA conditions
-        //if (trialInfo.SOAFactors == SOA1)
-        //{
-        //    StartCoroutine(SOA1MovementOnset(trialInfo.Interaction, trialInfo.InteractionPlacement));
-        //}
-
-        //if (trialInfo.SOAFactors == SOA2)
-        //{
-        //    StartCoroutine(SOA2Halfway(trialInfo.Interaction, trialInfo.InteractionPlacement));
-        //}
-
-        //if (trialInfo.SOAFactors == SOA3)
-        //{
-        //    StartCoroutine(SOA3AtBottle(trialInfo.Interaction, trialInfo.InteractionPlacement));
-        //}
-
-        //if (trialInfo.SOAFactors == SOA4)
-        //{
-        //    StartCoroutine(SOA4AfterGrasp(trialInfo.Interaction, trialInfo.InteractionPlacement));
-        //}
     }
 
     #region coroutines
@@ -195,7 +174,7 @@ public class StateCheckAction : MonoBehaviour, IState
         this.finished = true;
     }
 
-    
+
     private IEnumerator PourLeft()
     {
         while (!CheckPourLeft())
@@ -208,17 +187,39 @@ public class StateCheckAction : MonoBehaviour, IState
         this.finished = true;
     }
 
+
     private IEnumerator PlaceRight()
     {
-        while (!CheckPlaceRight())
+        while (!IsBottleGrasped(palmLastPosition, objectLastPosition))
         {
             yield return null;
         }
         yield return new WaitForSeconds(0.5f);
-        Debug.Log("Check PlaceRight good");
-        ExperimentalTrialSuccesful = true;
-        this.finished = true;
+        if (Vector3.Distance(ObjectReference.transform.position, PlaceStimulationRight.transform.position) <= 0.2)
+        {
+            ExperimentalTrialSuccesful = true;
+            yield return new WaitForSeconds(0.5f);
+            this.finished = true;
+        }
+        else
+        {
+            ExperimentalTrialNOTSuccesful = true;
+            yield return new WaitForSeconds(0.5f);
+            this.finished = true;
+        }
     }
+
+    //private IEnumerator PlaceRight()
+    //{
+    //    while (!CheckPlaceRight())
+    //    {
+    //        yield return null;
+    //    }
+    //    yield return new WaitForSeconds(0.5f);
+    //    Debug.Log("Check PlaceRight good");
+    //    ExperimentalTrialSuccesful = true;
+    //    this.finished = true;
+    //}
 
     private IEnumerator PlaceLeft()
     {
@@ -233,7 +234,7 @@ public class StateCheckAction : MonoBehaviour, IState
     }
     #endregion
 
-    #region implement coroutines condition methods
+    #region coroutines condition methods
 
     private bool CheckPourRight()
     {
