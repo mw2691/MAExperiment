@@ -219,7 +219,7 @@ public class StateStartExperiment : MonoBehaviour, IState
 
     private IEnumerator SOA4AfterGrasp()
     {
-        while (!StateCheckActionScript.IsBottleGrasped(palmLastPosition, objectLastPosition))
+        while (!StateCheckActionScript.IsBottleGraspedAndMoved())
         {
             yield return null;
         }

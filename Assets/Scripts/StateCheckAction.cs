@@ -42,6 +42,8 @@ public class StateCheckAction : MonoBehaviour, IState
 
     private Vector3 lastPositionPalm;
     private Vector3 lastPositionObject;
+    private Vector3 currentPositionPalm;
+    private Vector3 currentPositionObject;
 
 
     public void Enter()
@@ -51,30 +53,15 @@ public class StateCheckAction : MonoBehaviour, IState
         //Debug.Log("Enter StateCheckAction");
         currentTrialConditions = experimentControllerScript.currentTrial;
 
-        palmLastPosition = PalmReference.transform.position;
-        objectLastPosition = ObjectReference.transform.position;
-
         lastPositionPalm = PalmReference.transform.position;
         lastPositionObject = ObjectReference.transform.position;
     }
     
     public void Execute()
     {
-        var thumb = new Vector3(0, 0, ThumbFingerReference.transform.position.z);
-        var indexFinger = new Vector3(0, 0, IndexFingerReference.transform.position.z);
-        var objectTransform = new Vector3(0, 0, ObjectReference.transform.position.z);
-        var distanceBetweenThumbAndObject = Vector3.Distance(thumb, objectTransform);
-        var distanceBetweenIndexAndObject = Vector3.Distance(indexFinger, objectTransform);
-        //Debug.Log("Distance Index: object:  " + distanceBetweenIndexAndObject + ",,,,,, " + "Distance Thumb object: " + distanceBetweenThumbAndObject);
-        
-        if (IsBottleGrasped(palmLastPosition, objectLastPosition))
-            Debug.Log("aaaaaaaaaaaaaaaaaaaaaa");
-
-        var currentPositionPalm = PalmReference.transform.position;
-        var currentPositionObject = ObjectReference.transform.position;
-
-        Debug.Log("1. LastPositionPalm: " + lastPositionPalm + ",,,,,, CurrentPositionpalm:" + currentPositionPalm);
-        Debug.Log("Distance: " + Vector3.Distance(lastPositionPalm, currentPositionPalm));
+        currentPositionPalm = PalmReference.transform.position;
+        currentPositionObject = ObjectReference.transform.position;
+        IsBottleGraspedAndMoved();
         lastPositionPalm = currentPositionPalm;
         lastPositionObject = currentPositionObject;
         
@@ -141,7 +128,7 @@ public class StateCheckAction : MonoBehaviour, IState
     public IEnumerator TrialTimeOutAndBottleIsNotGrasped()
     {
         while (!(stateStartExperimentScript.TrialDurationTimeStamp >= stateStartExperimentScript.TrialMaxDuration &&
-            !IsBottleGrasped(palmLastPosition, objectLastPosition)))
+            !IsBottleGraspedAndMoved()))
         {
             yield return null;
         }
@@ -155,7 +142,7 @@ public class StateCheckAction : MonoBehaviour, IState
     public IEnumerator TrialTimeOutAndBottleIsGrasped()
     {
         while (!(stateStartExperimentScript.TrialDurationTimeStamp >= stateStartExperimentScript.TrialMaxDuration &&
-            IsBottleGrasped(palmLastPosition, objectLastPosition)))
+            IsBottleGraspedAndMoved()))
         {
             yield return null;
         }
@@ -194,7 +181,7 @@ public class StateCheckAction : MonoBehaviour, IState
     {
         while (!IsBottleRotated())
         {
-            if (IsBottleGrasped(palmLastPosition, objectLastPosition))
+            if (IsBottleGraspedAndMoved())
             {
                 experimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.Grasped;
             }
@@ -221,7 +208,7 @@ public class StateCheckAction : MonoBehaviour, IState
     {
         while (!IsBottleRotated())
         {
-            if (IsBottleGrasped(palmLastPosition, objectLastPosition))
+            if (IsBottleGraspedAndMoved())
             {
                 experimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.Grasped;
             }
@@ -247,7 +234,7 @@ public class StateCheckAction : MonoBehaviour, IState
 
     private IEnumerator PlaceRight()
     {
-        while (!IsBottleGrasped(palmLastPosition, objectLastPosition))
+        while (!IsBottleGraspedAndMoved())
         {
             yield return null;
         }
@@ -270,7 +257,7 @@ public class StateCheckAction : MonoBehaviour, IState
 
     private IEnumerator PlaceLeft()
     {
-        while (!IsBottleGrasped(palmLastPosition, objectLastPosition))
+        while (!IsBottleGraspedAndMoved())
         {
             yield return null;
         }
@@ -317,15 +304,19 @@ public class StateCheckAction : MonoBehaviour, IState
     }
 
 
-    public bool IsBottleGrasped(Vector3 lastPositionPalm, Vector3 lastPositionObject)
+    public bool IsBottleGraspedAndMoved()
     {
         var thumb = new Vector3(0, 0, ThumbFingerReference.transform.position.z);
         var indexFinger = new Vector3(0, 0, IndexFingerReference.transform.position.z);
         var objectTransform = new Vector3(0, 0, ObjectReference.transform.position.z);
         var distanceBetweenThumbAndObject = Vector3.Distance(thumb, objectTransform);
         var distanceBetweenIndexAndObject = Vector3.Distance(indexFinger, objectTransform);
-        
-        if ((Vector3.Distance(lastPositionPalm, lastPositionObject) <= 1.0f) &&
+        var velocityHand = (currentPositionPalm - lastPositionPalm) / Time.deltaTime;
+        var velocityObject = (currentPositionPalm - lastPositionPalm) / Time.deltaTime;
+
+        if ((velocityHand == velocityObject) &&
+            velocityHand != Vector3.zero &&
+            velocityObject != Vector3.zero &&
             distanceBetweenIndexAndObject <= 2.0f &&
             distanceBetweenThumbAndObject <= 2.0f)
         {

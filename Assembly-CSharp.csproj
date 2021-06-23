@@ -85,6 +85,7 @@
     <Compile Include="Assets/Scripts/SensorData.cs" />
     <Compile Include="Assets/Scripts/StateMachine.cs" />
     <Compile Include="Assets/Scripts/MiddleFingerScript.cs" />
+    <Compile Include="Assets/Scripts/TestVeloScript.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets/FastIK/Documentation.txt" />
