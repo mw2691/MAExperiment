@@ -26,6 +26,7 @@ public class ExperimentController : MonoBehaviour
     public bool stateCheckAction;
     public bool stateInitActionAppendOfErrorTrialsIsFinished;
     public bool stateCheckActionAppendRemainingErrorTrialsIsFinished;
+    private bool allErrorTrialsAppended;
 
     private const string StateInit = "StateInit (StateInit)";
     private const string StateStartExperiment = "StateStartExperiment (StateStartExperiment)";
@@ -70,7 +71,7 @@ public class ExperimentController : MonoBehaviour
         string[] args = Environment.GetCommandLineArgs();
         if (args.Length < 12)
         {
-            args = new string[] { "09", "dummyValue1", "dummyArg2", "dummyValue2" };
+            args = new string[] { "10", "dummyValue1", "dummyArg2", "dummyValue2" };
         }
 
         ParticipantID = args[0];
@@ -117,16 +118,21 @@ public class ExperimentController : MonoBehaviour
                     }
                 }
 
-
-                if (stateCheckActionAppendRemainingErrorTrialsIsFinished)
+                //vielleicht bei diesem if noch abchecken, ob es in den appended ErrorTrial noch 2er Trials gibt
+                if (stateCheckActionAppendRemainingErrorTrialsIsFinished &&
+                    FileWriteManagement.CheckForRemainingErrorTrials(ParticipantID, trialOrderLineCounter) &&
+                    FileWriteManagement.CheckAllTrialsAreEqualToTrialOrderCounter(ParticipantID, trialOrderLineCounter))
                 {
+                    Debug.Log("3.   AppendRemainingErrors");
+                    FileWriteManagement.AppendRemainingErrorTrials(ParticipantID, trialOrderLineCounter);
+                    stateCheckActionAppendRemainingErrorTrialsIsFinished = false;
                     //Debug.Log("Before appending remaining error trials            TrialOrderLineCounter: " + trialOrderLineCounter + ", " + "CountRowsinTrialOrderFile: " + FileWriteManagement.CountRowsinTrialOrderFile(ParticipantID));
-                    if (FileWriteManagement.CheckAllTrialsAreEqualToTrialOrderCounter(ParticipantID, trialOrderLineCounter))
-                    {
-                        Debug.Log("3.   AppendRemainingErrors");
-                        FileWriteManagement.AppendRemainingErrorTrials(ParticipantID, trialOrderLineCounter);
-                        stateCheckActionAppendRemainingErrorTrialsIsFinished = false;
-                    }
+                    //if (FileWriteManagement.CheckAllTrialsAreEqualToTrialOrderCounter(ParticipantID, trialOrderLineCounter))
+                    //{
+                    //    Debug.Log("3.   AppendRemainingErrors");
+                    //    FileWriteManagement.AppendRemainingErrorTrials(ParticipantID, trialOrderLineCounter);
+                    //    stateCheckActionAppendRemainingErrorTrialsIsFinished = false;
+                    //}
                 }
 
 

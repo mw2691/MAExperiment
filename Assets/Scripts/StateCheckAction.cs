@@ -16,13 +16,10 @@ public class StateCheckAction : MonoBehaviour, IState
 
     public GameObject PlaceStimulationLeft;
     public GameObject PlaceStimulationRight;
-
     public GameObject PalmReference;
     public GameObject ObjectReference;
     public GameObject IndexFingerReference;
     public GameObject ThumbFingerReference;
-    private Vector3 palmLastPosition;
-    private Vector3 objectLastPosition;
     public GameObject CupRight;
     public GameObject CupLeft;
 
@@ -65,14 +62,6 @@ public class StateCheckAction : MonoBehaviour, IState
         lastPositionPalm = currentPositionPalm;
         lastPositionObject = currentPositionObject;
         
-
-        this.palmLastPosition = PalmReference.transform.position;
-        this.objectLastPosition = ObjectReference.transform.position;
-
-        
-
-
-
         CheckExperiment(currentTrialConditions);
 
         stateStartExperimentScript.TrialDurationTimeStamp += Time.deltaTime;

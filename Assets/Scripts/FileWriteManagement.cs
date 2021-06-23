@@ -173,7 +173,7 @@ public class FileWriteManagement
         string fullPath = trialOrderFilePath + "/" + GetTrialOrderFileName(participantID);
         string[] arrLine = File.ReadAllLines(fullPath);
 
-        if (arrLine.Length -1 == lineNumber)
+        if (arrLine.Length == lineNumber)
         {
             return true;
         }
@@ -249,6 +249,5 @@ public class FileWriteManagement
         string progress = subs[subs.Length - 1];
         return progress;
     }
-
 }
 

@@ -1,13 +1,14 @@
 ﻿<Properties StartupConfiguration="{B80CFFCB-346F-48C7-F691-A16CFD253D05}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TestVeloScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ExperimentController.cs">
     <Files>
-      <File FileName="Assets/Scripts/StateCheckAction.cs" Line="320" Column="72" />
-      <File FileName="Assets/Scripts/StateStartExperiment.cs" />
-      <File FileName="Assets/Scripts/ExperimentController.cs" />
+      <File FileName="Assets/Scripts/StateCheckAction.cs" Line="18" Column="45" />
+      <File FileName="Assets/Scripts/TestVeloScript.cs" Line="52" Column="87" />
+      <File FileName="Assets/Scripts/StateStartExperiment.cs" Line="222" Column="65" />
+      <File FileName="Assets/Scripts/ExperimentController.cs" Line="282" Column="38" />
       <File FileName="Assets/Scripts/StateCheckHandPosition.cs" />
       <File FileName="Assets/Scripts/PositionCheck/PositionCheck.cs" />
-      <File FileName="Assets/Scripts/FileWriteManagement.cs" Line="178" Column="25" />
-      <File FileName="Assets/Scripts/TestVeloScript.cs" Line="7" Column="23" />
+      <File FileName="Assets/Scripts/FileWriteManagement.cs" Line="194" Column="52" />
+      <File FileName="Assets/Scripts/Trial.cs" Line="25" Column="12" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -17,7 +18,7 @@
               <Node name="Scripts" expanded="True">
                 <Node name="FixationCheck" expanded="True" />
                 <Node name="PositionCheck" expanded="True" />
-                <Node name="TestVeloScript.cs" selected="True" />
+                <Node name="ExperimentController.cs" selected="True" />
               </Node>
             </Node>
           </Node>
