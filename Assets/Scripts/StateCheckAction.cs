@@ -40,6 +40,9 @@ public class StateCheckAction : MonoBehaviour, IState
     public float BottleRotationRangeMin = 45.0f;
     public float BottleRotationRangeMax = 110.0f;
 
+    private Vector3 lastPositionPalm;
+    private Vector3 lastPositionObject;
+
 
     public void Enter()
     {
@@ -50,12 +53,39 @@ public class StateCheckAction : MonoBehaviour, IState
 
         palmLastPosition = PalmReference.transform.position;
         objectLastPosition = ObjectReference.transform.position;
+
+        lastPositionPalm = PalmReference.transform.position;
+        lastPositionObject = ObjectReference.transform.position;
     }
     
     public void Execute()
     {
+        var thumb = new Vector3(0, 0, ThumbFingerReference.transform.position.z);
+        var indexFinger = new Vector3(0, 0, IndexFingerReference.transform.position.z);
+        var objectTransform = new Vector3(0, 0, ObjectReference.transform.position.z);
+        var distanceBetweenThumbAndObject = Vector3.Distance(thumb, objectTransform);
+        var distanceBetweenIndexAndObject = Vector3.Distance(indexFinger, objectTransform);
+        //Debug.Log("Distance Index: object:  " + distanceBetweenIndexAndObject + ",,,,,, " + "Distance Thumb object: " + distanceBetweenThumbAndObject);
+        
+        if (IsBottleGrasped(palmLastPosition, objectLastPosition))
+            Debug.Log("aaaaaaaaaaaaaaaaaaaaaa");
+
+        var currentPositionPalm = PalmReference.transform.position;
+        var currentPositionObject = ObjectReference.transform.position;
+
+        Debug.Log("1. LastPositionPalm: " + lastPositionPalm + ",,,,,, CurrentPositionpalm:" + currentPositionPalm);
+        Debug.Log("Distance: " + Vector3.Distance(lastPositionPalm, currentPositionPalm));
+        lastPositionPalm = currentPositionPalm;
+        lastPositionObject = currentPositionObject;
+        
+
         this.palmLastPosition = PalmReference.transform.position;
         this.objectLastPosition = ObjectReference.transform.position;
+
+        
+
+
+
         CheckExperiment(currentTrialConditions);
 
         stateStartExperimentScript.TrialDurationTimeStamp += Time.deltaTime;
@@ -289,9 +319,15 @@ public class StateCheckAction : MonoBehaviour, IState
 
     public bool IsBottleGrasped(Vector3 lastPositionPalm, Vector3 lastPositionObject)
     {
-        if ((Vector3.Distance(lastPositionPalm, lastPositionObject) <= 0.4f) &&
-    Vector3.Distance(IndexFingerReference.transform.position, ObjectReference.transform.position) <= 0.4f &&
-    Vector3.Distance(ThumbFingerReference.transform.position, ObjectReference.transform.position) <= 0.4f)
+        var thumb = new Vector3(0, 0, ThumbFingerReference.transform.position.z);
+        var indexFinger = new Vector3(0, 0, IndexFingerReference.transform.position.z);
+        var objectTransform = new Vector3(0, 0, ObjectReference.transform.position.z);
+        var distanceBetweenThumbAndObject = Vector3.Distance(thumb, objectTransform);
+        var distanceBetweenIndexAndObject = Vector3.Distance(indexFinger, objectTransform);
+        
+        if ((Vector3.Distance(lastPositionPalm, lastPositionObject) <= 1.0f) &&
+            distanceBetweenIndexAndObject <= 2.0f &&
+            distanceBetweenThumbAndObject <= 2.0f)
         {
             experimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.Grasped;
             Debug.Log("Bottle is grasped");

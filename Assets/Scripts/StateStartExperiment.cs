@@ -15,6 +15,10 @@ public class StateStartExperiment : MonoBehaviour, IState
     public GameObject FixationCross;
     public StateCheckHandPosition StateCheckHandPositionScript;
     public StateCheckAction StateCheckActionScript;
+    public Transform HandStartPosition;
+    public Transform ObjectStartPosition;
+    public Transform ThumbReferencePosition;
+    public Transform IndexFingerReferencePosition;
 
 
     //visual cues
@@ -69,8 +73,8 @@ public class StateStartExperiment : MonoBehaviour, IState
         //Debug.Log("Enter StateStartExperiment");
         currentTrialConditions = ExperimentControllerScript.currentTrial;
 
-        var handReferenceZ = new Vector3(0, 0, HandReference.position.z);
-        var objectReferenceZ = new Vector3(0, 0, ObjectReference.position.z);
+        var handReferenceZ = new Vector3(0, 0, HandStartPosition.position.z);
+        var objectReferenceZ = new Vector3(0, 0, ObjectStartPosition.position.z);
         constDistanceBetweenHandAndObject = Vector3.Distance(handReferenceZ, objectReferenceZ);
 
         this.timeStamp = 0.0f;
@@ -240,11 +244,11 @@ public class StateStartExperiment : MonoBehaviour, IState
 
     private bool HalfWayDone()
     {
-        var handZ = new Vector3(0, 0, HandReference.position.z);
-        var objectZ = new Vector3(0, 0, ObjectReference.position.z);
-        var distanceBetweenHandAndObject = Vector3.Distance(handZ, objectZ);
+        var handStartZ = new Vector3(0, 0, HandReference.position.z);
+        var objectStartZ = new Vector3(0, 0, ObjectStartPosition.position.z);
+        var distanceBetweenHandAndObject = Vector3.Distance(handStartZ, objectStartZ);
 
-        if (distanceBetweenHandAndObject <= constDistanceBetweenHandAndObject / 2)
+        if (distanceBetweenHandAndObject <= (constDistanceBetweenHandAndObject) / 2)
         {
             return true;
         }
@@ -254,11 +258,13 @@ public class StateStartExperiment : MonoBehaviour, IState
 
     private bool AtBottle()
     {
-        var handTransform = HandReference.position;
-        var objectTransform = ObjectReference.position;
-        var distanceBetweenHandAndObject = Vector3.Distance(handTransform, objectTransform);
+        var thumb = new Vector3(0, 0, ThumbReferencePosition.position.z);
+        var indexFinger = new Vector3(0, 0, IndexFingerReferencePosition.position.z);
+        var objectTransform = new Vector3(0, 0, ObjectReference.position.z);
+        var distanceBetweenThumbAndObject = Vector3.Distance(thumb, objectTransform);
+        var distanceBetweenIndexAndObject = Vector3.Distance(indexFinger, objectTransform);
 
-        if (distanceBetweenHandAndObject <= 0.1f)
+        if (distanceBetweenThumbAndObject <= 2.0f && distanceBetweenIndexAndObject <= 2.0f)
         {
             Debug.Log("At bottle is true");
             return true;

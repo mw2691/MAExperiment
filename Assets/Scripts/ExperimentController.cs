@@ -120,7 +120,7 @@ public class ExperimentController : MonoBehaviour
 
                 if (stateCheckActionAppendRemainingErrorTrialsIsFinished)
                 {
-                    Debug.Log("Before appending remaining error trials            TrialOrderLineCounter: " + trialOrderLineCounter + ", " + "CountRowsinTrialOrderFile: " + FileWriteManagement.CountRowsinTrialOrderFile(ParticipantID));
+                    //Debug.Log("Before appending remaining error trials            TrialOrderLineCounter: " + trialOrderLineCounter + ", " + "CountRowsinTrialOrderFile: " + FileWriteManagement.CountRowsinTrialOrderFile(ParticipantID));
                     if (FileWriteManagement.CheckAllTrialsAreEqualToTrialOrderCounter(ParticipantID, trialOrderLineCounter))
                     {
                         Debug.Log("3.   AppendRemainingErrors");
@@ -183,7 +183,6 @@ public class ExperimentController : MonoBehaviour
         {
             if (stateMachineScript.currentState.ToString() == StateStartExperiment)
             {
-                var counter = 0;
                 //write results in resultfile
                 //generate resultline
                 //Debug.Log("stateStartExperiment: " + currentTrial.GenerateResultLine());
@@ -193,11 +192,10 @@ public class ExperimentController : MonoBehaviour
                 currentTrial.eyeData = EyeReference.transform.position;
                 currentTrial.objectData = ObjectReference.transform.position;
                 currentTrial.resultFileAnnotations = AnnotationInResultFile(currentAnnotationState);
-                if (counter % 2 == 0)
-                {
-                    FileWriteManagement.WriteFile(currentTrial.GenerateResultLine(), resultFileDirectory, true);
-                    counter++;
-                }
+                
+                FileWriteManagement.WriteFile(currentTrial.GenerateResultLine(), resultFileDirectory, true);
+  
+
 
                 //Check if experimental trial was successful --> eventuell in den stateCheckAction packen
                 //if (stateStartExperimentScript.ExperimentalTrialSuccesful && !stateTrainingScript.isStateTraining)
@@ -221,18 +219,15 @@ public class ExperimentController : MonoBehaviour
         {
             if (stateMachineScript.currentState.ToString() == StateCheckAction)
             {
-                var counter = 0;
                 currentTrial.palmData = PalmReference.transform.position;
                 currentTrial.thumbData = ThumbReference.transform.position;
                 currentTrial.indexData = IndexReference.transform.position;
                 currentTrial.eyeData = EyeReference.transform.position;
                 currentTrial.objectData = ObjectReference.transform.position;
                 currentTrial.resultFileAnnotations = AnnotationInResultFile(currentAnnotationState);
-                if (counter % 2 == 0)
-                {
-                    FileWriteManagement.WriteFile(currentTrial.GenerateResultLine(), resultFileDirectory, true);
-                    counter++;
-                }
+                
+                FileWriteManagement.WriteFile(currentTrial.GenerateResultLine(), resultFileDirectory, true);
+                
 
                 if (stateStartExperimentScript.TrialTimeOut)
                 {
@@ -249,7 +244,6 @@ public class ExperimentController : MonoBehaviour
                     FileWriteManagement.WriteProgressInTrialOrderFile(ParticipantID, trialOrderLineCounter, "2");
                     stateCheckAction = true;
                 }
-
 
                 //Debug.Log("StateCheckAction: " + currentTrial.GenerateResultLine());
                 //FileWriteManagement.WriteFile(currentTrial.GenerateResultLine(), resultFileName, true);
