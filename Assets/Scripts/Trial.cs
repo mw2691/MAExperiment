@@ -20,6 +20,7 @@ public class Trial
     public Vector3 objectData;
     public Vector3 eyeData;
     public string resultFileAnnotations;
+    public string resultFileGazeAnnotations;
 
 
     public Trial(string ParticipantID, int TrialNumber, string SOAFactors, string Interaction, string InteractionPlacement)
@@ -32,7 +33,7 @@ public class Trial
         this.ParticipantID = ParticipantID;
         this.TrialNumber = TrialNumber;
         this.SOAFactors = soaRemovedTab;
-        this.Interaction = interactionRemovedTab; 
+        this.Interaction = interactionRemovedTab;
         this.InteractionPlacement = placementRemovedTab;
     }
 
@@ -68,8 +69,9 @@ public class Trial
         sb.Append("IndexPosition" + "\t");
         sb.Append("PalmPosition" + "\t");
         sb.Append("ObjectPosition" + "\t");
-        sb.Append("RightEyePosition" + "\t");
-        sb.Append("Annotations" + "\t" + Environment.NewLine);
+        sb.Append("GazePosition" + "\t");
+        sb.Append("Annotations" + "\t");
+        sb.Append("GazeAnnotations" + "\t" + Environment.NewLine);
 
         return sb.ToString();
     }
@@ -78,12 +80,13 @@ public class Trial
     public string GenerateResultLine()
     {
         StringBuilder sb = new StringBuilder();
-        sb.Append(Vector3ToString(thumbData)  + "\t");
+        sb.Append(Vector3ToString(thumbData) + "\t");
         sb.Append(Vector3ToString(indexData) + "\t");
         sb.Append(Vector3ToString(palmData) + "\t");
         sb.Append(Vector3ToString(objectData) + "\t");
         sb.Append(Vector3ToString(eyeData) + "\t");
-        sb.Append(resultFileAnnotations + "\t" + Environment.NewLine);
+        sb.Append(resultFileAnnotations + "\t");
+        sb.Append(resultFileGazeAnnotations + "\t" + Environment.NewLine);
 
         return sb.ToString();
     }

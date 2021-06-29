@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class StateTraining : MonoBehaviour, IState
 {
@@ -8,8 +10,8 @@ public class StateTraining : MonoBehaviour, IState
     public IState nextState { get; set; }
     public GameObject StateInit;
     public StateCheckAction stateCheckActionScript;
-
     public bool isStateTraining;
+
 
 
     public void Enter()
@@ -22,16 +24,22 @@ public class StateTraining : MonoBehaviour, IState
 
     public void Execute()
     {
-        //Debug.Log("Execute StateTraining");
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Keyboard.current[Key.B].isPressed)
         {
             finished = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha0))
+        if (Keyboard.current[Key.Q].isPressed)
         {
             Debug.Log("Bool State Training set");
             isStateTraining = true;
+        }
+
+        if (Keyboard.current[Key.W].isPressed)
+        {
+            isStateTraining = false;
+            Debug.Log("Training finished");
+            finished = true;
         }
 
         if (finished)
@@ -41,9 +49,8 @@ public class StateTraining : MonoBehaviour, IState
 
     public void Exit()
     {
-        //finished = true;
+        finished = true;
         //Debug.Log("Exit StateWelcome");
         //nextState.Enter();
     }
-
 }

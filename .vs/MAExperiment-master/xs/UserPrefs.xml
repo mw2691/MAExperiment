@@ -1,14 +1,16 @@
 ﻿<Properties StartupConfiguration="{B80CFFCB-346F-48C7-F691-A16CFD253D05}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ExperimentController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/StateStartExperiment.cs">
     <Files>
-      <File FileName="Assets/Scripts/StateCheckAction.cs" Line="18" Column="45" />
-      <File FileName="Assets/Scripts/TestVeloScript.cs" Line="52" Column="87" />
-      <File FileName="Assets/Scripts/StateStartExperiment.cs" Line="222" Column="65" />
-      <File FileName="Assets/Scripts/ExperimentController.cs" Line="282" Column="38" />
-      <File FileName="Assets/Scripts/StateCheckHandPosition.cs" />
-      <File FileName="Assets/Scripts/PositionCheck/PositionCheck.cs" />
-      <File FileName="Assets/Scripts/FileWriteManagement.cs" Line="194" Column="52" />
-      <File FileName="Assets/Scripts/Trial.cs" Line="25" Column="12" />
+      <File FileName="Assets/Scripts/StateCheckAction.cs" Line="275" Column="39" />
+      <File FileName="Assets/Scripts/StateStartExperiment.cs" Line="225" Column="10" />
+      <File FileName="Assets/Scripts/ExperimentController.cs" Line="386" Column="18" />
+      <File FileName="Assets/Scripts/FileWriteManagement.cs" Line="229" Column="32" />
+      <File FileName="Assets/Scripts/StateCheckHandPosition.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PositionCheck/PositionCheck.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/ObjectScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/StateWelcome.cs" Line="21" Column="43" />
+      <File FileName="Assets/Scripts/StateTraining.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/StateInit.cs" Line="29" Column="13" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -18,7 +20,7 @@
               <Node name="Scripts" expanded="True">
                 <Node name="FixationCheck" expanded="True" />
                 <Node name="PositionCheck" expanded="True" />
-                <Node name="ExperimentController.cs" selected="True" />
+                <Node name="StateStartExperiment.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -28,7 +30,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="04928dac-8cc4-422b-afe0-97afa71feceb" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="696b6520-27dc-4460-b9b8-f288ee235b3e" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

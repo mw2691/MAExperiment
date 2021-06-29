@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class StateCheckHandPosition : MonoBehaviour, IState
 {
@@ -58,7 +59,7 @@ public class StateCheckHandPosition : MonoBehaviour, IState
         }
 
         //Debug.Log("Execute StateCheckHandPosition");
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Keyboard.current[Key.E].isPressed)
         {
             finished = true;
         }

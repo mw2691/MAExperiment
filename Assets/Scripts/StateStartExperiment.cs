@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class StateStartExperiment : MonoBehaviour, IState
 {
@@ -29,8 +30,8 @@ public class StateStartExperiment : MonoBehaviour, IState
 
 
     public bool ExperimentalTrialSuccesful;
-    public bool ExperimentalTrialNOTSuccesful;
-    public bool TrialTimeOut;
+    //public bool ExperimentalTrialNOTSuccesful;
+    //public bool TrialTimeOut;
 
     private Trial currentTrialConditions;
 
@@ -46,12 +47,14 @@ public class StateStartExperiment : MonoBehaviour, IState
     private float constDistanceBetweenHandAndObject;
 
     public float CheckDuration = 0.5f;
-    private float timeStamp = 0.0f;
+    //private float timeStamp = 0.0f;
     public float TrialDurationTimeStamp = 0.0f;
     public float TrialMaxDuration = 25.0f;
 
-    private Vector3 palmLastPosition;
-    private Vector3 objectLastPosition;
+    private Vector3 lastPositionPalm;
+    private Vector3 lastPositionObject;
+    private Vector3 currentPositionPalm;
+    private Vector3 currentPositionObject;
 
 
 
@@ -68,7 +71,7 @@ public class StateStartExperiment : MonoBehaviour, IState
     public void Enter()
     {
         finished = false;
-        TrialTimeOut = false;
+        //TrialTimeOut = false;
         nextState = CheckAction.GetComponent<IState>();
         //Debug.Log("Enter StateStartExperiment");
         currentTrialConditions = ExperimentControllerScript.currentTrial;
@@ -77,47 +80,49 @@ public class StateStartExperiment : MonoBehaviour, IState
         var objectReferenceZ = new Vector3(0, 0, ObjectStartPosition.position.z);
         constDistanceBetweenHandAndObject = Vector3.Distance(handReferenceZ, objectReferenceZ);
 
-        this.timeStamp = 0.0f;
+        //this.timeStamp = 0.0f;
         this.TrialDurationTimeStamp = 0.0f;
         this.TrialMaxDuration = 25.0f;
 
-        palmLastPosition = HandReference.transform.position;
-        objectLastPosition = ObjectReference.transform.position;
+        lastPositionPalm = HandReference.transform.position;
+        lastPositionObject = ObjectReference.transform.position;
 
     }
 
     public void Execute()
     {
-        this.palmLastPosition = HandReference.transform.position;
-        this.objectLastPosition = ObjectReference.transform.position;
+        currentPositionPalm = HandReference.transform.position;
+        currentPositionObject = ObjectReference.transform.position;
 
-        //Start the trial
         if (!FixationCross.activeSelf && StateCheckHandPositionScript.finished)
         {
-            TrialDurationTimeStamp += Time.deltaTime;
+            //TrialDurationTimeStamp += Time.deltaTime;
             StartExperiment(currentTrialConditions);
         }
 
-        if (TrialDurationTimeStamp >= TrialMaxDuration)
-        {
-            TrialTimeOut = true;
-            this.finished = true;
-        }
+        lastPositionPalm = currentPositionPalm;
+        lastPositionObject = currentPositionObject;
+
+        //if (TrialDurationTimeStamp >= TrialMaxDuration)
+        //{
+        //    TrialTimeOut = true;
+        //    this.finished = true;
+        //}
 
 
         //for test: Experiment was good
-        if (Input.GetKey(KeyCode.O))
+        if (Keyboard.current[Key.O].isPressed)
         {
             ExperimentalTrialSuccesful = true;
 
         }
-        if(Input.GetKey(KeyCode.P))
-        {
-            ExperimentalTrialNOTSuccesful = true;
-        }
+        //if(Keyboard.current[Key.P].isPressed)
+        //{
+        //    ExperimentalTrialNOTSuccesful = true;
+        //}
 
         //Debug.Log("Execute StateStartExperiment");
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Keyboard.current[Key.F].isPressed)
         {
             this.finished = true;
         }
@@ -131,7 +136,7 @@ public class StateStartExperiment : MonoBehaviour, IState
     public void Exit()
     {
         ExperimentalTrialSuccesful = false;
-        ExperimentalTrialNOTSuccesful = false;
+        //ExperimentalTrialNOTSuccesful = false;
         //ExperimentControllerScript.ResetBools();
 
         //Debug.Log("Exit StateStartExperiment");
@@ -164,20 +169,15 @@ public class StateStartExperiment : MonoBehaviour, IState
     } 
 
 
-
-
-
-
-
     private IEnumerator SOA1MovementOnset()
     {
         while (!AtMovementOnset())
         {
             yield return null;
         }
-        ExperimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.ReachForBottle;
+        //ExperimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.ReachForBottle;
         StartStimulation(currentTrialConditions.Interaction, currentTrialConditions.InteractionPlacement);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
         PlaceStimulationLeft.SetActive(false);
         PlaceStimulationRight.SetActive(false);
         PourStimulationLeft.SetActive(false);
@@ -191,9 +191,9 @@ public class StateStartExperiment : MonoBehaviour, IState
         {
             yield return null;
         }
-        ExperimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.ReachForBottle;
+        //ExperimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.ReachForBottle;
         StartStimulation(currentTrialConditions.Interaction, currentTrialConditions.InteractionPlacement);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
         PlaceStimulationLeft.SetActive(false);
         PlaceStimulationRight.SetActive(false);
         PourStimulationLeft.SetActive(false);
@@ -207,9 +207,9 @@ public class StateStartExperiment : MonoBehaviour, IState
         {
             yield return null;
         }
-        ExperimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.ReachForBottle;
+        //ExperimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.ReachForBottle;
         StartStimulation(currentTrialConditions.Interaction, currentTrialConditions.InteractionPlacement);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
         PlaceStimulationLeft.SetActive(false);
         PlaceStimulationRight.SetActive(false);
         PourStimulationLeft.SetActive(false);
@@ -219,13 +219,13 @@ public class StateStartExperiment : MonoBehaviour, IState
 
     private IEnumerator SOA4AfterGrasp()
     {
-        while (!StateCheckActionScript.IsBottleGraspedAndMoved())
+        while (!IsBottleGraspedAndMoved())
         {
             yield return null;
         }
-        ExperimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.ReachForBottle;
+        //ExperimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.ReachForBottle;
         StartStimulation(currentTrialConditions.Interaction, currentTrialConditions.InteractionPlacement);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
         PlaceStimulationLeft.SetActive(false);
         PlaceStimulationRight.SetActive(false);
         PourStimulationLeft.SetActive(false);
@@ -233,16 +233,20 @@ public class StateStartExperiment : MonoBehaviour, IState
         this.finished = true;
     }
 
-    private bool AtMovementOnset()
+    public bool AtMovementOnset()
     {
         if (!FixationCross.activeSelf)
         {
+            //ExperimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.ReachForBottle;
             return true;
-        }else
+        }
+        else
+        {
             return false;
+        }
     }
 
-    private bool HalfWayDone()
+    public bool HalfWayDone()
     {
         var handStartZ = new Vector3(0, 0, HandReference.position.z);
         var objectStartZ = new Vector3(0, 0, ObjectStartPosition.position.z);
@@ -256,7 +260,7 @@ public class StateStartExperiment : MonoBehaviour, IState
             return false;
     }
 
-    private bool AtBottle()
+    public bool AtBottle()
     {
         var thumb = new Vector3(0, 0, ThumbReferencePosition.position.z);
         var indexFinger = new Vector3(0, 0, IndexFingerReferencePosition.position.z);
@@ -272,32 +276,61 @@ public class StateStartExperiment : MonoBehaviour, IState
         return false;
     }
 
+    public bool IsBottleGraspedAndMoved()
+    {
+        var thumb = new Vector3(0, 0, ThumbReferencePosition.position.z);
+        var indexFinger = new Vector3(0, 0, IndexFingerReferencePosition.position.z);
+        var objectTransform = new Vector3(0, 0, ObjectReference.transform.position.z);
+        var distanceBetweenThumbAndObject = Vector3.Distance(thumb, objectTransform);
+        var distanceBetweenIndexAndObject = Vector3.Distance(indexFinger, objectTransform);
+        var velocityHand = (currentPositionPalm - lastPositionPalm) / Time.deltaTime;
+        var velocityObject = (currentPositionObject - lastPositionObject) / Time.deltaTime;
+        var thresholdVector = new Vector3(1, 1, 1);
+        var thresholdValue = 1.5f;
+
+        if (Vector3.Distance(velocityHand, thresholdVector) >= thresholdValue &&
+           Vector3.Distance(velocityObject, thresholdVector) >= thresholdValue &&
+            distanceBetweenIndexAndObject <= 2.0f &&
+            distanceBetweenThumbAndObject <= 2.0f)
+        {
+            //ExperimentControllerScript.currentAnnotationState = ExperimentController.AnnotationStates.Grasped;
+            return true;
+        }
+        else
+            return false;
+    }
+
+
 
     private void StartStimulation(string trialInteraction, string trialPlacement)
     {
         if ((trialInteraction == InteractionPour) && (trialPlacement == PlacementRight))
         {
             MeshRenderer meshStimulus = PourStimulationRight.GetComponent<MeshRenderer>();
-            meshStimulus.material.color = Color.green;
+            meshStimulus.material.color = Color.red;
             PourStimulationRight.SetActive(true);
+            return;
         }
         if ((trialInteraction == InteractionPour) && (trialPlacement == PlacementLeft))
         {
             MeshRenderer meshStimulus = PourStimulationLeft.GetComponent<MeshRenderer>();
-            meshStimulus.material.color = Color.green;
+            meshStimulus.material.color = Color.red;
             PourStimulationLeft.SetActive(true);
+            return;
         }
         if ((trialInteraction == InteractionPlace) && (trialPlacement == PlacementRight))
         {
             MeshRenderer meshStimulus = PlaceStimulationRight.GetComponent<MeshRenderer>();
-            meshStimulus.material.color = Color.green;
+            meshStimulus.material.color = Color.red;
             PlaceStimulationRight.SetActive(true);
+            return;
         }
         if ((trialInteraction == InteractionPlace) && (trialPlacement == PlacementLeft))
         {
             MeshRenderer meshStimulus = PlaceStimulationLeft.GetComponent<MeshRenderer>();
-            meshStimulus.material.color = Color.green;
+            meshStimulus.material.color = Color.red;
             PlaceStimulationLeft.SetActive(true);
+            return;
         }
     }
 

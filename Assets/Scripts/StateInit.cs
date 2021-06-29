@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class StateInit : MonoBehaviour, IState
 {
     public bool finished { get; set; }
     public IState nextState { get; set; }
     public GameObject CheckHandPosition;
+    public ExperimentController ExperimentControllerScript;
 
 
     public void Enter()
@@ -18,8 +20,13 @@ public class StateInit : MonoBehaviour, IState
 
     public void Execute()
     {
+        if (ExperimentControllerScript.stateInitFinished)
+        {
+            finished = true;
+        }
+
         //Debug.Log("Execute StateInit");
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Keyboard.current[Key.C].isPressed)
         {
             finished = true;
         }

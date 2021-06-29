@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.InputSystem;
 using System;
 
 public class StateWelcome : MonoBehaviour, IState
@@ -24,13 +25,18 @@ public class StateWelcome : MonoBehaviour, IState
 
     public void Execute()
     {
-
         //Debug.Log("Execute StateWelcome");
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Keyboard.current[Key.A].isPressed)
         {
-
             finished = true;
         }
+
+
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+
+        //    finished = true;
+        //}
 
         if (finished)
             Exit();

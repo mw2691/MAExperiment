@@ -63,6 +63,7 @@
     <Compile Include="Assets/Scripts/ExperimentController.cs" />
     <Compile Include="Assets/FastIK/Scripts/FastIK/FastIKFabric.cs" />
     <Compile Include="Assets/FastIK/Scripts/FastIK/FastIKCCD.cs" />
+    <Compile Include="Assets/Scripts/TestVeloScript.cs" />
     <Compile Include="Assets/Scripts/UDPClient.cs" />
     <Compile Include="Assets/Scripts/IState.cs" />
     <Compile Include="Assets/FastIK/Scripts/Sample/SampleSinMover.cs" />
@@ -85,7 +86,6 @@
     <Compile Include="Assets/Scripts/SensorData.cs" />
     <Compile Include="Assets/Scripts/StateMachine.cs" />
     <Compile Include="Assets/Scripts/MiddleFingerScript.cs" />
-    <Compile Include="Assets/Scripts/TestVeloScript.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets/FastIK/Documentation.txt" />
@@ -685,6 +685,9 @@
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InputSystem">
+      <HintPath>Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

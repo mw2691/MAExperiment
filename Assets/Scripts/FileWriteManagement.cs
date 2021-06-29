@@ -148,12 +148,41 @@ public class FileWriteManagement
         for (int i = 0; i < arrLine.Length; i++)
         {
             string[] subs = arrLine[i].Split(' ');
-            if (subs[subs.Length - 1] == "2")
+            if (subs[subs.Length - 1] == "0")
             {
                 allErrorTrials.Add(arrLine[i]);
             }
         }
         return allErrorTrials;
+    }
+
+    public static void DeleteSingleErrorTrial(string participantID, int trialRowCounter)
+    {
+        string fullPath = trialOrderFilePath + "/" + GetTrialOrderFileName(participantID);
+        var trialOrderLine = GetTrialOrderLine(participantID, trialRowCounter);
+        string[] arrLine = File.ReadAllLines(fullPath);
+        var allLines = arrLine.ToList<string>();
+        var subs = trialOrderLine.Split(' ');
+        if (subs[subs.Length - 1] == "1")
+        {
+            allLines.RemoveAt(trialRowCounter);
+            File.WriteAllLines(fullPath, allLines.ToArray());
+        }
+    }
+
+    public static string GetSingleErrorTrial(string participantID, int trialRowCounter)
+    {
+        string fullPath = trialOrderFilePath + "/" + GetTrialOrderFileName(participantID);
+        string newline = "";
+        var trialOrderLine = GetTrialOrderLine(participantID, trialRowCounter);
+        var subs = trialOrderLine.Split(' ');
+        if (subs[subs.Length - 1] == "1")
+        {
+            subs[subs.Length - 1] = "0";
+            newline = string.Join(" ", subs);
+            //File.AppendAllText(fullPath, newLine);
+        }
+        return newline;
     }
 
     public static void AppendErrorTrialsToTrialOrderFile(string participantID)
@@ -200,7 +229,7 @@ public class FileWriteManagement
         for (int i = lineNumber; i < arrLine.Length; i++)
         {
             string[] subs = arrLine[i].Split(' ');
-            if (subs[subs.Length - 1] == "2")
+            if (subs[subs.Length - 1] == "0")
             {
                 areThereErrorTrials = true;
             }
