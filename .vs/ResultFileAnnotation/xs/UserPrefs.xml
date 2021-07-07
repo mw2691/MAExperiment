@@ -1,0 +1,22 @@
+﻿<Properties StartupConfiguration="{8C388D1E-F749-77A6-668D-B7EEABBD45CE}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/FileWriteManagement.cs">
+    <Files>
+      <File FileName="Assets/Scripts/LogData.cs" Line="19" Column="1" />
+      <File FileName="Assets/Scripts/FileWriteManagement.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="ResultFileAnnotation" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="7e7a2dee-da88-473e-8de5-b93e5d71275a" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
