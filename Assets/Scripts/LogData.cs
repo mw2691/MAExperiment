@@ -255,11 +255,54 @@ public class LogData : MonoBehaviour
         return result;
     }
 
+    private string FormatPositionData(string handposition)
+    {
+        var secondComma = IndexOfNth(handposition, ',', 2);
+        var fourthComma = IndexOfNth(handposition, ',', 4);
+        var sixthComma = IndexOfNth(handposition, ',', 6);
+
+        xCoor = handposition.Substring(0, secondComma);
+        yCoor = handposition.Substring(secondComma + 1, fourthComma - secondComma - 1);
+        //zCoor = handposition.Substring(fourthComma + 1, sixthComma - fourthComma - 1);
+
+
+        if (!((sixthComma - fourthComma) < 0))
+        {
+            zCoor = handposition.Substring(fourthComma + 1, sixthComma - fourthComma - 1);
+        }
+
+        xCoor = xCoor.Replace(",", ".");
+        yCoor = yCoor.Replace(",", ".");
+        zCoor = zCoor.Replace(",", ".");
+
+        return xCoor + ":" + yCoor + ":" + zCoor;
+
+    }
+
+
     private void WriteIntoResultFile(string state)
     {
         var currentResultLine = AllRowsFromFile[fileRowCounter];
         string[] singleRowSplitted = currentResultLine.Split('\t');
         singleRowSplitted[5] = state;
+        var thumbPositionData = singleRowSplitted[0];
+        var indexPositionData = singleRowSplitted[1];
+        var palmPositionData = singleRowSplitted[2];
+        var objectPositionData = singleRowSplitted[3];
+        var gazePositionData = singleRowSplitted[4];
+
+        var thumbFormattedString = FormatPositionData(thumbPositionData);
+        var indexFormattedString = FormatPositionData(indexPositionData);
+        var palmFormattedString = FormatPositionData(palmPositionData);
+        var objectFormattedString = FormatPositionData(objectPositionData);
+        var gazeFormattedString = FormatPositionData(gazePositionData);
+
+        singleRowSplitted[0] = thumbFormattedString;
+        singleRowSplitted[1] = indexFormattedString;
+        singleRowSplitted[2] = palmFormattedString;
+        singleRowSplitted[3] = objectFormattedString;
+        singleRowSplitted[4] = gazeFormattedString;
+
         var newLine = string.Join("\t", singleRowSplitted);
         var fullPath = strResultFileName;
 
