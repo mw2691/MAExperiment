@@ -22,7 +22,11 @@ library(signal)
 library(dplyr)
 library(schoRsch)
 library(ez)
-#library(mousetrap)
+
+
+
+
+
 
 
 
@@ -34,29 +38,6 @@ participantID <- 1
 pathOnlyWithID <- paste(annotatedFilesFolder,slash, participantID, sep = "")
 allResultFilesFromGivenParticipantID <- list.files(pathOnlyWithID)
 
-
-
-# participant1 <- matrix(nrow = 11, ncol=16)
-# participant2 <- matrix(nrow = 11, ncol=16)
-# participant3 <- matrix(nrow = 11, ncol=16)
-# participant4 <- matrix(nrow = 11, ncol=16)
-# participant5 <- matrix(nrow = 11, ncol=16)
-# participant6 <- matrix(nrow = 11, ncol=16)
-# participant7 <- matrix(nrow = 11, ncol=16)
-# participant8 <- matrix(nrow = 11, ncol=16)
-# participant9 <- matrix(nrow = 11, ncol=16)
-# participant10 <- matrix(nrow = 11, ncol=16)
-# participant11 <- matrix(nrow = 11, ncol=16)
-# participant12 <- matrix(nrow = 11, ncol=16)
-# participant13 <- matrix(nrow = 11, ncol=16)
-# participant14 <- matrix(nrow = 11, ncol=16)
-# participant15 <- matrix(nrow = 11, ncol=16)
-# participant16 <- matrix(nrow = 11, ncol=16)
-# 
-# matricesList <- list(participant1, participant2, participant3, participant4, participant5,
-#                      participant6, participant7, participant8, participant9, participant10,
-#                      participant11, participant12, participant13, participant14, participant15,
-#                      participant16)
 
 matricesListPeakVelos <- list()
 matricesListHorizontalMovement <- list()
@@ -218,8 +199,12 @@ for (k in participandIDSeq) {
       }
       PeakVelocitySOA1PlaceLeft[,rowCounter1] <- c(matchedVelos)
       PalmXSOA1PlaceLeft[,rowCounter1] <- c(matchedPositions)
+      if (rowCounter1 == 10){
+        
+      }
       rowCounter1 <- rowCounter1 + 1
     }
+    
     if(str_detect(filename, "SOA2_Place_Left")){
       for (i in 1:length(quantileTrialList)){
         higherBorder <- quantileTrialList[i] * 1.03
@@ -417,65 +402,390 @@ for (k in participandIDSeq) {
     }
   }
 
-  meanVeloSOA1PlaceR <- rowMeans(PeakVelocitySOA1PlaceRight)
-  meanVeloSOA2PlaceR <- rowMeans(PeakVelocitySOA2PlaceRight)
-  meanVeloSOA3PlaceR <- rowMeans(PeakVelocitySOA3PlaceRight)
-  meanVeloSOA4PlaceR <- rowMeans(PeakVelocitySOA4PlaceRight)
+  meanVeloSOA1PlaceRight <- rowMeans(PeakVelocitySOA1PlaceRight)
+  meanVeloSOA2PlaceRight <- rowMeans(PeakVelocitySOA2PlaceRight)
+  meanVeloSOA3PlaceRight <- rowMeans(PeakVelocitySOA3PlaceRight)
+  meanVeloSOA4PlaceRight <- rowMeans(PeakVelocitySOA4PlaceRight)
   
-  meanVeloSOA1PlaceL <- rowMeans(PeakVelocitySOA1PlaceLeft)
-  meanVeloSOA2PlaceL <- rowMeans(PeakVelocitySOA2PlaceLeft)
-  meanVeloSOA3PlaceL <- rowMeans(PeakVelocitySOA3PlaceLeft)
-  meanVeloSOA4PlaceL <- rowMeans(PeakVelocitySOA4PlaceLeft)
+  meanVeloSOA1PlaceLeft <- rowMeans(PeakVelocitySOA1PlaceLeft)
+  meanVeloSOA2PlaceLeft <- rowMeans(PeakVelocitySOA2PlaceLeft)
+  meanVeloSOA3PlaceLeft <- rowMeans(PeakVelocitySOA3PlaceLeft)
+  meanVeloSOA4PlaceLeft <- rowMeans(PeakVelocitySOA4PlaceLeft)
   
-  meanVeloSOA1PourL <- rowMeans(PeakVelocitySOA1PourLeft)
-  meanVeloSOA2PourL <- rowMeans(PeakVelocitySOA2PourLeft)
-  meanVeloSOA3PourL <- rowMeans(PeakVelocitySOA3PourLeft)
-  meanVeloSOA4PourL <- rowMeans(PeakVelocitySOA4PourLeft)
+  meanVeloSOA1PourLeft <- rowMeans(PeakVelocitySOA1PourLeft)
+  meanVeloSOA2PourLeft <- rowMeans(PeakVelocitySOA2PourLeft)
+  meanVeloSOA3PourLeft <- rowMeans(PeakVelocitySOA3PourLeft)
+  meanVeloSOA4PourLeft <- rowMeans(PeakVelocitySOA4PourLeft)
   
-  meanVeloSOA1PourR <- rowMeans(PeakVelocitySOA1PourRight)
-  meanVeloSOA2PourR <- rowMeans(PeakVelocitySOA2PourRight)
-  meanVeloSOA3PourR <- rowMeans(PeakVelocitySOA3PourRight)
-  meanVeloSOA4PourR <- rowMeans(PeakVelocitySOA4PourRight)
+  meanVeloSOA1PourRight <- rowMeans(PeakVelocitySOA1PourRight)
+  meanVeloSOA2PourRight <- rowMeans(PeakVelocitySOA2PourRight)
+  meanVeloSOA3PourRight <- rowMeans(PeakVelocitySOA3PourRight)
+  meanVeloSOA4PourRight <- rowMeans(PeakVelocitySOA4PourRight)
   
   
   
-  HoriMovSOA1PlaceR <- rowMeans(PalmXSOA1PlaceRight)
-  HoriMovSOA2PlaceR <- rowMeans(PalmXSOA2PlaceRight)
-  HoriMovSOA3PlaceR <- rowMeans(PalmXSOA3PlaceRight)
-  HoriMovSOA4PlaceR <- rowMeans(PalmXSOA4PlaceRight)
+  HoriMovSOA1PlaceRight <- rowMeans(PalmXSOA1PlaceRight)
+  HoriMovSOA2PlaceRight <- rowMeans(PalmXSOA2PlaceRight)
+  HoriMovSOA3PlaceRight <- rowMeans(PalmXSOA3PlaceRight)
+  HoriMovSOA4PlaceRight <- rowMeans(PalmXSOA4PlaceRight)
   
-  HoriMovSOA1PlaceL <- rowMeans(PalmXSOA1PlaceLeft)
-  HoriMovSOA2PlaceL <- rowMeans(PalmXSOA2PlaceLeft)
-  HoriMovSOA3PlaceL <- rowMeans(PalmXSOA3PlaceLeft)
-  HoriMovSOA4PlaceL <- rowMeans(PalmXSOA4PlaceLeft)
+  HoriMovSOA1PlaceLeft <- rowMeans(PalmXSOA1PlaceLeft)
+  HoriMovSOA2PlaceLeft <- rowMeans(PalmXSOA2PlaceLeft)
+  HoriMovSOA3PlaceLeft <- rowMeans(PalmXSOA3PlaceLeft)
+  HoriMovSOA4PlaceLeft <- rowMeans(PalmXSOA4PlaceLeft)
   
-  HoriMovSOA1PourL <- rowMeans(PalmXSOA1PourLeft)
-  HoriMovSOA2PourL <- rowMeans(PalmXSOA2PourLeft)
-  HoriMovSOA3PourL <- rowMeans(PalmXSOA3PourLeft)
-  HoriMovSOA4PourL <- rowMeans(PalmXSOA4PourLeft)
+  HoriMovSOA1PourLeft <- rowMeans(PalmXSOA1PourLeft)
+  HoriMovSOA2PourLeft <- rowMeans(PalmXSOA2PourLeft)
+  HoriMovSOA3PourLeft <- rowMeans(PalmXSOA3PourLeft)
+  HoriMovSOA4PourLeft <- rowMeans(PalmXSOA4PourLeft)
   
-  HoriMovSOA1PourR <- rowMeans(PalmXSOA1PourRight)
-  HoriMovSOA2PourR <- rowMeans(PalmXSOA2PourRight)
-  HoriMovSOA3PourR <- rowMeans(PalmXSOA3PourRight)
-  HoriMovSOA4PourR <- rowMeans(PalmXSOA4PourRight)
+  HoriMovSOA1PourRight <- rowMeans(PalmXSOA1PourRight)
+  HoriMovSOA2PourRight <- rowMeans(PalmXSOA2PourRight)
+  HoriMovSOA3PourRight <- rowMeans(PalmXSOA3PourRight)
+  HoriMovSOA4PourRight <- rowMeans(PalmXSOA4PourRight)
   
 
-
-  matricesListPeakVelos[[k]] <- cbind(meanVeloSOA1PlaceR, meanVeloSOA2PlaceR, meanVeloSOA3PlaceR, meanVeloSOA4PlaceR,
-                                        meanVeloSOA1PlaceL, meanVeloSOA2PlaceL, meanVeloSOA3PlaceL, meanVeloSOA4PlaceL,
-                                        meanVeloSOA1PourL, meanVeloSOA2PourL, meanVeloSOA3PourL, meanVeloSOA4PourL, 
-                                        meanVeloSOA1PourR, meanVeloSOA2PourR, meanVeloSOA3PourR, meanVeloSOA4PourR)
   
-  matricesListHorizontalMovement[[k]] <- cbind(HoriMovSOA1PlaceR, HoriMovSOA2PlaceR, HoriMovSOA3PlaceR, HoriMovSOA4PlaceR,
-                                               HoriMovSOA1PlaceL, HoriMovSOA2PlaceL, HoriMovSOA3PlaceL, HoriMovSOA4PlaceL,
-                                               HoriMovSOA1PourL, HoriMovSOA2PourL, HoriMovSOA3PourL, HoriMovSOA4PourL, 
-                                               HoriMovSOA1PourR, HoriMovSOA2PourR, HoriMovSOA3PourR, HoriMovSOA1PourR)
+  
+  
+  
+  
+
+  matricesListPeakVelos[[k]] <- cbind(meanVeloSOA1PlaceRight, meanVeloSOA2PlaceRight, meanVeloSOA3PlaceRight, meanVeloSOA4PlaceRight,
+                                        meanVeloSOA1PlaceLeft, meanVeloSOA2PlaceLeft, meanVeloSOA3PlaceLeft, meanVeloSOA4PlaceLeft,
+                                        meanVeloSOA1PourLeft, meanVeloSOA2PourLeft, meanVeloSOA3PourLeft, meanVeloSOA4PourLeft, 
+                                        meanVeloSOA1PourRight, meanVeloSOA2PourRight, meanVeloSOA3PourRight, meanVeloSOA4PourRight)
+  
+  matricesListHorizontalMovement[[k]] <- cbind(HoriMovSOA1PlaceRight, HoriMovSOA2PlaceRight, HoriMovSOA3PlaceRight, HoriMovSOA4PlaceRight,
+                                               HoriMovSOA1PlaceLeft, HoriMovSOA2PlaceLeft, HoriMovSOA3PlaceLeft, HoriMovSOA4PlaceLeft,
+                                               HoriMovSOA1PourLeft, HoriMovSOA2PourLeft, HoriMovSOA3PourLeft, HoriMovSOA4PourLeft, 
+                                               HoriMovSOA1PourRight, HoriMovSOA2PourRight, HoriMovSOA3PourRight, HoriMovSOA4PourRight)
 
   
   # if(k == 2){
   #   break
   # }
 }
+matricesListHorizontalMovement[[5]] <- NULL
+matricesListPeakVelos[[5]] <- NULL
+
+
+
+participantID <- c()
+Interaction <- c()
+SOA <- c()
+Placement <- c()
+ReachDistancePercentage <- c()
+Velo <- c()
+PalmPosX <- c()
+allData <- data.frame(matrix(0, ncol = 6, nrow = 2310)) 
+dfnames <- c("participantsID", "SOA", "Interaction", "Placement", "ReachDistancePercentage", "PalmX")
+colnames(allData) <- dfnames
+dfcounter1 <- 1
+dfcounter2 <- 11
+
+
+for (i in 1:length(matricesListHorizontalMovement)){#14
+  namesOfColumnHoriMov <- colnames(matricesListHorizontalMovement[[i]])
+  if (str_detect(namesOfColumnHoriMov[1], "HoriMovSOA1PlaceRight")){
+    participantID <- rep(i, 11)
+    SOA <- rep("SOA1", 11)
+    Interaction <-  rep("Place", 11)
+    Placement <-  rep("Right", 11)
+    ReachDistancePercentage <- seq(0,10,1)
+    PalmPosX <- matricesListHorizontalMovement[[i]][,1]
+    cbindin <- cbind(participantID, SOA, Interaction, Placement, ReachDistancePercentage, PalmPosX)
+    allData[dfcounter1:dfcounter2,] <- rbind(cbindin)
+    print(paste(dfcounter1, ":::", dfcounter2))
+    dfcounter1 <- dfcounter2+1
+    dfcounter2 <- dfcounter2 +11
+  }
+  if (str_detect(namesOfColumnHoriMov[2], "HoriMovSOA2PlaceRight")){
+    participantID <- rep(i, 11)
+    SOA <- rep("SOA2", 11)
+    Interaction <-  rep("Place", 11)
+    Placement <-  rep("Right", 11)
+    ReachDistancePercentage <- seq(0,10,1)
+    PalmPosX <- matricesListHorizontalMovement[[i]][,2]
+    cbindin <- cbind(participantID, SOA, Interaction, Placement, ReachDistancePercentage, PalmPosX)
+    allData[dfcounter1:dfcounter2,] <- rbind(cbindin)
+    print(paste(dfcounter1, ":::", dfcounter2))
+    dfcounter1 <- dfcounter2+1
+    dfcounter2 <- dfcounter2 +11
+  }
+  if (str_detect(namesOfColumnHoriMov[3], "HoriMovSOA3PlaceRight")){
+    participantID <- rep(i, 11)
+    SOA <- rep("SOA3", 11)
+    Interaction <-  rep("Place", 11)
+    Placement <-  rep("Right", 11)
+    ReachDistancePercentage <- seq(0,10,1)
+    PalmPosX <- matricesListHorizontalMovement[[i]][,3]
+    cbindin <- cbind(participantID, SOA, Interaction, Placement, ReachDistancePercentage, PalmPosX)
+    allData[dfcounter1:dfcounter2,] <- rbind(cbindin)
+    print(paste(dfcounter1, ":::", dfcounter2))
+    dfcounter1 <- dfcounter2+1
+    dfcounter2 <- dfcounter2 +11
+  }
+  if (str_detect(namesOfColumnHoriMov[4], "HoriMovSOA4PlaceRight")){
+    participantID <- rep(i, 11)
+    SOA <- rep("SOA4", 11)
+    Interaction <-  rep("Place", 11)
+    Placement <-  rep("Right", 11)
+    ReachDistancePercentage <- seq(0,10,1)
+    PalmPosX <- matricesListHorizontalMovement[[i]][,4]
+    cbindin <- cbind(participantID, SOA, Interaction, Placement, ReachDistancePercentage, PalmPosX)
+    allData[dfcounter1:dfcounter2,] <- rbind(cbindin)
+    print(paste(dfcounter1, ":::", dfcounter2))
+    dfcounter1 <- dfcounter2+1
+    dfcounter2 <- dfcounter2 +11
+  }
+  if (str_detect(namesOfColumnHoriMov[5], "HoriMovSOA1PlaceLeft")){
+    participantID <- rep(i, 11)
+    SOA <- rep("SOA1", 11)
+    Interaction <-  rep("Place", 11)
+    Placement <-  rep("Left", 11)
+    ReachDistancePercentage <- seq(0,10,1)
+    PalmPosX <- matricesListHorizontalMovement[[i]][,5]
+    cbindin <- cbind(participantID, SOA, Interaction, Placement, ReachDistancePercentage, PalmPosX)
+    allData[dfcounter1:dfcounter2,] <- rbind(cbindin)
+    print(paste(dfcounter1, ":::", dfcounter2))
+    dfcounter1 <- dfcounter2+1
+    dfcounter2 <- dfcounter2 +11
+  }
+  if (str_detect(namesOfColumnHoriMov[6], "HoriMovSOA2PlaceLeft")){
+    participantID <- rep(i, 11)
+    SOA <- rep("SOA2", 11)
+    Interaction <-  rep("Place", 11)
+    Placement <-  rep("Left", 11)
+    ReachDistancePercentage <- seq(0,10,1)
+    PalmPosX <- matricesListHorizontalMovement[[i]][,6]
+    cbindin <- cbind(participantID, SOA, Interaction, Placement, ReachDistancePercentage, PalmPosX)
+    allData[dfcounter1:dfcounter2,] <- rbind(cbindin)
+    print(paste(dfcounter1, ":::", dfcounter2))
+    dfcounter1 <- dfcounter2+1
+    dfcounter2 <- dfcounter2 +11
+  }
+  if (str_detect(namesOfColumnHoriMov[7], "HoriMovSOA3PlaceLeft")){
+    participantID <- rep(i, 11)
+    SOA <- rep("SOA3", 11)
+    Interaction <-  rep("Place", 11)
+    Placement <-  rep("Left", 11)
+    ReachDistancePercentage <- seq(0,10,1)
+    PalmPosX <- matricesListHorizontalMovement[[i]][,7]
+    cbindin <- cbind(participantID, SOA, Interaction, Placement, ReachDistancePercentage, PalmPosX)
+    allData[dfcounter1:dfcounter2,] <- rbind(cbindin)
+    print(paste(dfcounter1, ":::", dfcounter2))
+    dfcounter1 <- dfcounter2+1
+    dfcounter2 <- dfcounter2 +11
+  }
+  if (str_detect(namesOfColumnHoriMov[8], "HoriMovSOA4PlaceLeft")){
+    participantID <- rep(i, 11)
+    SOA <- rep("SOA4", 11)
+    Interaction <-  rep("Place", 11)
+    Placement <-  rep("Left", 11)
+    ReachDistancePercentage <- seq(0,10,1)
+    PalmPosX <- matricesListHorizontalMovement[[i]][,8]
+    cbindin <- cbind(participantID, SOA, Interaction, Placement, ReachDistancePercentage, PalmPosX)
+    allData[dfcounter1:dfcounter2,] <- rbind(cbindin)
+    print(paste(dfcounter1, ":::", dfcounter2))
+    dfcounter1 <- dfcounter2+1
+    dfcounter2 <- dfcounter2 +11
+  }
+  if (str_detect(namesOfColumnHoriMov[9], "HoriMovSOA1PourLeft")){
+    participantID <- rep(i, 11)
+    SOA <- rep("SOA1", 11)
+    Interaction <-  rep("Pour", 11)
+    Placement <-  rep("Left", 11)
+    ReachDistancePercentage <- seq(0,10,1)
+    PalmPosX <- matricesListHorizontalMovement[[i]][,9]
+    cbindin <- cbind(participantID, SOA, Interaction, Placement, ReachDistancePercentage, PalmPosX)
+    allData[dfcounter1:dfcounter2,] <- rbind(cbindin)
+    print(paste(dfcounter1, ":::", dfcounter2))
+    dfcounter1 <- dfcounter2+1
+    dfcounter2 <- dfcounter2 +11
+  }
+  if (str_detect(namesOfColumnHoriMov[10], "HoriMovSOA2PourLeft")){
+    participantID <- rep(i, 11)
+    SOA <- rep("SOA2", 11)
+    Interaction <-  rep("Pour", 11)
+    Placement <-  rep("Left", 11)
+    ReachDistancePercentage <- seq(0,10,1)
+    PalmPosX <- matricesListHorizontalMovement[[i]][,10]
+    cbindin <- cbind(participantID, SOA, Interaction, Placement, ReachDistancePercentage, PalmPosX)
+    allData[dfcounter1:dfcounter2,] <- rbind(cbindin)
+    print(paste(dfcounter1, ":::", dfcounter2))
+    dfcounter1 <- dfcounter2+1
+    dfcounter2 <- dfcounter2 +11
+  }
+  if (str_detect(namesOfColumnHoriMov[11], "HoriMovSOA3PourLeft")){
+    participantID <- rep(i, 11)
+    SOA <- rep("SOA3", 11)
+    Interaction <-  rep("Pour", 11)
+    Placement <-  rep("Left", 11)
+    ReachDistancePercentage <- seq(0,10,1)
+    PalmPosX <- matricesListHorizontalMovement[[i]][,11]
+    cbindin <- cbind(participantID, SOA, Interaction, Placement, ReachDistancePercentage, PalmPosX)
+    allData[dfcounter1:dfcounter2,] <- rbind(cbindin)
+    print(paste(dfcounter1, ":::", dfcounter2))
+    dfcounter1 <- dfcounter2+1
+    dfcounter2 <- dfcounter2 +11
+  }
+  if (str_detect(namesOfColumnHoriMov[12], "HoriMovSOA4PourLeft")){
+    participantID <- rep(i, 11)
+    SOA <- rep("SOA4", 11)
+    Interaction <-  rep("Pour", 11)
+    Placement <-  rep("Left", 11)
+    ReachDistancePercentage <- seq(0,10,1)
+    PalmPosX <- matricesListHorizontalMovement[[i]][,12]
+    cbindin <- cbind(participantID, SOA, Interaction, Placement, ReachDistancePercentage, PalmPosX)
+    allData[dfcounter1:dfcounter2,] <- rbind(cbindin)
+    print(paste(dfcounter1, ":::", dfcounter2))
+    dfcounter1 <- dfcounter2+1
+    dfcounter2 <- dfcounter2 +11
+  }
+  if (str_detect(namesOfColumnHoriMov[13], "HoriMovSOA1PourRight")){
+    participantID <- rep(i, 11)
+    SOA <- rep("SOA1", 11)
+    Interaction <-  rep("Pour", 11)
+    Placement <-  rep("Right", 11)
+    ReachDistancePercentage <- seq(0,10,1)
+    PalmPosX <- matricesListHorizontalMovement[[i]][,13]
+    cbindin <- cbind(participantID, SOA, Interaction, Placement, ReachDistancePercentage, PalmPosX)
+    allData[dfcounter1:dfcounter2,] <- rbind(cbindin)
+    print(paste(dfcounter1, ":::", dfcounter2))
+    dfcounter1 <- dfcounter2+1
+    dfcounter2 <- dfcounter2 +11
+  }
+  if (str_detect(namesOfColumnHoriMov[14], "HoriMovSOA2PourRight")){
+    participantID <- rep(i, 11)
+    SOA <- rep("SOA2", 11)
+    Interaction <-  rep("Pour", 11)
+    Placement <-  rep("Right", 11)
+    ReachDistancePercentage <- seq(0,10,1)
+    PalmPosX <- matricesListHorizontalMovement[[i]][,14]
+    cbindin <- cbind(participantID, SOA, Interaction, Placement, ReachDistancePercentage, PalmPosX)
+    allData[dfcounter1:dfcounter2,] <- rbind(cbindin)
+    print(paste(dfcounter1, ":::", dfcounter2))
+    dfcounter1 <- dfcounter2+1
+    dfcounter2 <- dfcounter2 +11
+  }
+  if (str_detect(namesOfColumnHoriMov[15], "HoriMovSOA3PourRight")){
+    participantID <- rep(i, 11)
+    SOA <- rep("SOA3", 11)
+    Interaction <-  rep("Pour", 11)
+    Placement <-  rep("Right", 11)
+    ReachDistancePercentage <- seq(0,10,1)
+    PalmPosX <- matricesListHorizontalMovement[[i]][,15]
+    cbindin <- cbind(participantID, SOA, Interaction, Placement, ReachDistancePercentage, PalmPosX)
+    allData[dfcounter1:dfcounter2,] <- rbind(cbindin)
+    print(paste(dfcounter1, ":::", dfcounter2))
+    dfcounter1 <- dfcounter2+1
+    dfcounter2 <- dfcounter2 +11
+  }
+  if (str_detect(namesOfColumnHoriMov[16], "HoriMovSOA4PourRight")){
+    participantID <- rep(i, 11)
+    SOA <- rep("SOA4", 11)
+    Interaction <-  rep("Pour", 11)
+    Placement <-  rep("Right", 11)
+    ReachDistancePercentage <- seq(0,10,1)
+    PalmPosX <- matricesListHorizontalMovement[[i]][,16]
+    cbindin <- cbind(participantID, SOA, Interaction, Placement, ReachDistancePercentage, PalmPosX)
+    allData[dfcounter1:dfcounter2,] <- rbind(cbindin)
+    print(paste(dfcounter1, ":::", dfcounter2))
+    dfcounter1 <- dfcounter2+1
+    dfcounter2 <- dfcounter2 +11
+  }
+
+  
+}
+
+allData$participantsID <- factor(allData$participantsID)
+allData$SOA <- factor(allData$SOA)
+allData$Interaction <- factor(allData$Interaction)
+allData$Placement <- factor(allData$Placement)
+allData$ReachDistancePercentage <- factor(allData$ReachDistancePercentage)
+  
+allData$PalmX <- as.numeric(allData$PalmX)
+allData$participantsID <- as.numeric(allData$participantsID)
+#allData$ReachDistancePercentage <- as.numeric(allData$ReachDistancePercentage)
+
+
+testagg <- aggregate(PalmX ~ participantsID * Placement * SOA * ReachDistancePercentage, allData, mean)
+subTestagg <- subset(allData, ReachDistancePercentage == 7, select =  c("participantsID", "Placement", "SOA", "ReachDistancePercentage", "PalmX"))
+anovaPalmPosXSubTestAgg <- ezANOVA(
+  data = subTestagg,
+  PalmX,
+  participantsID,
+  within = .(Placement, SOA),
+  detailed = TRUE
+)
+anova_out(anovaPalmPosXSubTestAgg)
+
+
+
+
+  
+anovaPalmPosX <- ezANOVA(
+  data = allData,
+  PalmX,
+  participantsID,
+  within = .(Interaction, SOA, Placement, ReachDistancePercentage),
+  detailed = TRUE,
+  type = 1
+)
+anova_out(anovaPalmPosX)
+  
+  
+
+anovaPalmPosTest <- ezANOVA(
+  data = allData,
+  dv = .(PalmX),
+  wid = .(participantsID),
+  within = .(Interaction, SOA, Placement, ReachDistancePercentage),
+  detailed = TRUE,
+  type = 1
+)
+anova_out(anovaPalmPosTest)
+
+testData <- subset(allData, ReachDistancePercentage == 0, select =  c("participantsID", "SOA", "Interaction", "Placement", "ReachDistancePercentage", "PalmX"))
+  
+anovaPalmPosTest9 <- ezANOVA(
+  data = testData,
+  dv = .(PalmX),
+  wid = .(participantsID),
+  within = .(Interaction, SOA, Placement),
+  detailed = TRUE
+)
+anova_out(anovaPalmPosTest9)
+testData$posthoclevels <- paste(testData$Interaction, testData$Placement, testData$SOA)
+pairwise.t.test(testData$PalmX, testData$posthoclevels, paired = TRUE, p.adjust.method = "bonferroni")
+
+
+  #inspecting allData frame 
+testoSOA4PourLeft <- subset(allData, SOA =="SOA4" & Interaction == "Pour" & Placement == "Left" & participantsID == 1, select = c("participantsID", "SOA", "Interaction", "Placement", "ReachDistancePercentage", "PalmX"))
+testoSOA3PourLeft <- subset(allData, SOA =="SOA3" & Interaction == "Pour" & Placement == "Left", select = c("participantsID", "SOA", "Interaction", "Placement", "ReachDistancePercentage", "PalmX"))
+testoSOA2PourLeft <- subset(allData, SOA =="SOA3" & Interaction == "Pour" & Placement == "Left", select = c("participantsID", "SOA", "Interaction", "Placement", "ReachDistancePercentage", "PalmX"))
+testoNew <- subset(allData, participantsID == 1, select = c("participantsID", "SOA", "Interaction", "Placement", "ReachDistancePercentage", "PalmX"))
+
+
+
+with(allData,table(Interaction, SOA, Placement, ReachDistancePercentage))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #####Peak Velos
 SOA1PlaceR <- matrix(nrow = 11, ncol = 14)
